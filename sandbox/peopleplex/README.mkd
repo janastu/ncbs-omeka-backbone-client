@@ -1,0 +1,36 @@
+<style type="text/css">p {text-align:center;width: auto}</style>
+Created by [Christopher Manning](http://www.christophermanning.org/projects/building-cubic-hamiltonian-graphs-from-lcf-notation/)
+
+Gallery
+-------  
+[![Axle](https://gist.github.com/christophermanning/1703449/raw/graph-axle.png "Axle")](http://bl.ocks.org/d/1703449/#/[-48,-32,3,14,16,-37,-42,48]22/0/0)
+[![Eight](https://gist.github.com/christophermanning/1703449/raw/graph-eight.png "Eight")](http://bl.ocks.org/d/1703449/#/[25,50,75,100]100/0/0)
+[![Fibbobaci](https://gist.github.com/christophermanning/1703449/raw/graph-fibonacci.png "Fibonacci")](http://bl.ocks.org/d/1703449/#/[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169]43/0/1)
+[![Florets](https://gist.github.com/christophermanning/1703449/raw/graph-florets.png "Florets")](http://bl.ocks.org/d/1703449/#/[10,9,8,7,6,5,4,3,2,1]10/0/0)
+[![Star](https://gist.github.com/christophermanning/1703449/raw/graph-star.png "Star")](http://bl.ocks.org/d/1703449/#/[6,10]5/0/0)
+[![Mosaic](https://gist.github.com/christophermanning/1703449/raw/graph-mosaic.png "Mosaic")](http://bl.ocks.org/d/1703449/#/[500]1000/0/1)
+[![Original](https://gist.github.com/christophermanning/1703449/raw/graph-original.png "Original")](http://bl.ocks.org/d/1703449/#/[30,-2,2,21,-2,2,12,-2,2,-12,-2,2,-21,-2,2,30,-2,2,-12,-2,2,21,-2,2,-21,-2,2,12,-2,2]2/1/0)
+[![Spiral](https://gist.github.com/christophermanning/1703449/raw/graph-spiral.png "Spiral")](http://bl.ocks.org/d/1703449/#/[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]4/0/1)
+[![Sun](https://gist.github.com/christophermanning/1703449/raw/graph-sun.png "Sun")](http://bl.ocks.org/d/1703449/#/[-48,-45]21/0/0)
+[![Pods](https://gist.github.com/christophermanning/1703449/raw/graph-pods.png "Pods")](http://bl.ocks.org/d/1703449/#/[3553353424234324324]1022/0/0)
+
+Controls
+--------
+  * Place your cursor near a number in the LCF code and use the up/down
+    arrow or the mousewheel to increment or decrement that number. Hold down
+    the control and or shift key to increment or decrement by 10 or 100. 
+
+Interesting Graphs
+------------------
+  * [Stitching a Torus Together](?lcfCode=[10]100&animationSpeed=1&lockVertices=0)
+  * [25 Möbius Ladder](?lcfCode=[-25]50&animationSpeed=1&lockVertices=0)
+  * Please share interesting graphs you find: [@cmanning88](https://twitter.com/cmanning88)
+
+References
+----------
+  * [Project Summary and Changelog](http://www.christophermanning.org/projects/building-cubic-hamiltonian-graphs-from-lcf-notation/)
+  * [Wikipedia article on LCF notation](http://en.wikipedia.org/wiki/LCF_notation)
+  * [Wolfram MathWorld article on LCF notation](http://mathworld.wolfram.com/LCFNotation.html)
+  * [d3.js Force Layout](https://github.com/mbostock/d3/wiki/Force-Layout)
+
+[Run this gist at bl.ocks.org](http://bl.ocks.org/1703449)

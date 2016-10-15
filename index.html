@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+	    <title>NCBS 25</title>
+	    <link rel="icon" href="img/Assets/ncbs_logo_header.png" type="image/png" sizes="16x16">
+	    <meta name="description" content="" />
+	    <meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+		<link type="text/css" rel="stylesheet" href="css/theme/header.css" />
+		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
+		<link type="text/css" rel="stylesheet" href="libs/ImageViewer-master/imageviewer.css" />
+	</head>
+	
+	<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<!-- Header from templates/header.html and app.js -->
+				<div id="header">
+				</div>
+			
+		</div>
+		<div class="row-fluid">
+			<div class="">
+				<div id="main">
+					<div id="content">
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div class="row-fluid">
+			<div class="col-md-12">
+				<!-- footer which is a common navigation to themes-->
+				<div id="footer">
+				</div>
+			</div>
+		</div>	
+
+	
+	</div>
+
+    <!-- testing components markup  end-->
+
+
+    <!-- Templates and scripts start -->
+	    <script type="text/template" id="listItems">
+		
+			<div class="list-group-item">
+				  
+					<%if(mime_type == "audio/mpeg"){%> 
+						<audio controls="controls" preload="none">
+						                  Your browser does not support the <code>audio</code> element.
+						                  
+						                  <source src=<%= fileurls.original %>>
+						                </audio>
+						<%}%>
+					<%if(mime_type == "image/jpeg"){%>
+						<img data-high-res-src= <%= fileurls.fullsize %> src=<%= fileurls.thumbnail%> class="pannable-image"/>
+						<%}%>
+
+					<% if(description){%> 
+						<p><%= description.text %></p>
+					<%}%>
+					<% if(rights){%> 
+						<p><%= rights.text %></p>
+					<%}%>
+			</div>
+		</script>
+
+<script type="text/template" id="carousel-indicator-template">
+<li data-target="#carcousel-example-generic" data-slide-to=<%= index%> ></li>
+
+</script>
+<script type="text/template" id="image-carousel-template">
+<div class="container">
+	<div class="row">
+		<div id="myCarousel" class="carousel slide" style="max-width: 900px; margin: 0px auto;">
+            <ol class="carousel-indicators hidden-xs hidden-sm" style="padding-bottom: 42px;">
+                
+            </ol>
+            <div class="carousel-inner">
+                <div class="active item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/city/" class="img-rounded" alt="PS3 reparatie Haarlem"></a>
+                    <div class="carousel-caption">
+                        <h3>Cupcake ipsum dolor sit amet</h3>
+                        <p>Powder chocolate carrot cake. Applicake tart icing chupa chups marshmallow apple pie candy canes gingerbread croissant.</p>
+                    </div>
+                </div>
+                <div class="item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/nature/" class="img-rounded" alt="Blu-ray Lens reparatie"></a>
+                    <div class="carousel-caption">
+                        <h3>Cupcake ipsum dolor sit amet</h3>
+                        <p>Pudding fruitcake chocolate pastry caramels dessert powder cupcake. Marzipan sweet roll jelly macaroon brownie.</p>
+                    </div>
+                </div>
+                <div class="item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/food/" class="img-rounded" alt="Yellow Light of Death"></a>
+                    <div class="carousel-caption">
+                        <h3>Cupcake ipsum dolor sit amet</h3>
+                        <p>Ice cream pie marzipan cookie macaroon dragée cookie. Caramels tootsie roll danish chocolate cake pastry icing.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+        </div>
+	</div>
+</div>
+</script>
+
+<!-- testing components end-->
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>	    
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+	<script type="text/javascript" src="libs/classie.js"></script>
+	<script type="text/javascript" src="libs/require.min.js"></script>	    		
+	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="libs/ImageViewer-master/imageviewer.min.js"></script>
+
+	<script>
+		app = {};
+
+		app.init = function() {
+			app = new ApplicationRouter();
+
+			app.controller = AppController();
+			app.state={};
+			Backbone.history.start();
+		};
+
+		//hack - to call init a delay beacause some view components 
+		//are undefined in the runtime
+		setTimeout(app.init, 1000);
+		
+	</script>
+
+	<script type="text/javascript" src="js/views.js"></script>	
+	<script type="text/javascript" src="js/router.js"></script>    		
+	<script type="text/javascript" src="js/collections.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+
+	</body>
+</html>

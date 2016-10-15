@@ -1,0 +1,33 @@
+/* Theme from designer */
+.list-group-item {
+			background-color: transparent;
+			border-color: #009688;
+		}
+		.sub-theme-nav-item{
+			padding: 7px;		    
+		}
+		.sub-theme-nav-item img {
+			margin: 0 auto;
+			background: transparent;
+			border:none;
+			height: auto;
+			width: 100%;
+			max-width: 135px;
+		}
+		.panel-ncbs-foot{
+			background-color: #cbb534;
+		}
+		#ncbs-nav-footer .panel {
+			border-radius: 0px;
+			margin:5px;
+		}
+		#ncbs-nav-footer .panel-body{
+			height: 150px;
+		}
+		#ncbs-nav-footer .panel-footer{
+			background-color: transparent;
+			border: 1px solid transparent;
+			color: #333726;
+			font-size: 15px;
+			font-family: roboto;
+		}
