@@ -66,6 +66,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		},
 		render: function(){
 			this.model = this.collection.get(this.tags[0]);
+			this.content = {
+				element_texts: this.model.get('element_texts'), 
+				total:this.model.get('element_texts').length,
+				tabNav: ""
+			}
 			window.scrollTo(0,0);
 			this.$el.html(this.template(this.model.toJSON()));
 

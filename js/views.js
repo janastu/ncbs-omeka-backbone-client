@@ -48,7 +48,7 @@ imgSliderView = Backbone.View.extend({
 		this.model.set("content", this.options.content);
 		this.model.set("total", this.options.content.length);
 		this.$el.html(this.template());
-		this.viewer = ImageViewer($(this.$('.image-container')));
+		this.viewer = ImageViewer($(this.$('.image-container')), {snapView: true});
 		this.listenTo(this.model, "change", this.render);
 		console.log(this.viewer);
 		this.render();
@@ -63,7 +63,7 @@ imgSliderView = Backbone.View.extend({
 		}
 
 		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].small, this.model.get('content')[this.model.get('currentIndex')-1].big);
-		
+		this.$('.iv-large-image').css('max-width', '100%');
 		return this;
 
 	},
