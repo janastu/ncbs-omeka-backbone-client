@@ -1,4 +1,8 @@
 /* Theme from designer */
+a:hover {
+  text-decoration: none;
+}
+
 .list-group-item {
 			background-color: transparent;
 			border-color: #009688;
@@ -19,7 +23,7 @@
 		}
 		#ncbs-nav-footer .panel {
 			border-radius: 0px;
-			margin:5px;
+			margin:4px;
 		}
 		#ncbs-nav-footer .panel-body{
 			height: 150px;
@@ -30,4 +34,9 @@
 			color: #333726;
 			font-size: 15px;
 			font-family: roboto;
+			margin-top: 20%;
+		}
+		#ncbs-nav-footer .panel-footer:hover {
+			background-color: #333726;
+			color: #fffebf;
 		}
