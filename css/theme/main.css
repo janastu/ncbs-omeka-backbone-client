@@ -1,7 +1,7 @@
 /* Theme from designer */
-a:hover {
+/*a:hover {
   text-decoration: none;
-}
+}*/
 
 .list-group-item {
 			background-color: transparent;
@@ -39,4 +39,7 @@ a:hover {
 		#ncbs-nav-footer .panel-footer:hover {
 			background-color: #333726;
 			color: #fffebf;
+		}
+		#ncbs-nav-footer a{
+			text-decoration: none;
 		}
