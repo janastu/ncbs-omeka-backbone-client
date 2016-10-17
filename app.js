@@ -60,19 +60,23 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		el: "#content",
 		template: _.template($('#sub-theme-nav-tabs').html()),
 		initialize: function(options){
+			this.siteMap = [
+			["Identity","Space for biology", "Reflections", "Science in India", "Recognition"],
+["Institution Building", "Space & autonomy", "Paper trails", "Architecture"],
+["Growth", "Hiring", "Student selection", "Start-up days", "Collaborations", "Scaling"],
+["Research", "Basic/applied toggle", "Queries and tools", "Processes", "Areas and shifts"],
+["Education", "Building knowledge", "Mentorship"],
+["Ripple Effect", "Effects and Toll", "Isolation/interaction"],
+["Intersections", "Gender equality", "Hierarchy & class", "NCBS community", "Outside world"]];
 			this.options = options || {};
 			this.tags = this.options.tag.split('-');
 			this.listenTo(this.collection, "add", this.render);
 		},
 		render: function(){
 			this.model = this.collection.get(this.tags[0]);
-			this.content = {
-				element_texts: this.model.get('element_texts'), 
-				total:this.model.get('element_texts').length,
-				tabNav: ""
-			}
+			
 			window.scrollTo(0,0);
-			this.$el.html(this.template(this.model.toJSON()));
+			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
 
 			this.mediaContainer = new storyMediaView({el:"#ncbs-narrative-container", tag: "1-india-ps-1"});
 			this.mediaContainer.render();

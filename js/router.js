@@ -46,8 +46,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView.render();
 	},
 	theme2: function(query){
-		/*this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();*/
+		
 		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "2-india-ps-1"});
 		this.tabsView.render();
 		
@@ -55,24 +54,23 @@ var ApplicationRouter = Backbone.Router.extend({
 	theme3: function(query){
 		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "3-india-ps-1"});
 		this.tabsView.render();
-		/*this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();*/
+		
 	},
 	theme4: function(query){
-		this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();
+		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "4-india-ps-1"});
+		this.tabsView.render();
 	},
 	theme5: function(query){
-		this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();
+		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "5-india-ps-1"});
+		this.tabsView.render();
 	}, 
 	theme6: function(query){
-		this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();
+		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "6-india-ps-1"});
+		this.tabsView.render();
 	},
 	theme7: function(query){
-		this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();
+		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "7-india-ps-1"});
+		this.tabsView.render();
 	}
 });
 
