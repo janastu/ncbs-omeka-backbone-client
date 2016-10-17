@@ -120,39 +120,26 @@
 <script type="text/template" id="sub-theme-nav-tabs">
 <div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
 
+
 <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style="margin-top:175px">
-  <li role="presentation" class="active"><a href="#identity-note" aria-controls="identity-note" role="tab" data-toggle="tab"><img src="img/Assets/identity.png" alt="category_identity" class="img-responsive" style="max-width:15px; display:inline;"/><span>Identity</span></a></li>
-    <li role="presentation" ><a href="#space-for-biology" aria-controls="space-for-biology" role="tab" data-toggle="tab">Space for biology</a></li>
-    <li role="presentation"><a href="#science-in-india" aria-controls="science-in-india" role="tab" data-toggle="tab">Science in India</a></li>
-    <li role="presentation"><a href="#recognition" aria-controls="recognition" role="tab" data-toggle="tab">Recognition</a></li>
-    <li role="presentation"><a href="#reflections" aria-controls="reflections" role="tab" data-toggle="tab">Reflections</a></li>
+  <% _.each(sitemap, function(arr,index) {%>
+
+  <li role="presentation" class=""><a href="#<%=index%>-note" aria-controls="<%=index%>-note" role="tab" data-toggle="tab"><!--img src="img/Assets/identity.png" alt="category_identity" class="img-responsive" style="max-width:15px; display:inline;"/><span--><%=arr%><!--/span--></a></li>
+  <%});%>
+    
   </ul>
 
   <!-- Tab panes -->
   <div class="container tab-content">
-  <div role="tabpanel" class="tab-pane active" id="identity-note">
-  <%= element_texts[1].text %>
+  <% _.each(sitemap, function(arr,index) {%>
+  	<%var i = index+1;%>
+  <div role="tabpanel" class="tab-pane" id="<%=index%>-note">
+  <%= content.element_texts[i].text %>
   
   </div>
-    <div role="tabpanel" class="tab-pane" id="space-for-biology">
-    <%= element_texts[2].text %>
-    	
-    </div>
-    <div role="tabpanel" class="tab-pane" id="science-in-india">
-    <%= element_texts[3].text %>
-
-</div>
-<div role="tabpanel" class="tab-pane" id="recognition">
-<%= element_texts[4].text %>
-	
-
-</div>
-    <div role="tabpanel" class="tab-pane" id="reflections">
-    <%= element_texts[5].text %>
-    	
-
-    </div>
+  <%});%>
+    
   </div>
 
 	
