@@ -1,7 +1,89 @@
 //View Partials - Common header and footer	
+dummy = [{
+        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/9982b559f1492ba7df902e9f15103dde.jpg',
+        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/9982b559f1492ba7df902e9f15103dde.jpg'
+    },{
+        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/221b610a7e70e4a7a537761178309511.jpg',
+        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/221b610a7e70e4a7a537761178309511.jpg'
+    },{
+        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/9795fbb14b84b0d635db2c61d006a104.jpg',
+        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/9795fbb14b84b0d635db2c61d006a104.jpg'
+    },{
+        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/2ed67b2f00cb40156d244a2fab870e47.jpg',
+        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/2ed67b2f00cb40156d244a2fab870e47.jpg'
+    }];
+
+    DummyView = Backbone.View.extend({
+    	template: _.template($("#dummy-view").html()),
+    	initialize: function(options){
+    		this.options = options || {};
+    		this.render
+    	},
+    	render: function(options){
+    		this.$el.html(this.template);
+    	}
+    });
+imgSliderModel = Backbone.Model.extend({
+	defaults: {
+		content: [],
+		currentIndex: 1,
+		total: 4
+	},
+	initialize: function() {
+
+	}
+});
+
+imgSliderView = Backbone.View.extend({
+	template: _.template($("#img-slider-template").html()),
+	events: {
+		"click .prev": "slideDecrement",
+		"click .next": "slideIncrement"
+	},
+	initialize: function(options){
+		//Image slider view using http://ignitersworld.com/lab/imageViewer.html
+		//expects options - el, content(array of objects for imgurls)
+		this.options = options || {};
+		this.model = new imgSliderModel();
+		this.model.set("content", this.options.content);
+		this.model.set("total", this.options.content.length);
+		this.$el.html(this.template());
+		this.viewer = ImageViewer($(this.$('.image-container')));
+		this.listenTo(this.model, "change", this.render);
+		console.log(this.viewer);
+		this.render();
+
+	},
+	render: function(){
+		
+		if(this.model.get('currentIndex') > this.model.get('total')) {
+			this.model.set('currentIndex', 1);
+		} else if( this.model.get('currentIndex')<1) {
+			this.model.set('currentIndex', this.model.get('total'));
+		}
+
+		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].small, this.model.get('content')[this.model.get('currentIndex')-1].big);
+		
+		return this;
+
+	},
+	slideDecrement: function(e){
+		this.model.set('currentIndex', this.model.get('currentIndex')-1);
+	},
+	slideIncrement: function(e){
+		this.model.set('currentIndex', this.model.get('currentIndex')+1);
+	}
+});
 
 
+ AudioView = Backbone.View.extend({
+ 	initialize: function(){
 
+ 	},
+ 	render: function(){
+
+ 	}
+ });
 ImageView = Backbone.View.extend({
 	initialize: function(options){
 		//initialize options - template, content is array of models
@@ -46,16 +128,3 @@ ImageView = Backbone.View.extend({
 	}
 });
 
-ImageCarousel = new Backbone.View.extend({
-	el: "#test-carousel",
- 
-	initialize: function(options){
-		/*this.container = _.template($("#image-carousel-template")),
-		this.indicators = _.template($("#carousel-indicator-template")),*/
-		this.content = options.content;
-		console.log(this.content, "in slider view");
-	},
-	render: function(){
-
-	}
-});

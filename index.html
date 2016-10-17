@@ -12,7 +12,29 @@
 		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
 		<link type="text/css" rel="stylesheet" href="libs/ImageViewer-master/imageviewer.css" />
 	</head>
-	
+	<style>
+	.image-container{
+		height:600px;
+	}
+
+	.image-container img {
+		max-width:100%;
+		max-height:auto;
+	}
+	.nav-tabs > li > a {
+		border-radius:0px;
+		color: darkcyan;
+	}
+	.nav-tabs > li.active > a, 
+	.nav-tabs > li.active > a:hover, 
+	.nav-tabs > li.active > a:focus {
+		
+		color: darkcyan;
+		border: 1px solid darkcyan;
+		border-bottom: transparent;
+		background-color: transparent;
+	}
+	</style>
 	<body>
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -45,6 +67,19 @@
 
 
     <!-- Templates and scripts start -->
+
+   <script type="text/template" id="dummy-view">
+   <div class="container" style="background-color:#f4f3e9; height:600px;" id="ncbs-narrative-container">
+   <div class="panel panel-default" style="top:150px;position:relative;">
+     <div class="panel-body">
+     <div class="center-block">
+       <h1> Coming soon! </h1>
+       </div>
+     </div>
+   </div>
+   
+   </div>
+   </script>
 	    <script type="text/template" id="listItems">
 		
 			<div class="list-group-item">
@@ -69,62 +104,84 @@
 			</div>
 		</script>
 
-<script type="text/template" id="carousel-indicator-template">
-<li data-target="#carcousel-example-generic" data-slide-to=<%= index%> ></li>
 
+<!-- subtheme identity content start-->
+<script type="text/template" id="img-slider-template">
+<div class="col-md-12">
+    <div class="image-container"></div>
+    <span class="prev glyphicon glyphicon-chevron-left"/></span>
+    <span  class="next glyphicon glyphicon-chevron-right"/></span>
+    <div class="footer-info">
+        <span class="current"></span>/<span class="total"></span>
+    </div>
+</div>    
 </script>
-<script type="text/template" id="image-carousel-template">
-<div class="container">
-	<div class="row">
-		<div id="myCarousel" class="carousel slide" style="max-width: 900px; margin: 0px auto;">
-            <ol class="carousel-indicators hidden-xs hidden-sm" style="padding-bottom: 42px;">
-                
-            </ol>
-            <div class="carousel-inner">
-                <div class="active item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/city/" class="img-rounded" alt="PS3 reparatie Haarlem"></a>
-                    <div class="carousel-caption">
-                        <h3>Cupcake ipsum dolor sit amet</h3>
-                        <p>Powder chocolate carrot cake. Applicake tart icing chupa chups marshmallow apple pie candy canes gingerbread croissant.</p>
-                    </div>
-                </div>
-                <div class="item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/nature/" class="img-rounded" alt="Blu-ray Lens reparatie"></a>
-                    <div class="carousel-caption">
-                        <h3>Cupcake ipsum dolor sit amet</h3>
-                        <p>Pudding fruitcake chocolate pastry caramels dessert powder cupcake. Marzipan sweet roll jelly macaroon brownie.</p>
-                    </div>
-                </div>
-                <div class="item" align="center"><a href="#"><img src="http://lorempixel.com/1920/1080/food/" class="img-rounded" alt="Yellow Light of Death"></a>
-                    <div class="carousel-caption">
-                        <h3>Cupcake ipsum dolor sit amet</h3>
-                        <p>Ice cream pie marzipan cookie macaroon dragée cookie. Caramels tootsie roll danish chocolate cake pastry icing.</p>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-        </div>
-	</div>
+
+<script type="text/template" id="sub-theme-nav-tabs">
+<div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
+
+<!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style="margin-top:175px">
+  <li role="presentation" class="active"><a href="#identity-note" aria-controls="identity-note" role="tab" data-toggle="tab"><img src="img/Assets/identity.png" alt="category_identity" class="img-responsive" style="max-width:15px; display:inline;"/><span>Identity</span></a></li>
+    <li role="presentation" ><a href="#space-for-biology" aria-controls="space-for-biology" role="tab" data-toggle="tab">Space for biology</a></li>
+    <li role="presentation"><a href="#science-in-india" aria-controls="science-in-india" role="tab" data-toggle="tab">Science in India</a></li>
+    <li role="presentation"><a href="#recognition" aria-controls="recognition" role="tab" data-toggle="tab">Recognition</a></li>
+    <li role="presentation"><a href="#reflections" aria-controls="reflections" role="tab" data-toggle="tab">Reflections</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="container tab-content">
+  <div role="tabpanel" class="tab-pane active" id="identity-note">
+  <%= element_texts[1].text %>
+  
+  </div>
+    <div role="tabpanel" class="tab-pane" id="space-for-biology">
+    <%= element_texts[2].text %>
+    	
+    </div>
+    <div role="tabpanel" class="tab-pane" id="science-in-india">[1-India-P1]
+    <%= element_texts[3].text %>
+
+</div>
+<div role="tabpanel" class="tab-pane" id="recognition">
+<%= element_texts[4].text %>
+	
+
+</div>
+    <div role="tabpanel" class="tab-pane" id="reflections">
+    <%= element_texts[5].text %>
+    	
+
+    </div>
+  </div>
+
+	
 </div>
 </script>
 
+<!-- subtheme identity content END-->
 <!-- testing components end-->
 
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>	    
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="libs/underscore-1.5.2-min.js"></script>	    
+	<script type="text/javascript" src="libs/jquery-1.10.2-min.js"></script>
 
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+	<script type="text/javascript" src="libs/backbone-1.1.0-min.js"></script>
 	<script type="text/javascript" src="libs/classie.js"></script>
 	<script type="text/javascript" src="libs/require.min.js"></script>	    		
 	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="libs/ImageViewer-master/imageviewer.min.js"></script>
 
+
+	<script type="text/javascript" src="js/views.js"></script>	
+	<script type="text/javascript" src="js/router.js"></script>    		
+	<script type="text/javascript" src="js/collections.js"></script>
+	<script type="text/javascript" src="app.js"></script>
 	<script>
 		app = {};
-
+		app.controller = AppController();
+		console.log(app);
 		app.init = function() {
 			app = new ApplicationRouter();
-
-			app.controller = AppController();
 			app.state={};
 			Backbone.history.start();
 		};
@@ -135,10 +192,7 @@
 		
 	</script>
 
-	<script type="text/javascript" src="js/views.js"></script>	
-	<script type="text/javascript" src="js/router.js"></script>    		
-	<script type="text/javascript" src="js/collections.js"></script>
-	<script type="text/javascript" src="app.js"></script>
+	
 
 	</body>
 </html>

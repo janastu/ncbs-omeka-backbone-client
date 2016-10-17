@@ -16,15 +16,16 @@ error: function(result, status, xhr){
 	}
 });
 
+
 AppController = function(){
 
 window.PAGES = {};
 
 PAGES.config = {
-	getOmekaCollections: 'http://ncbs.test.openrun.net/api/collections',
-	getOmekaFiles: "http://ncbs.test.openrun.net/api/files",
-	getOmekaItems: 'http://ncbs.test.openrun.net/api/items',
-	getOmekaContext: 'http://ncbs.test.openrun.net/api/elements?element_set=1'
+	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25dev/api/collections',
+	getOmekaFiles: "https://www.ncbs.res.in/ncbs25dev/api/files",
+	getOmekaItems: 'https://www.ncbs.res.in/ncbs25dev/api/items',
+	getOmekaContext: 'https://www.ncbs.res.in/ncbs25dev/api/elements?element_set=1'
 };
 
 var FilesCollection = Backbone.Collection.extend({
@@ -64,6 +65,7 @@ var collectionProto = Backbone.Collection.extend({
 						description: omekaItems.getContextText(item, "Description"),
 						rights: omekaItems.getContextText(item, "Rights"),
 						format: omekaItems.getContextText(item, "Format"),
+						tags: item.get('tags')[0].name,
 						mime_type: files.getFileUrlsById(item.get('id')).get('mime_type'), 
 						fileurls: files.getFileUrlsById(item.get('id')).get('file_urls')
 					} 
@@ -117,5 +119,6 @@ omekaItems.fetch({
 
 return true;
 };
+
 
 
