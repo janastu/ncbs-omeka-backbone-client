@@ -4,6 +4,7 @@
 var ApplicationRouter = Backbone.Router.extend({
 	routes: {
 		"": "home",
+		"about": "about",
 		"identity": "theme1",
 		"identity?:query": "theme1",
 		"institution-building": "theme2",
