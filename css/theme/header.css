@@ -160,7 +160,7 @@ header {
     display: inline-block;
     float: right; }
     header nav a {
-      line-height: 150px;
+      line-height: 75px;
       margin-left: 20px;
       color: #fff;
       font-weight: 700;
