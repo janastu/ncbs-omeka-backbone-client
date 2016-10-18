@@ -24,6 +24,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		// Site content from omeka api as required by the client 
 		//interfaces.
 		this.content = new Backbone.Collection;
+		$('#ncbs-content-policy').modal()
 
 	},
 	home: function() {
