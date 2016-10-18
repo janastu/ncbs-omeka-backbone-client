@@ -49,16 +49,10 @@
 			border-radius: 0px;
 			margin:4px;
 		}
-		#ncbs-nav-footer .panel-body{
-			/*height: 150px;*/
-		}
-		#ncbs-nav-footer .panel-footer{
-			background-color: transparent;
-			border: 1px solid transparent;
-			color: #333726;
-			font-size: 15px;
-			font-family: roboto;
-			
+		
+		#ncbs-nav-footer {
+			background-color: #f4f3e9;
+			color:#333726;
 		}
 		#ncbs-nav-footer a:hover .ncbs-foot-nav-text{
 			
