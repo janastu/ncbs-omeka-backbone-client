@@ -8,7 +8,7 @@ a:hover {
 			border-color: #009688;
 		}
 		.sub-theme-nav-item{
-			padding: 7px;		    
+			/*padding: 7px;	*/	    
 		}
 		.sub-theme-nav-item img {
 			margin: 0 auto;
@@ -20,13 +20,15 @@ a:hover {
 		}
 		.panel-ncbs-foot{
 			background-color: #cbb534;
+			width:150px;
+			height:130px;
 		}
 		#ncbs-nav-footer .panel {
 			border-radius: 0px;
 			margin:4px;
 		}
 		#ncbs-nav-footer .panel-body{
-			height: 150px;
+			/*height: 150px;*/
 		}
 		#ncbs-nav-footer .panel-footer{
 			background-color: transparent;
@@ -34,9 +36,21 @@ a:hover {
 			color: #333726;
 			font-size: 15px;
 			font-family: roboto;
-			margin-top: 20%;
+			
 		}
-		#ncbs-nav-footer .panel-footer:hover {
-			background-color: #333726;
-			color: #fffebf;
+		#ncbs-nav-footer a:hover .ncbs-foot-nav-text{
+			
+				background-color: #333726;
+				color: #fffebf;
+		
+		}
+
+		.ncbs-foot-nav-text {
+			background-color: #cbb534;
+			    margin-left: 4px;
+			    margin-right: 4px;
+			    margin-top: -4px;
+			    color: #333726;
+			    font-size: 15px;
+			    font-family: roboto;
 		}
