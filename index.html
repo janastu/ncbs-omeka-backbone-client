@@ -7,6 +7,7 @@
 	    <meta name="description" content="" />
 	    <meta name="author" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="libs/font-awesome-4.6.3/css/font-awesome.min.css">
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
 		<link type="text/css" rel="stylesheet" href="css/theme/header.css" />
 		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
@@ -14,6 +15,8 @@
 	</head>
 
 	<body>
+	
+
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<!-- Header from templates/header.html and app.js -->
@@ -24,7 +27,12 @@
 		<div class="row-fluid">
 			<div class="">
 				<div id="main">
+					<div id="spinner-launch" style="display:none;">
+						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+						<span class="sr-only">Loading...</span>
+					</div>
 					<div id="content">
+
 					</div>
 				</div>
 			</div>
@@ -149,8 +157,9 @@
 			app = new ApplicationRouter();
 			app.state={};
 			Backbone.history.start();
-			
+
 		};
+		$("#spinner-launch").show();
 		//app.init();
 		//hack - to call init a delay beacause some view components 
 		//are undefined in the runtime on the server
