@@ -18,7 +18,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		scrollEffect: function(){
 			window.addEventListener('scroll', function(e){
 		    var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-		        shrinkOn = 50,
+		        shrinkOn = 25,
 		        header = document.querySelector("header");
 		    if (distanceY > shrinkOn) {
 		        classie.add(header,"smaller");

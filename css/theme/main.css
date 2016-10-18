@@ -3,6 +3,28 @@ a:hover {
   text-decoration: none;
 }
 
+
+.image-container{
+	height:600px;
+}
+
+.image-container img {
+	max-width:100%;
+	max-height:auto;
+}
+.nav-tabs > li > a {
+	border-radius:0px;
+	color: darkcyan;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+	
+	color: darkcyan;
+	border: 1px solid darkcyan;
+	border-bottom: transparent;
+	background-color: transparent;
+}
 .list-group-item {
 			background-color: transparent;
 			border-color: #009688;
