@@ -150,10 +150,10 @@
 			app.state={};
 			Backbone.history.start();
 		};
-
+		//app.init();
 		//hack - to call init a delay beacause some view components 
-		//are undefined in the runtime
-		setTimeout(app.init, 1000);
+		//are undefined in the runtime on the server
+		setTimeout(app.init, 5000);
 		
 	</script>
 
