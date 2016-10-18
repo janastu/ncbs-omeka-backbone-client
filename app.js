@@ -22,7 +22,9 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		        header = document.querySelector("header");
 		    if (distanceY > shrinkOn) {
 		        classie.add(header,"smaller");
+		        $("#ncbs-home-text-collapsible").hide();
 		    } else {
+		    	$("#ncbs-home-text-collapsible").show();
 		        if (classie.has(header,"smaller")) {
 		            classie.remove(header,"smaller");
 		        }
