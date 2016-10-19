@@ -160,7 +160,7 @@ header {
     display: inline-block;
     float: right; }
     header nav a {
-      line-height: 75px;
+      line-height: 70px;
       margin-left: 20px;
       color: #fff;
       font-weight: 700;
@@ -182,7 +182,7 @@ header {
        }
     header.smaller h1 img{width:119px;}
     header.smaller nav a {
-      line-height: 40px; }
+      line-height: 70px; }
 
 /* =Footer
 -------------------------------------------------------------- */
