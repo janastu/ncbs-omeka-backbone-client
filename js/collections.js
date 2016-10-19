@@ -19,7 +19,8 @@ error: function(result, status, xhr){
 
 AppController = function(){
 
-window.PAGES = {};
+	
+	window.PAGES = {};
 
 PAGES.config = {
 	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25dev/api/collections',
@@ -59,19 +60,19 @@ var collectionProto = Backbone.Collection.extend({
 		console.log(this, "after");
 		
 		var pages = this.map(function(item, i){
-
+				
 					return {
 						id: item.id,
-						description: omekaItems.getContextText(item, "Description"),
-						rights: omekaItems.getContextText(item, "Rights"),
-						format: omekaItems.getContextText(item, "Format"),
-						tags: item.get('tags')[0].name,
-						mime_type: files.getFileUrlsById(item.get('id')).get('mime_type'), 
-						fileurls: files.getFileUrlsById(item.get('id')).get('file_urls')
+						description: omekaItems.getContextText(item, "Description") || null,
+						rights: omekaItems.getContextText(item, "Rights") || null,
+						format: omekaItems.getContextText(item, "Format") || null,
+						tags: item.get('tags')[0] || null,
+						mime_type: files.getFileUrlsById(item.get('id')).get('mime_type') || null, 
+						fileurls: files.getFileUrlsById(item.get('id')).get('file_urls') || null
 					} 
 				});
-		console.log(pages);
-		app.content.add(pages);
+		console.log(pages, app.APIcontent);
+		APIcontent.add(pages);
 	}
 });
 
@@ -105,15 +106,16 @@ files.fetch({
 	url: PAGES.config.getOmekaFiles
 });
 
+window.content=[];
 omekaItems = new collectionProto();
 omekaItems.fetch({
 	url: PAGES.config.getOmekaItems,
 	success: function(response){
 		//hack to be removed in production
 		//due to slow internet
-		if(files.length){
-			omekaItems.makeSiteContent();
-		}
+		
+		omekaItems.makeSiteContent();
+		
 	}
 });
 

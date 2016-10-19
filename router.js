@@ -20,12 +20,9 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.headerView.render();
 		this.footerView = new FooterView();
 		this.footerView.render();
-
-		// Site content from omeka api as required by the client 
-		//interfaces.
-		this.content = new Backbone.Collection;
 		$('#ncbs-content-policy').modal();
 		$("#spinner-launch").hide();
+		this.omekaItems = APIcontent.groupByTags(0);
 
 	},
 	home: function() {
@@ -36,6 +33,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.homeView = new HomeView({el: "#content"});
 		this.homeView.render();
 		this.state.view=this.homeView;
+
 	},
 	about: function(){
 		this.dummyView = new DummyView({el: "#content"});
@@ -43,35 +41,63 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme1: function(query) {
 		//url pattern - > #theme1?sub-theme=name&state=""
-		console.log(omekaCollections, "in theme 1");
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "1-india-ps-1"});
+		console.log(APIcontent);
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "1-*", content: 
+			this.omekaItems[1]
+		});
 		this.tabsView.render();
 	},
 	theme2: function(query){
 		
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "2-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "2-*", 
+			content: this.omekaItems[2]
+		});
 		this.tabsView.render();
 		
 	},
 	theme3: function(query){
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "3-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "3-*", 
+			content: this.omekaItems[3]
+		});
 		this.tabsView.render();
 		
 	},
 	theme4: function(query){
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "4-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "4-*", 
+			content: this.omekaItems[4]
+		});
 		this.tabsView.render();
 	},
 	theme5: function(query){
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "5-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "5-*", 
+			content: this.omekaItems[5]
+		});
 		this.tabsView.render();
 	}, 
 	theme6: function(query){
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "6-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "6-*", 
+			content: this.omekaItems[6]
+		});
 		this.tabsView.render();
 	},
 	theme7: function(query){
-		this.tabsView = new subthemeNav({collection: omekaCollections, tag: "7-india-ps-1"});
+		this.tabsView = new subthemeNav({
+			collection: omekaCollections, 
+			tag: "7-*", 
+			content: this.omekaItems[7]
+		});
 		this.tabsView.render();
 	}
 });

@@ -12,6 +12,15 @@
 		<link type="text/css" rel="stylesheet" href="css/theme/header.css" />
 		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
 		<link type="text/css" rel="stylesheet" href="libs/ImageViewer-master/imageviewer.css" />
+		<style>
+		.global-audio-player{
+			position:fixed;
+			bottom:0px;
+			width: 100%;
+			background-color: white;
+			height: 50px;
+		}
+		</style>
 	</head>
 
 	<body>
@@ -46,7 +55,8 @@
 			</div>
 		</div>	
 
-	
+	<div id="audio-player-container">
+	</div>
 	</div>
 
     <!-- testing components markup  end-->
@@ -89,7 +99,16 @@
 					<%}%>
 			</div>
 		</script>
-
+<!-- global audio player template -->
+<script type="text/template" id="audio-player-template">
+<div class="global-audio-player" >
+<audio controls autoplay class="center-block" style="margin-top:10px; width:100%; padding-left: 15px; padding-right: 15px;">
+  
+  <source src="<%=original%>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+</div>
+</script>
 
 <!-- subtheme identity content start-->
 <script type="text/template" id="img-slider-template">
@@ -151,6 +170,17 @@
 	<script type="text/javascript" src="app.js"></script>
 	<script>
 		app = {};
+		// Site content from omeka api as required by the client 
+		//interfaces.
+		storyCollection = Backbone.Collection.extend({
+			groupByTags: function(index){
+				return this.groupBy(function(item){
+					console.log(index);
+					return item.get('tags').name.split('-')[index];
+				}, index);
+			}
+		});
+		APIcontent = new storyCollection;
 		app.controller = AppController();
 		console.log(app);
 		app.init = function() {
