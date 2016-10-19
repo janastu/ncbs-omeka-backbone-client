@@ -241,3 +241,25 @@ header {
     text-align: center; }
   #info-bar span.all-tutorials {
     border-bottom: solid 1px #0793e2; } }
+
+    .nav>li>a{
+      background-color: transparent;
+    }
+.nav>li>a:hover{
+  background-color: rgba(102, 102, 102, 0.2);
+}
+.nav>.dropdown>a:focus{
+  background-color: rgba(102, 102, 102, 0.2);
+}
+.nav>.dropdown>a:active{
+  background-color: rgba(102, 102, 102, 0.2);
+}
+
+.dropdown-menu li a {
+  color: white;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #357774;
+  color:white;
+}
