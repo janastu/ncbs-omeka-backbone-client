@@ -60,14 +60,19 @@
 				color: #fffebf;
 				text-decoration:underline;
 		}
-
+		#ncbs-nav-footer a:focus .ncbs-foot-nav-text{
+			
+				background-color: #333726;
+				color: #fffebf;
+				text-decoration:none;
+		}
 		.ncbs-foot-nav-text {
 			background-color: #cbb534;
 			    margin-left: 4px;
 			    margin-right: 4px;
 			    margin-top: -4px;
 			    color: #333726;
-			    font-size: 15px;
+			    font-size: 17px;
 			    font-family: roboto;
 		}
 
@@ -77,7 +82,7 @@
 			top:13px; 
 			max-width: 375px; 
 			font-size: 16px; 
-			line-height: 18px; 
+			line-height: 19px; 
 			font-family: roboto;
 			color: #f2f2f2;
 			padding:15px; 
