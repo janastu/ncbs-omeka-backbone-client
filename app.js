@@ -93,8 +93,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			
 			window.scrollTo(0,0);
 			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
-			this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
-			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
+			this.$("#ncbs-narrative-container .nav-tabs li:nth-child(2)").first().addClass("active");
+			this.$("#ncbs-narrative-container .tab-pane:nth-child(2)").first().addClass("active");
 			this.mediaContainer = new storyMediaView({
 				el:"#ncbs-narrative-container", 
 				tag: "1-india-ps-1", 
