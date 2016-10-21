@@ -131,19 +131,29 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				//append audio icons where the dom matches
 				$(this.found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
 			}, this);
-
+			_.each(this.spans, function(span){
+				var mappedAudio = _.map(this.groupedMedia["audio/mpeg"], function(item){
+					console.log(mappedAudio);
+				})
+			});
 			_.each(this.spans, function(span){
 				var mapped = _.map(this.groupedMedia["image/jpeg"], function(item){
 					var tagArray = item.get('tags').name.split('-');
-					var domTagmatch = tagArray.splice(3, 1);
+					var domTagmatch = tagArray.splice(3, 2);
+					//console.log(tagArray, span, "map dom", domTagmatch);
 					if(span.innerHTML === tagArray.join('-')){
 						return item;
 					}
 				});
-
+				
 				var cleanedMapped = _.compact(mapped);
+				var sorted = _.sortBy(cleanedMapped, function(item){
+					//console.log(item.get('tags').name.split('-')[3]);
+					return item.get('tags').name.split('-')[3];
+				});
+				console.log(cleanedMapped, span, sorted, "sorted");
 				if(cleanedMapped.length){
-					new imgSliderView({el: span, content: cleanedMapped});
+					new imgSliderView({el: span, content: sorted});
 				}
 				
 			}, this);

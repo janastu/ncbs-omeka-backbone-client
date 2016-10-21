@@ -145,7 +145,7 @@ header {
   header h1#logo {
     display: inline-block;
     height: 150px;
-    line-height: 110px;
+    line-height: 85px;
     float: left;
     font-family: "Oswald", sans-serif;
     font-size: 80px;
