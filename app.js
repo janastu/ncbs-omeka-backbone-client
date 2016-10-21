@@ -122,19 +122,27 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		},
 		render: function() {
 			//iterate to each item of the collection by media type
-			_.each(this.groupedMedia["audio/mpeg"], function(item){
+			/*_.each(this.groupedMedia["audio/mpeg"], function(item){
 				//find the matching tag from  dom for each item
 				this.found = _.find(this.spans, function(span){
 					return span.innerHTML === item.get('tags').name;
 				});
 				console.log(this.found, "audio");
 				//append audio icons where the dom matches
-				$(this.found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
-			}, this);
+				//$(this.found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
+			}, this);*/
 			_.each(this.spans, function(span){
-				var mappedAudio = _.map(this.groupedMedia["audio/mpeg"], function(item){
-					console.log(mappedAudio);
-				})
+				var mappedAudio = _.find(this.groupedMedia["audio/mpeg"], function(item){
+					//console.log(span.innerHTML, item.get('tags').name, 'matched?')
+					if(span.innerHTML === item.get('tags').name){
+
+						return item;	
+					}
+				});
+				console.log(mappedAudio, span);
+				if(mappedAudio){
+					$(span).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+mappedAudio.get('tags').name+'></i>');
+				}
 			}, this);
 			_.each(this.spans, function(span){
 				var mapped = _.map(this.groupedMedia["image/jpeg"], function(item){
@@ -151,7 +159,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 					//console.log(item.get('tags').name.split('-')[3]);
 					return item.get('tags').name.split('-')[3];
 				});
-				console.log(cleanedMapped, span, sorted, "sorted");
+				//console.log(cleanedMapped, span, sorted, "sorted");
 				if(sorted.length){
 					new imgSliderView({el: span, content: sorted});
 				}

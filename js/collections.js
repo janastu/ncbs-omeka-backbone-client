@@ -23,9 +23,9 @@ AppController = function(){
 	window.PAGES = {};
 
 PAGES.config = {
-	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25/api/collections.json',
-	getOmekaFiles: "https://www.ncbs.res.in/ncbs25/api/files.json",
-	getOmekaItems: 'https://www.ncbs.res.in/ncbs25/api/items.json',
+	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25/omeka/api/collections',
+	getOmekaFiles: "https://www.ncbs.res.in/ncbs25/omeka/api/files",
+	getOmekaItems: 'https://www.ncbs.res.in/ncbs25/omeka/api/items',
 	getOmekaContext: 'https://www.ncbs.res.in/ncbs/api/elements.json'
 };
 
@@ -155,6 +155,7 @@ function checkMakeSiteContent(typ) {
 	}
 	if (files_done && collections_done &&  items_done)
 		omekaItems.makeSiteContent();
+
 }
 return true;
 };
