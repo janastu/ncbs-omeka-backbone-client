@@ -76,29 +76,37 @@
    
    </div>
    </script>
-	    <script type="text/template" id="listItems">
-		
-			<div class="list-group-item">
-				  
-					<%if(mime_type == "audio/mpeg"){%> 
-						<audio controls="controls" preload="none">
-						                  Your browser does not support the <code>audio</code> element.
-						                  
-						                  <source src=<%= fileurls.original %>>
-						                </audio>
-						<%}%>
-					<%if(mime_type == "image/jpeg"){%>
-						<img data-high-res-src= <%= fileurls.fullsize %> src=<%= fileurls.thumbnail%> class="pannable-image"/>
-						<%}%>
 
-					<% if(description){%> 
-						<p><%= description.text %></p>
-					<%}%>
-					<% if(rights){%> 
-						<p><%= rights.text %></p>
-					<%}%>
-			</div>
-		</script>
+   <script type="text/template" id="about-page-template">
+   <div class="container" style="background-color:#f4f3e9; margin-top:145px;" id="ncbs-about-container">
+ 		
+ 			<br/>
+ 		<blockquote><p>“When you are in the middle of a story, it isn't a story at all, but only a confusion, a dark roaring, a blindness. It is only afterwards that it becomes anything like a story when you're telling it to yourself or someone else.”</p>
+ 		<footer> -- Stories We Tell. Directed by Sarah Polley. 2012</footer>
+ 		</blockquote>
+
+ 		<br/>
+
+ 		<h3 class="text-center">NCBS @ 25</h3>
+ 		<p>Designed by D.Epicentre (Sudebi Thakurata, Bharat Joshi, Tanvi Talwar, Saakshita Prabhakar, Probal Banerjee) and <a href="http://servelots.com/new/3d.html" target="_blank">Servelots</a> (T B Dinesh, Bhanu Prakash, T Pradyumna, A Shalini, Arun Kumar, Nikitha Bharadwaj, Madhuvanthi, Amrapali)</p>
+ 		<br/>
+
+ 		<p>The NCBS@25 digital exhibit contains records (images, audio and video excerpts, text) under copyright or under third party ownership. These records are given on loan to NCBS for the purposes of this exhibit. Material may only be reproduced for academic and non-commercial use, and only with the explicit permission of the record owners, as mentioned in the caption for each image, and audio and video clip. Please respect the honour code and the generosity of the donors in sharing this material with a wider audience.</p>
+ 		<br/>
+ 		<p>The design team gratefully acknowledges the invaluable support of the following institutes and people:</p>
+ 		<br/>
+ 		<p>Tata Institute of Fundamental Research (TIFR) Archives; Janastu; and the offices of Architecture and Engineering, IT, Research Development Office, Establishment and Instrumentation, National Centre for Biological Sciences.</p>
+ 		<br/>
+ 		<p>A. Sreenath, Anil Ananthaswamy, George Antony, Aditya Asopa, Savita Ayyar, Champakali Ayyub, B.V. Sreekantan, Prasanta Baruah, Upinder Bhalla, Soumya Bhattacharjee, Aditi Bhattacharya, Chandrashekhar, Chinmayee Chandrashekhara, Sumantra Chattarji, Indira Chowdhury, D. R. Lad, G. Gajendra, Prem Chandra Gautam, Archit Guha, H. Bhagya, H. Krishnamurthy, H. Mohan, Gaiti Hasan, Shobha Jagtap, Mamtha Jaigopal, Jeevaraju, Sudhanshu Jha, Man Mohan Johri, K. S. Vishalakshi, K. Venkataramanathan, K. VijayRaghavan, Pavan Kumar Kaushik, Anubhab Khan, Sudhir Krishna, Anusha Krishnan, Ajith Kumar, Anand Kumar, L. S. Shashidhara, M. S. Swaminathan, Saurabh Mahajan, Priyanka Mathai, Debakshi Mullick, Mathew K Mathew, Satyajit Mayor, Issac F. Murzello, N. Shanthakumary, Rudra Naik, Vidyanand Nanjundiah, Maithreyi Narasimha, Samadhan Narwade, Shannon Olsson, P. Balaram, P. N. Bhavsar, P.P. Divakaran, P. Ranjith, Dasaradhi Palakodeti, Knight Paul Pandian, Mitradas Panicker, R. Chetana, R. Hema, R. Parvathi, R. Sowdhamini, R.D. John, Bhavya Ramakrishnan, Uma Ramakrishnan, Ashok Rao, B. J. Rao, C.N.R. Rao, Satyajit Rath, Krishanu Ray, Oindrila Raychaudhuri, Raj Rewal, S. Savitha, S. N. Basha, Taslimarif Saiyed, Vinaya Sahasrabuddhe, Sanjay Sane, Apurva Sarin, Kalyani Sharma, Shobhona Sharma, Archana Shetty, Dilawar Singh, Ram Naresh Singh, Virendra Singh, Sammitha Sreevathsa, Govind Swarup, T. Eswar, T. J. Felix, T. M. Sahadevan, Krishnapriya Tamma, Mukund Thattai, Parvathi Thangam, Thejaprakash, Deepti Trivedi, Sandip Trivedi, U.B. Poornima, Jayant Udgaonkar, Vidita Vaidya, Shaju Varghese, Veera, Noor Zainab, and the families of K.S. Krishnan and Obaid Siddiqi.</p>
+ 		<br/>
+ 		<p>Quotes from the following people were excerpted from oral history interviews conducted by Indira Chowdhury. (2002 - 2003). TIFR Archives. Oral History Project, TIFR Oral History Archives: P. Babu, P.K. Maitra, Obaid Siddiqi. Quotes from everyone else were excerpted from interviews that are part of an on-going NCBS Archives oral history project (July 2016 - April 2017). The voices you hear on this page are of a selection of people who generously gave their time to discuss the history of NCBS.</p>
+ 		<br/>
+ 		<p>Feedback about the exhibit or need to get in touch with any of the record owners? 
+ 		ncbs25@ncbs.res.in</p>
+   
+   </div>
+   </script>
+	   
 <!-- global audio player template -->
 <script type="text/template" id="audio-player-template">
 <div class="global-audio-player" >
@@ -114,12 +122,25 @@ Your browser does not support the audio element.
 <script type="text/template" id="img-slider-template">
 <div class="col-md-12">
     <div class="image-container"></div>
-    <span class="prev glyphicon glyphicon-chevron-left"/></span>
-    <span  class="next glyphicon glyphicon-chevron-right"/></span>
-    <div class="footer-info">
-        <span class="current"></span>/<span class="total"></span>
-    </div>
 </div>    
+</script>
+
+<script type="text/template" id="img-slider-footer">
+<div class="footer-info">
+<span class="prev glyphicon glyphicon-chevron-left pull-left"/></span>
+<span  class="next glyphicon glyphicon-chevron-right pull-right"/></span>
+<div class="text-center">
+    <span class="current"><%=currentIndex%></span>/
+    <span class="total"><%=total%></span>
+ </div>
+</div>
+</script>
+
+<script type="text/template" id="caption-template">
+<div class="featured-img-caption">
+<hr />
+<span><%=text %></span>
+</div>
 </script>
 
 <script type="text/template" id="sub-theme-nav-tabs">
@@ -175,7 +196,6 @@ Your browser does not support the audio element.
 		storyCollection = Backbone.Collection.extend({
 			groupByTags: function(index){
 				return this.groupBy(function(item){
-					console.log(index);
 					return item.get('tags').name.split('-')[index];
 				}, index);
 			}
@@ -189,11 +209,16 @@ Your browser does not support the audio element.
 			Backbone.history.start();
 
 		};
-		$("#spinner-launch").show();
+		$("#spinner-launch").toggle();
 		//app.init();
 		//hack - to call init a delay beacause some view components 
 		//are undefined in the runtime on the server
-		setTimeout(app.init, 5000);
+		//APIcontent.once("add", app.init);
+		function checkForContentToInit(){
+			APIcontent.once("add", app.init);
+		}
+		checkForContentToInit();
+		//setTimeout(checkForContentToInit, 3000);
 		
 	</script>
 

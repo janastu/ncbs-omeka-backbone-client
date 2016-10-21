@@ -27,7 +27,7 @@ imgSliderModel = Backbone.Model.extend({
 	defaults: {
 		content: [],
 		currentIndex: 1,
-		total: 4
+		total: ""
 	},
 	initialize: function() {
 
@@ -36,6 +36,8 @@ imgSliderModel = Backbone.Model.extend({
 
 imgSliderView = Backbone.View.extend({
 	template: _.template($("#img-slider-template").html()),
+	footerTemplate: _.template($("#img-slider-footer").html()),
+	captionTemplate: _.template($("#caption-template").html()),
 	events: {
 		"click .prev": "slideDecrement",
 		"click .next": "slideIncrement"
@@ -47,25 +49,30 @@ imgSliderView = Backbone.View.extend({
 		this.model = new imgSliderModel();
 		this.model.set("content", this.options.content);
 		this.model.set("total", this.options.content.length);
-		this.$el.html(this.template());
-		this.viewer = ImageViewer($(this.$('.image-container')), {snapView: true});
+		this.$el.html(this.template(this.model.toJSON()));
+		this.viewer = ImageViewer(this.$('.image-container'), {
+			snapView: false,
+			zoomOnMouseWheel: true
+		});
 		this.listenTo(this.model, "change", this.render);
-		console.log(this.viewer);
 		this.render();
 
 	},
 	render: function(){
-		
+		console.log(this.model.toJSON());
 		if(this.model.get('currentIndex') > this.model.get('total')) {
 			this.model.set('currentIndex', 1);
 		} else if( this.model.get('currentIndex')<1) {
 			this.model.set('currentIndex', this.model.get('total'));
 		}
-
-		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].small, this.model.get('content')[this.model.get('currentIndex')-1].big);
-		this.$('.iv-large-image').css('max-width', '100%');
-		return this;
-
+		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').thumbnail, this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').original);
+		this.$(".featured-img-caption").remove();
+		this.$el.append(this.captionTemplate(this.model.get('content')[this.model.get('currentIndex')-1].get('description')));
+		this.$('.footer-info').remove();
+		this.$el.append(this.footerTemplate(this.model.toJSON()));
+		this.model.set("total", this.options.content.length);
+		this.viewer.refresh();
+		this.$('img').css('max-width', '100%', 'max-height', 'auto');
 	},
 	slideDecrement: function(e){
 		this.model.set('currentIndex', this.model.get('currentIndex')-1);
@@ -78,6 +85,7 @@ imgSliderView = Backbone.View.extend({
 
  AudioView = Backbone.View.extend({
  	template: _.template($("#audio-player-template").html()),
+ 	captionTemplate: _.template($("#caption-template").html()),
  	initialize: function(options){
  		this.options = options || {};
  		this.found = _.find(this.options.content, function(item){
@@ -89,6 +97,7 @@ imgSliderView = Backbone.View.extend({
  	render: function(){
  		console.log("audio render");
  		this.$el.html(this.template(this.found.get('fileurls')));
+ 		this.$el.append(this.captionTemplate(this.found.get('description')));
  		return this;
  	}
  });

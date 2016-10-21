@@ -57,7 +57,7 @@ var collectionProto = Backbone.Collection.extend({
 				});
 	},
 	makeSiteContent: function() {
-		console.log(this, "after");
+
 		
 		var pages = this.map(function(item, i){
 				
@@ -71,7 +71,7 @@ var collectionProto = Backbone.Collection.extend({
 						fileurls: files.getFileUrlsById(item.get('id')).get('file_urls') || null
 					} 
 				});
-		console.log(pages, app.APIcontent);
+	
 		APIcontent.add(pages);
 	}
 });
@@ -88,37 +88,71 @@ var ContextCollection = Backbone.Collection.extend({
 	}
 });
 
-
+var context_done = false;
+var files_done = false;
+var items_done = false;
+var collections_done = false;
 
 context = new ContextCollection;
 context.fetch({
 	url: PAGES.config.getOmekaContext
+}).then(function(response){
+	//hack to be removed in production
+	//due to slow internet
+	
+	//omekaItems.makeSiteContent();
+	checkMakeSiteContent('context');
 });
 
 
 omekaCollections = new collectionProto;
 omekaCollections.fetch({
 	url: PAGES.config.getOmekaCollections
+}).then(function(response){
+	//hack to be removed in production
+	//due to slow internet
+	
+	//omekaItems.makeSiteContent();
+	checkMakeSiteContent('collections');
 });
 
 files = new FilesCollection;
 files.fetch({
 	url: PAGES.config.getOmekaFiles
+}).then(function(response){
+	//hack to be removed in production
+	//due to slow internet
+	
+	//omekaItems.makeSiteContent();
+	checkMakeSiteContent('files');
 });
 
 window.content=[];
 omekaItems = new collectionProto();
 omekaItems.fetch({
 	url: PAGES.config.getOmekaItems,
-	success: function(response){
-		//hack to be removed in production
-		//due to slow internet
-		
-		omekaItems.makeSiteContent();
-		
-	}
+}).then(function(response){
+	//hack to be removed in production
+	//due to slow internet
+	
+	//omekaItems.makeSiteContent();
+	checkMakeSiteContent('items');
 });
 
+function checkMakeSiteContent(typ) {
+	switch(typ) {
+		case 'files':
+			files_done = true;
+		case 'collections':
+			collections_done = true;
+		case 'context':
+			context_done = true;
+		case 'items':
+			items_done = true;
+	}
+	if (files_done && collections_done && context_done && items_done)
+		omekaItems.makeSiteContent();
+}
 return true;
 };
 

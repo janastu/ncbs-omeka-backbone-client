@@ -21,9 +21,8 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.footerView = new FooterView();
 		this.footerView.render();
 		$('#ncbs-content-policy').modal();
-		$("#spinner-launch").hide();
 		this.omekaItems = APIcontent.groupByTags(0);
-
+		$("#spinner-launch").toggle();
 	},
 	home: function() {
 		console.log("in home");
@@ -36,18 +35,20 @@ var ApplicationRouter = Backbone.Router.extend({
 
 	},
 	about: function(){
-		this.dummyView = new DummyView({el: "#content"});
-		this.dummyView.render();
+		this.aboutPage = new aboutView();
+		this.aboutPage.render();
 	},
 	theme1: function(query) {
 		//url pattern - > #theme1?sub-theme=name&state=""
 		console.log(APIcontent);
+		
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
-			tag: "1-*", content: 
-			this.omekaItems[1]
+			tag: "1-*", 
+			content: this.omekaItems[1]
 		});
 		this.tabsView.render();
+		//$("#spinner-launch").toggle();
 	},
 	theme2: function(query){
 		

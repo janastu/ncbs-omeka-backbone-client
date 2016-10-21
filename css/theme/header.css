@@ -1,9 +1,9 @@
 /* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+
+h1, h2, h3, h4, h5, h6, p, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
+del, dfn, em, font,  ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -27,7 +27,7 @@ ol, ul {
  
 
 blockquote {
-  quotes: none; }
+  /*quotes: none;*/ }
 
 blockquote:before, blockquote:after {
   content: '';
@@ -178,7 +178,7 @@ header {
     }
     header.smaller h1#logo {
       display:block;
-      line-height: 65px;
+      line-height: 55px;
        }
     header.smaller h1 img{width:119px;}
     header.smaller nav a {

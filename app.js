@@ -57,6 +57,20 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		
 	});	
 
+	aboutView = Backbone.View.extend({
+		el: "#content",
+		template: _.template($("#about-page-template").html()),
+		
+		
+		initialize: function() {
+			//this.$container = $("#main");
+			
+		},
+		render: function() {
+			this.$el.html(this.template);
+		}
+		
+	});	
 
 	subthemeNav = Backbone.View.extend({
 		el: "#content",
@@ -87,6 +101,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				media: this.options.content
 			});
 			this.mediaContainer.render();
+
 		}
 	});
 
@@ -109,16 +124,35 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			//iterate to each item of the collection by media type
 			_.each(this.groupedMedia["audio/mpeg"], function(item){
 				//find the matching tag from  dom for each item
-				var found = _.find(this.spans, function(span){
-					console.log(item.get('tags').name, span.innerHTML);
+				this.found = _.find(this.spans, function(span){
 					return span.innerHTML === item.get('tags').name;
 				});
+				console.log(this.found, "audio");
 				//append audio icons where the dom matches
-				$(found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
+				$(this.found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
 			}, this);
+
+			_.each(this.spans, function(span){
+				var mapped = _.map(this.groupedMedia["image/jpeg"], function(item){
+					var tagArray = item.get('tags').name.split('-');
+					var domTagmatch = tagArray.splice(3, 1);
+					if(span.innerHTML === tagArray.join('-')){
+						return item;
+					}
+				});
+
+				var cleanedMapped = _.compact(mapped);
+				if(cleanedMapped.length){
+					new imgSliderView({el: span, content: cleanedMapped});
+				}
+				
+			}, this);
+			
 			//this.slide1 = new imgSliderView({el: this.spans[1], content: dummy});
 			//this.slide1.render();
+
 			return this;
+
 		},
 		launchAudioPlayer: function(event){
 			console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
