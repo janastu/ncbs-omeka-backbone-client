@@ -135,7 +135,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				var mappedAudio = _.map(this.groupedMedia["audio/mpeg"], function(item){
 					console.log(mappedAudio);
 				})
-			});
+			}, this);
 			_.each(this.spans, function(span){
 				var mapped = _.map(this.groupedMedia["image/jpeg"], function(item){
 					var tagArray = item.get('tags').name.split('-');
@@ -152,7 +152,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 					return item.get('tags').name.split('-')[3];
 				});
 				console.log(cleanedMapped, span, sorted, "sorted");
-				if(cleanedMapped.length){
+				if(sorted.length){
 					new imgSliderView({el: span, content: sorted});
 				}
 				
