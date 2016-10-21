@@ -23,10 +23,10 @@ AppController = function(){
 	window.PAGES = {};
 
 PAGES.config = {
-	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25dev/api/collections',
-	getOmekaFiles: "https://www.ncbs.res.in/ncbs25dev/api/files",
-	getOmekaItems: 'https://www.ncbs.res.in/ncbs25dev/api/items',
-	getOmekaContext: 'https://www.ncbs.res.in/ncbs25dev/api/elements?element_set=1'
+	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25/api/collections.json',
+	getOmekaFiles: "https://www.ncbs.res.in/ncbs25/api/files.json",
+	getOmekaItems: 'https://www.ncbs.res.in/ncbs25/api/items.json',
+	getOmekaContext: 'https://www.ncbs.res.in/ncbs25/api/elements.json'
 };
 
 var FilesCollection = Backbone.Collection.extend({
