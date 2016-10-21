@@ -63,13 +63,13 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		template: _.template($('#sub-theme-nav-tabs').html()),
 		initialize: function(options){
 			this.siteMap = [
-			["Identity","Space for biology", "Reflections", "Science in India", "Recognition"],
-["Institution Building", "Space & autonomy", "Paper trails", "Architecture"],
-["Growth", "Hiring", "Student selection", "Start-up days", "Collaborations", "Scaling"],
-["Research", "Basic/applied toggle", "Queries and tools", "Processes", "Areas and shifts"],
-["Education", "Building knowledge", "Mentorship"],
-["Ripple Effect", "Effects and Toll", "Isolation/interaction"],
-["Intersections", "Gender equality", "Hierarchy & class", "NCBS community", "Outside world"]];
+			["Identity","Space for biology", "Science in India", "Recognition", "Reflections"],
+			["Institution Building", "Space & Autonomy", "Paper Trails", "Architecture"],
+			["Growth", "Hiring", "Start-ups", "Collaborations", "Student Selections", "Scaling"],
+			["Research", "Basic/Applied toggle", "Areas and shifts", "Processes", "Queries and tools"],
+			["Education", "Building knowledge", "Mentorship"],
+			["Ripple Effect", "Effects and Toll", "Interaction/Isolation"],
+			["Intersections", "Gender Equality", "Hierarchy & Class", "NCBS Community", "Outside World"]];
 			this.options = options || {};
 			this.tags = this.options.tag.split('-');
 			this.listenTo(this.collection, "add", this.render);
@@ -81,7 +81,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
 			this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
-			this.mediaContainer = new storyMediaView({el:"#ncbs-narrative-container", tag: "1-india-ps-1"});
+			this.mediaContainer = new storyMediaView({
+				el:"#ncbs-narrative-container", 
+				tag: "1-india-ps-1", 
+				media: this.options.content
+			});
 			this.mediaContainer.render();
 		}
 	});
@@ -89,15 +93,36 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 	});
 
 	storyMediaView = Backbone.View.extend({
+		events: {
+			"click .audio-player-trigger": "launchAudioPlayer"
+		},
 		initialize: function(options) {
 			this.options = options || {};
 			this.spans = this.$("span");
-			console.log(this.spans, this.options);
+			this.groupedMedia = _.groupBy(this.options.media, function(item){
+				return item.get('mime_type');
+			});
+			console.log(this.groupedMedia);
+	
 		},
 		render: function() {
-			this.slide1 = new imgSliderView({el: this.spans[1], content: dummy});
+			//iterate to each item of the collection by media type
+			_.each(this.groupedMedia["audio/mpeg"], function(item){
+				//find the matching tag from  dom for each item
+				var found = _.find(this.spans, function(span){
+					console.log(item.get('tags').name, span.innerHTML);
+					return span.innerHTML === item.get('tags').name;
+				});
+				//append audio icons where the dom matches
+				$(found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
+			}, this);
+			//this.slide1 = new imgSliderView({el: this.spans[1], content: dummy});
 			//this.slide1.render();
 			return this;
+		},
+		launchAudioPlayer: function(event){
+			console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
+			new AudioView({el: "#audio-player-container", tags: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 		}
 	});
 

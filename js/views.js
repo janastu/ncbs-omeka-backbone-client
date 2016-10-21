@@ -77,13 +77,22 @@ imgSliderView = Backbone.View.extend({
 
 
  AudioView = Backbone.View.extend({
- 	initialize: function(){
-
+ 	template: _.template($("#audio-player-template").html()),
+ 	initialize: function(options){
+ 		this.options = options || {};
+ 		this.found = _.find(this.options.content, function(item){
+ 			
+ 			return item.get('tags').name === this.options.tags.tag;
+ 		}, this);
+ 		this.render();
  	},
  	render: function(){
-
+ 		console.log("audio render");
+ 		this.$el.html(this.template(this.found.get('fileurls')));
+ 		return this;
  	}
  });
+
 ImageView = Backbone.View.extend({
 	initialize: function(options){
 		//initialize options - template, content is array of models
