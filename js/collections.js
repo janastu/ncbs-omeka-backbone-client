@@ -23,9 +23,9 @@ AppController = function(){
 	window.PAGES = {};
 
 PAGES.config = {
-	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25/api/collections.json',
-	getOmekaFiles: "https://www.ncbs.res.in/ncbs25/api/files.json",
-	getOmekaItems: 'https://www.ncbs.res.in/ncbs25/api/items.json',
+	getOmekaCollections: 'https://www.ncbs.res.in/ncbs25dev/api/collections',
+	getOmekaFiles: "https://www.ncbs.res.in/ncbs25dev/api/files",
+	getOmekaItems: 'https://www.ncbs.res.in/ncbs25dev/api/items',
 	getOmekaContext: 'https://www.ncbs.res.in/ncbs25/api/elements.json'
 };
 
@@ -88,12 +88,12 @@ var ContextCollection = Backbone.Collection.extend({
 	}
 });
 
-var context_done = false;
+//var context_done = false;
 var files_done = false;
 var items_done = false;
 var collections_done = false;
 
-context = new ContextCollection;
+/*context = new ContextCollection;
 context.fetch({
 	url: PAGES.config.getOmekaContext
 }).then(function(response){
@@ -102,7 +102,7 @@ context.fetch({
 	
 	//omekaItems.makeSiteContent();
 	checkMakeSiteContent('context');
-});
+});*/
 
 
 omekaCollections = new collectionProto;
@@ -145,12 +145,12 @@ function checkMakeSiteContent(typ) {
 			files_done = true;
 		case 'collections':
 			collections_done = true;
-		case 'context':
-			context_done = true;
+		/*case 'context':
+			context_done = true;*/
 		case 'items':
 			items_done = true;
 	}
-	if (files_done && collections_done && context_done && items_done)
+	if (files_done && collections_done &&  items_done)
 		omekaItems.makeSiteContent();
 }
 return true;
