@@ -77,6 +77,9 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 	subthemeNav = Backbone.View.extend({
 		el: "#content",
 		template: _.template($('#sub-theme-nav-tabs').html()),
+		events: {
+			"click ul li a": "refreshViewer"
+		},
 		initialize: function(options){
 			this.siteMap = [
 			["Identity","Space for biology", "Science in India", "Recognition", "Reflections"],
@@ -95,6 +98,9 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			
 			window.scrollTo(0,0);
 			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
+			//var idForGallery = this.siteMap[this.tags[0]-1].split("").join("-").toLowerCase();
+			//console.log(idForGallery);
+			//this.$el.append("<div"+idForGallery+"><div>");
 			this.$("#ncbs-narrative-container .nav-tabs li:nth-child(2)").first().addClass("active");
 			this.$("#ncbs-narrative-container .tab-pane:nth-child(2)").first().addClass("active");
 			this.mediaContainer = new storyMediaView({
@@ -103,6 +109,10 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				media: this.options.content
 			});
 			this.mediaContainer.render();
+			this.Gallery = new GalleryView({content: this.options.content, theme: this.tags[0]});
+		},
+		refreshViewer: function(event){
+			//console.log(event.target, "refresh viewer");
 
 		}
 	});
@@ -164,11 +174,10 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				var nsort = sorted.sort(naturalCompare);
 				// append the list of images to Dom
 				if(sorted.length){
-					new imgSliderView({el: span, content: nsort});
-				}
-
-				new GalleryView({content: this.options.content});
-				
+					sliderModel = new imgSliderModel();
+					this.slider =  new imgSliderView({el: span, content: nsort, model: sliderModel});
+					sliderModel.set("hack", span.innerHTML);
+				}				
 			}, this);
 			
 			//iterate to each span from dom view

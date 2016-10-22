@@ -1,17 +1,5 @@
 //View Partials - Common header and footer	
-dummy = [{
-        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/9982b559f1492ba7df902e9f15103dde.jpg',
-        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/9982b559f1492ba7df902e9f15103dde.jpg'
-    },{
-        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/221b610a7e70e4a7a537761178309511.jpg',
-        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/221b610a7e70e4a7a537761178309511.jpg'
-    },{
-        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/9795fbb14b84b0d635db2c61d006a104.jpg',
-        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/9795fbb14b84b0d635db2c61d006a104.jpg'
-    },{
-        small : 'https://www.ncbs.res.in/ncbs25dev/files/thumbnails/2ed67b2f00cb40156d244a2fab870e47.jpg',
-        big : 'https://www.ncbs.res.in/ncbs25dev/files/original/2ed67b2f00cb40156d244a2fab870e47.jpg'
-    }];
+
 
     DummyView = Backbone.View.extend({
     	template: _.template($("#dummy-view").html()),
@@ -23,11 +11,14 @@ dummy = [{
     		this.$el.html(this.template);
     	}
     });
+
+
 imgSliderModel = Backbone.Model.extend({
 	defaults: {
 		content: [],
 		currentIndex: 1,
-		total: ""
+		total: "",
+		hack: ""
 	},
 	initialize: function() {
 
@@ -40,13 +31,14 @@ imgSliderView = Backbone.View.extend({
 	captionTemplate: _.template($("#caption-template").html()),
 	events: {
 		"click .prev": "slideDecrement",
-		"click .next": "slideIncrement"
+		"click .next": "slideIncrement",
+		"click .slider-refresh": "refreshSlide"
 	},
 	initialize: function(options){
 		//Image slider view using http://ignitersworld.com/lab/imageViewer.html
 		//expects options - el, content(array of objects for imgurls)
 		this.options = options || {};
-		this.model = new imgSliderModel();
+		this.model = this.options.model;
 		this.model.set("content", this.options.content);
 		this.model.set("total", this.options.content.length);
 		this.$el.html(this.template(this.model.toJSON()));
@@ -83,6 +75,10 @@ imgSliderView = Backbone.View.extend({
 	},
 	slideIncrement: function(e){
 		this.model.set('currentIndex', this.model.get('currentIndex')+1);
+	},
+	refreshSlide: function(e){
+		console.log(e.target, "refreshed");
+		this.model.set('currentIndex', 1);
 	}
 });
 
@@ -90,28 +86,36 @@ imgSliderView = Backbone.View.extend({
  AudioView = Backbone.View.extend({
  	template: _.template($("#audio-player-template").html()),
  	captionTemplate: _.template($("#audio-caption-template").html()),
+ 	//galleryTemplate: _.template($("gallery-audio-template").html()),
  	events: {
  		"click .close": "closePlayer"
  	},
  	initialize: function(options){
  		this.options = options || {};
+ 		if(this.options.tags){
  		this.found = _.find(this.options.content, function(item){
  			
  			return item.get('tags').name === this.options.tags.tag;
  		}, this);
+ 	} 
  		this.render();
  	},
  	render: function(){
- 		console.log("audio render");
+ 		//console.log("audio render");
+ 		if(this.options.tag){
  		this.$el.html(this.template(this.found.get('fileurls')));
  		this.$el.append(this.captionTemplate({description: this.found.get('description'),
  												rights: this.found.get('rights') || ""}));
+ 	} else {
+ 		//console.log(this.options);
+ 		this.$el.html(this.template({src: this.options.url.src, original: undefined}));
+ 	}
  		this.$el.show();
  		return this;
  	},
  	closePlayer: function(event){
  		event.preventDefault();
- 		console.log(this);
+ 		//console.log(this);
  		this.$('audio').trigger('pause');
  		this.$el.hide();
  		//$(this.el).children.remove();
@@ -135,16 +139,77 @@ VideoView = Backbone.View.extend({
 });
 
 GalleryView = Backbone.View.extend({
-	//template: _.template(),
+	el: "#ncbs-narrative-container",
+	imgTemplate: _.template($("#gallery-img-template").html()),
+	audioTemplate: _.template($("#gallery-audio-template").html()),
+	events: {
+		"click .gallery-player-trriger": "launchAudioPlayer"
+	},
 	initialize: function(options){
 	this.options = options || {};
-	console.log(this.options);
+	this.siteMap = [["Space", "India", "Recognition", "Reflection"], ["Autonomy", "Paper", "Arch"],
+	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
+	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS Community", "Outside"]
+	];
+	//console.log(this.options);
+	this.items = _.compact(_.map(this.options.content, function(item){
+		if(item.get('tags').name.split('-').length<3){
+			return item;
+		}
+	}));
+	this.groupedItems = _.groupBy(this.items, function(item){
+		//console.log(item);
+		return item.get('mime_type');
+	})
+	//console.log(this.items, this.groupedItems);
 	this.render();
 	},
 	render: function(){
+		var subTheme = this.siteMap[this.options.theme-1];
+		_.each(subTheme, function(subIndex, index){
+			_.each(this.groupedItems['image/jpeg'], function(item){
+				//console.log(item.toJSON(), index, subIndex, "in second each");
+				var fileTag = item.get('tags').name.split('-')[1];
+				if(subIndex == fileTag){
+					var indexBuild = index+1;
+					var domElem = '#'+indexBuild+"-note";
+					console.log(domElem, "in if");
+					this.$(domElem).append(this.imgTemplate(item.toJSON()));
+				}
+				//var domID = subTheme
+				//console.log(fileTag, subTheme, "in second each end");
+				//this.$el.append(this.imgTemplate(item.toJSON()));
+			}, this);
 
-	}
+		}, this);
+
+		_.each(subTheme, function(subIndex, index){
+			_.each(this.groupedItems['audio/mpeg'], function(item){
+				//console.log(item.toJSON(), index, subIndex, "in second each");
+				var fileTag = item.get('tags').name.split('-')[1];
+				if(subIndex == fileTag){
+					var indexBuild = index+1;
+					var domElem = '#'+indexBuild+"-note";
+					//console.log(domElem, "in if");
+					this.$(domElem).append(this.audioTemplate({
+						description: item.get('description').text,
+						src: item.get('fileurls').original
+					}));
+				}
+			}, this);
+
+		}, this);
+		
+	},
+
+	launchAudioPlayer: function(event){
+		console.log(event.target.dataset);
+		new AudioView({el: "#audio-player-container", url: event.target.dataset});
+}
 });
+
+
+
 ImageView = Backbone.View.extend({
 	initialize: function(options){
 		//initialize options - template, content is array of models

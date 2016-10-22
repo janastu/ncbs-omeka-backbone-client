@@ -113,7 +113,7 @@ omekaCollections.fetch({
 	//due to slow internet
 	
 	//omekaItems.makeSiteContent();
-	console.log("collections fetched");
+	//console.log("collections fetched");
 	checkMakeSiteContent('collections');
 });
 
@@ -125,7 +125,7 @@ files.fetch({
 	//due to slow internet
 	
 	//omekaItems.makeSiteContent();
-	console.log("files fetched");
+	//console.log("files fetched");
 	checkMakeSiteContent('files');
 });
 
@@ -138,7 +138,7 @@ omekaItems.fetch({
 	//due to slow internet
 	
 	//omekaItems.makeSiteContent();
-	console.log("items fetched");
+	//console.log("items fetched");
 	checkMakeSiteContent('items');
 });
 

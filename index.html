@@ -29,6 +29,14 @@
 			width:99%;
 			height:25px;
 		}
+		.img-gallery-item{
+			display: inline-block;
+			margin: 5px;
+		}
+		.gallery-player-trigger{
+			font-size:24px;
+			color: darkcyan;
+		}
 		</style>
 	</head>
 
@@ -132,8 +140,11 @@
 <div class="global-audio-player" >
 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 <audio controls autoplay class="center-block" style="margin-top:10px; width:100%; padding-left: 15px; padding-right: 15px;">
-  
+  <%if(original){%>
   <source src="<%=original%>" type="audio/mpeg">
+  <%}else{%>
+  	<source src="<%=src%>" type="audio/mpeg">
+  	<%}%>
 Your browser does not support the audio element.
 </audio>
 </div>
@@ -142,6 +153,7 @@ Your browser does not support the audio element.
 <!-- subtheme identity content start-->
 <script type="text/template" id="img-slider-template">
 <div class="" style="padding-top:15px; padding-bottom:5px;">
+
     <div class="image-container"></div>
 </div>    
 </script>
@@ -151,6 +163,7 @@ Your browser does not support the audio element.
 <span class="prev glyphicon glyphicon-chevron-left pull-left"/></span>
 <span  class="next glyphicon glyphicon-chevron-right pull-right"/></span>
 <div class="text-center">
+<span class="glyphicon glyphicon-refresh slider-refresh" style="cursor:pointer;" ></span> 
     <span class="current"><%=currentIndex%></span>/
     <span class="total"><%=total%></span>
  </div>
@@ -183,6 +196,18 @@ Your browser does not support the audio element.
  		</div>
 </script>
 
+<script type="text/template" id="gallery-img-template">
+<div class="img-gallery-item" data-tag="">
+<img src=<%=fileurls.square_thumbnail%> data-high-res-src=<%=fileurls.original%> class="img-responsive pannable" />
+</div>
+</script>
+<script type="text/template" id="gallery-audio-template">
+<div class="audio-gallery-item">
+<span><%=description%></span>
+<i class="fa fa-play-circle gallery-player-trriger" aria-hidden="true" data-src="<%=src%>"></i>
+</div>
+</script>
+
 <script type="text/template" id="sub-theme-nav-tabs">
 <div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
 
@@ -200,10 +225,13 @@ Your browser does not support the audio element.
   <div class="container tab-content">
   <% _.each(sitemap, function(arr,index) {%>
   	<%var i = index+1;%>
+  	<%var idGallery = arr.split(" ").join("-")%>
+  	
   <div role="tabpanel" class="tab-pane" id="<%=index%>-note">
   <%= content.element_texts[i].text %>
-  
+  <div id="<%=idGallery%>"></div>
   </div>
+
   <%});%>
     
   </div>
@@ -242,7 +270,7 @@ Your browser does not support the audio element.
 		});
 		APIcontent = new storyCollection;
 		app.controller = AppController();
-		console.log(app);
+		//console.log(app);
 		app.init = function() {
 			app = new ApplicationRouter();
 			app.state={};
