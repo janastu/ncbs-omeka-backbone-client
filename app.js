@@ -166,6 +166,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				if(sorted.length){
 					new imgSliderView({el: span, content: nsort});
 				}
+
+				new GalleryView({content: this.options.content});
 				
 			}, this);
 			

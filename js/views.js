@@ -134,6 +134,17 @@ VideoView = Backbone.View.extend({
 	}
 });
 
+GalleryView = Backbone.View.extend({
+	//template: _.template(),
+	initialize: function(options){
+	this.options = options || {};
+	console.log(this.options);
+	this.render();
+	},
+	render: function(){
+
+	}
+});
 ImageView = Backbone.View.extend({
 	initialize: function(options){
 		//initialize options - template, content is array of models
