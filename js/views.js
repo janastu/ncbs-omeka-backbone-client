@@ -60,7 +60,7 @@ imgSliderView = Backbone.View.extend({
 
 	},
 	render: function(){
-		console.log(this.model.toJSON());
+		
 		if(this.model.get('currentIndex') > this.model.get('total')) {
 			this.model.set('currentIndex', 1);
 		} else if( this.model.get('currentIndex')<1) {
@@ -118,6 +118,22 @@ imgSliderView = Backbone.View.extend({
  	}
  });
 
+VideoView = Backbone.View.extend({
+	template: _.template($("#video-player-template").html()),
+	captionTemplate: _.template($("#caption-template").html()),
+
+	initialize: function(options){
+		this.options = options || {};
+		this.render();
+	},
+	render: function(){
+		this.$el.html(this.template(this.options.content.toJSON()));
+		this.$el.append(this.captionTemplate({description: this.options.content.get('description'),
+										rights: this.options.content.get('rights') || ""
+									}));
+	}
+});
+
 ImageView = Backbone.View.extend({
 	initialize: function(options){
 		//initialize options - template, content is array of models
@@ -131,7 +147,7 @@ ImageView = Backbone.View.extend({
 		this.render();
 	},
 	render: function(model){
-		console.log(this.collection);
+		//console.log(this.collection);
 		this.collection.each(function(item){
 			this.$container.append(this.$el.append(this.template(item.toJSON())));
 		}, this);
@@ -151,8 +167,8 @@ ImageView = Backbone.View.extend({
 		    });
 	},
 	initImageSlideshow: function(){
-		console.log(this.content);
-		console.log($(this.container).find('ol'));
+		//console.log(this.content);
+		//console.log($(this.container).find('ol'));
 		$(this.el).append(this.containerTemplate());
 		_.each(this.content, function(item, index){
 			$(this.container).find('ol').append(this.template({index: index}));

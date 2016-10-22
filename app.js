@@ -119,34 +119,33 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.groupedMedia = _.groupBy(this.options.media, function(item){
 				return item.get('mime_type');
 			});
-			console.log(this.groupedMedia);
+			//console.log(this.groupedMedia);
 	
 		},
 		render: function() {
-			//iterate to each item of the collection by media type
-			/*_.each(this.groupedMedia["audio/mpeg"], function(item){
-				//find the matching tag from  dom for each item
-				this.found = _.find(this.spans, function(span){
-					return span.innerHTML === item.get('tags').name;
-				});
-				console.log(this.found, "audio");
-				//append audio icons where the dom matches
-				//$(this.found).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+item.get("tags").name+'></i>');
-			}, this);*/
+			
+			//iterate to each span from dom view
 			_.each(this.spans, function(span){
+				//find the matching tag from the file tags to match the tag in dom view
 				var mappedAudio = _.find(this.groupedMedia["audio/mpeg"], function(item){
 					//console.log(span.innerHTML, item.get('tags').name, 'matched?')
 					if(span.innerHTML === item.get('tags').name){
 						return item;	
 					}
 				});
-				console.log(mappedAudio, span);
+				
+				//append the audio icon to dom
 				if(mappedAudio){
 					$(span).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+'"></i>');
 				}
 			}, this);
+
+			//iterate to each span from dom view
 			_.each(this.spans, function(span){
+				//find the matching tag from the file tags to match the tag in dom view
+				//which will be an array of items for images
 				var mapped = _.map(this.groupedMedia["image/jpeg"], function(item){
+					//the grouping is based on the 3rd char in tag series seperated by -
 					var tagArray = item.get('tags').name.split('-');
 					var domTagmatch = tagArray.splice(3, 2);
 					//console.log(tagArray, span, "map dom", domTagmatch);
@@ -154,28 +153,44 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 						return item;
 					}
 				});
-				
+				//clean up the array of unwanted values
 				var cleanedMapped = _.compact(mapped);
+				//sort the array by order
 				var sorted = _.sortBy(cleanedMapped, function(item){
 					//console.log(item.get('tags').name.split('-')[3]);
 					return item.get('tags').name.split('-')[3];
 				});
+				//since sort goes through a string of values - a natural order sorting is required
 				var nsort = sorted.sort(naturalCompare);
-				console.log(span, sorted, nsort, "sorted");
+				// append the list of images to Dom
 				if(sorted.length){
 					new imgSliderView({el: span, content: nsort});
 				}
 				
 			}, this);
 			
-			//this.slide1 = new imgSliderView({el: this.spans[1], content: dummy});
-			//this.slide1.render();
+			//iterate to each span from dom view
+			_.each(this.spans, function(span){
+				//find the matching tag from the file tags to match the tag in dom view
+				var mappedVideo = _.find(this.groupedMedia["video/mp4"], function(item){
+					//console.log(span.innerHTML, item.get('tags').name, 'matched?')
+					if(span.innerHTML === item.get('tags').name){
+						return item;	
+					}
+				});
+				
+				//append the audio icon to dom
+				if(mappedVideo){
+					//console.log(mappedVideo.toJSON());
+					new VideoView({el: span, content: mappedVideo});
+				}
+			}, this);
 
 			return this;
 
 		},
 		launchAudioPlayer: function(event){
-			console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
+			//console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
 			new AudioView({el: "#audio-player-container", tags: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 		}
 	});
@@ -184,7 +199,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 
 function naturalCompare(a, b) {
     var ax = [], bx = [];
-    console.log(a, b);
+    //console.log(a, b);
     a.get('tags').name.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { ax.push([$1 || Infinity, $2 || ""]) });
     b.get('tags').name.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { bx.push([$1 || Infinity, $2 || ""]) });
     

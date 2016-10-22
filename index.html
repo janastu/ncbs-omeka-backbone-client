@@ -141,7 +141,7 @@ Your browser does not support the audio element.
 
 <!-- subtheme identity content start-->
 <script type="text/template" id="img-slider-template">
-<div class="col-md-12">
+<div class="" style="padding-top:15px; padding-bottom:5px;">
     <div class="image-container"></div>
 </div>    
 </script>
@@ -159,9 +159,11 @@ Your browser does not support the audio element.
 
 <script type="text/template" id="caption-template">
 <div class="featured-img-caption">
-<hr />
+
 <span><%=description.text %></span>
+<%if(rights.text){%>
 <em><%=rights.text %></em>
+<%}%>
 </div>
 </script>
 
@@ -173,12 +175,20 @@ Your browser does not support the audio element.
 </marquee>
 </div>
 </script>
+
+<script type="text/template" id="video-player-template">
+<div class="" style="padding-top:15px; padding-bottom:5px;">
+<video style="width:100%;" class="center-block" controls="" name="media" 
+ 		><source src=<%=fileurls.original%>></video>
+ 		</div>
+</script>
+
 <script type="text/template" id="sub-theme-nav-tabs">
 <div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
 
 
 <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist" style="margin-top:125px">
+  <ul class="nav nav-tabs" role="tablist" style="margin-top:125px; margin-bottom:10px;">
   <% _.each(sitemap, function(arr,index) {%>
 
   <li role="presentation" class=""><a href="#<%=index%>-note" aria-controls="<%=index%>-note" role="tab" data-toggle="tab"><!--img src="img/Assets/identity.png" alt="category_identity" class="img-responsive" style="max-width:15px; display:inline;"/><span--><%=arr%><!--/span--></a></li>
