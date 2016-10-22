@@ -18,7 +18,16 @@
 			bottom:0px;
 			width: 100%;
 			background-color: white;
-			height: 50px;
+			height: 60px;
+		}
+		.audio-caption-fixed{
+			position: fixed;
+			bottom:74px;
+			font-size: 12px;
+			padding-left: 15px;
+			padding-right: 15px;
+			width:100%;
+			height:25px;
 		}
 		</style>
 	</head>
@@ -121,6 +130,7 @@
 <!-- global audio player template -->
 <script type="text/template" id="audio-player-template">
 <div class="global-audio-player" >
+<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 <audio controls autoplay class="center-block" style="margin-top:10px; width:100%; padding-left: 15px; padding-right: 15px;">
   
   <source src="<%=original%>" type="audio/mpeg">
@@ -150,10 +160,19 @@ Your browser does not support the audio element.
 <script type="text/template" id="caption-template">
 <div class="featured-img-caption">
 <hr />
-<span><%=text %></span>
+<span><%=description.text %></span>
+<em><%=rights.text %></em>
 </div>
 </script>
 
+<script type="text/template" id="audio-caption-template">
+<div class="audio-caption-fixed">
+<marquee>
+<span><%=description.text %></span>
+<em><%=rights.text %></em>
+</marquee>
+</div>
+</script>
 <script type="text/template" id="sub-theme-nav-tabs">
 <div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
 

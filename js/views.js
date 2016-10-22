@@ -52,7 +52,8 @@ imgSliderView = Backbone.View.extend({
 		this.$el.html(this.template(this.model.toJSON()));
 		this.viewer = ImageViewer(this.$('.image-container'), {
 			snapView: false,
-			zoomOnMouseWheel: true
+			zoomOnMouseWheel: true,
+			maxZoom: 400
 		});
 		this.listenTo(this.model, "change", this.render);
 		this.render();
@@ -67,7 +68,10 @@ imgSliderView = Backbone.View.extend({
 		}
 		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').thumbnail, this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').original);
 		this.$(".featured-img-caption").remove();
-		this.$el.append(this.captionTemplate(this.model.get('content')[this.model.get('currentIndex')-1].get('description')));
+		window.imager = this.model;
+		//console.log(this.model.get('content')[this.model.get('currentIndex')-1].get('description').text, this.model.get('content')[this.model.get('currentIndex')-1].get('rights').text);
+		this.$el.append(this.captionTemplate({description: this.model.get('content')[this.model.get('currentIndex')-1].get('description'),
+												rights: this.model.get('content')[this.model.get('currentIndex')-1].get('rights') || ""}));
 		this.$('.footer-info').remove();
 		this.$el.append(this.footerTemplate(this.model.toJSON()));
 		this.model.set("total", this.options.content.length);
@@ -85,7 +89,10 @@ imgSliderView = Backbone.View.extend({
 
  AudioView = Backbone.View.extend({
  	template: _.template($("#audio-player-template").html()),
- 	captionTemplate: _.template($("#caption-template").html()),
+ 	captionTemplate: _.template($("#audio-caption-template").html()),
+ 	events: {
+ 		"click .close": "closePlayer"
+ 	},
  	initialize: function(options){
  		this.options = options || {};
  		this.found = _.find(this.options.content, function(item){
@@ -97,8 +104,17 @@ imgSliderView = Backbone.View.extend({
  	render: function(){
  		console.log("audio render");
  		this.$el.html(this.template(this.found.get('fileurls')));
- 		this.$el.append(this.captionTemplate(this.found.get('description')));
+ 		this.$el.append(this.captionTemplate({description: this.found.get('description'),
+ 												rights: this.found.get('rights') || ""}));
+ 		this.$el.show();
  		return this;
+ 	},
+ 	closePlayer: function(event){
+ 		event.preventDefault();
+ 		console.log(this);
+ 		this.$('audio').trigger('pause');
+ 		this.$el.hide();
+ 		//$(this.el).children.remove();
  	}
  });
 

@@ -3,6 +3,8 @@
 (function(){
 
 require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'libs/text!templates/footer.html'], function (headerTpl, homeTpl, footerTpl) {
+
+
 	HeaderView = Backbone.View.extend({
 		el: "#header",
 		templateFileName: "header.html",
@@ -135,13 +137,12 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				var mappedAudio = _.find(this.groupedMedia["audio/mpeg"], function(item){
 					//console.log(span.innerHTML, item.get('tags').name, 'matched?')
 					if(span.innerHTML === item.get('tags').name){
-
 						return item;	
 					}
 				});
 				console.log(mappedAudio, span);
 				if(mappedAudio){
-					$(span).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag='+mappedAudio.get('tags').name+'></i>');
+					$(span).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+'"></i>');
 				}
 			}, this);
 			_.each(this.spans, function(span){
@@ -159,9 +160,10 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 					//console.log(item.get('tags').name.split('-')[3]);
 					return item.get('tags').name.split('-')[3];
 				});
-				//console.log(cleanedMapped, span, sorted, "sorted");
+				var nsort = sorted.sort(naturalCompare);
+				console.log(span, sorted, nsort, "sorted");
 				if(sorted.length){
-					new imgSliderView({el: span, content: sorted});
+					new imgSliderView({el: span, content: nsort});
 				}
 				
 			}, this);
@@ -177,6 +179,25 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			new AudioView({el: "#audio-player-container", tags: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 		}
 	});
+
+
+
+function naturalCompare(a, b) {
+    var ax = [], bx = [];
+    console.log(a, b);
+    a.get('tags').name.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { ax.push([$1 || Infinity, $2 || ""]) });
+    b.get('tags').name.replace(/(\d+)|(\D+)/g, function(_, $1, $2) { bx.push([$1 || Infinity, $2 || ""]) });
+    
+    while(ax.length && bx.length) {
+        var an = ax.shift();
+        var bn = bx.shift();
+        var nn = (an[0] - bn[0]) || an[1].localeCompare(bn[1]);
+        if(nn) return nn;
+    }
+
+    return ax.length - bx.length;
+}
+
 
 })();
 
