@@ -257,37 +257,11 @@ Your browser does not support the audio element.
 
 	<script type="text/javascript" src="js/views.js"></script>
 	<script type="text/javascript" src="js/collections.js"></script>	
-	<script type="text/javascript" src="router.js"></script>    		
+	   		
 	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="router.js"></script> 
 	<script>
-		app = {};
-		// Site content from omeka api as required by the client 
-		//interfaces.
-		storyCollection = Backbone.Collection.extend({
-			groupByTags: function(index){
-				return this.groupBy(function(item){
-					return item.get('tags').name.split('-')[index];
-				}, index);
-			}
-		});
-		APIcontent = new storyCollection;
-		app.controller = AppController();
-		//console.log(app);
-		app.init = function() {
-			app = new ApplicationRouter();
-			app.state={};
-			Backbone.history.start();
-
-		};
-		$("#spinner-launch").toggle();
-		//app.init();
-		//hack - to call init a delay beacause some view components 
-		//are undefined in the runtime on the server
-		//APIcontent.once("add", app.init);
-		function checkForContentToInit(){
-			APIcontent.once("add", app.init);
-		}
-		checkForContentToInit();
+		
 		//setTimeout(checkForContentToInit, 3000);
 		
 	</script>

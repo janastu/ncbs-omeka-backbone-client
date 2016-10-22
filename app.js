@@ -4,6 +4,37 @@
 
 require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'libs/text!templates/footer.html'], function (headerTpl, homeTpl, footerTpl) {
 
+	app = {};
+	// Site content from omeka api as required by the client 
+	//interfaces.
+	storyCollection = Backbone.Collection.extend({
+		groupByTags: function(index){
+			return this.groupBy(function(item){
+				return item.get('tags').name.split('-')[index];
+			}, index);
+		}
+	});
+	APIcontent = new storyCollection;
+	app.controller = AppController();
+	//console.log(app);
+	app.init = function() {
+		app = new ApplicationRouter();
+		app.state={};
+		Backbone.history.start();
+
+	};
+	$("#spinner-launch").toggle();
+	//app.init();
+	//hack - to call init a delay beacause some view components 
+	//are undefined in the runtime on the server
+	//APIcontent.once("add", app.init);
+	function checkForContentToInit(){
+		if(APIcontent.length){
+			app.init();
+		}
+		APIcontent.once("add", app.init);
+	}
+	checkForContentToInit();
 
 	HeaderView = Backbone.View.extend({
 		el: "#header",

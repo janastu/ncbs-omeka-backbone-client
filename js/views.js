@@ -78,7 +78,9 @@ imgSliderView = Backbone.View.extend({
 	},
 	refreshSlide: function(e){
 		console.log(e.target, "refreshed");
+		this.model.set('currentIndex', this.model.get('currentIndex')+1);
 		this.model.set('currentIndex', 1);
+
 	}
 });
 
