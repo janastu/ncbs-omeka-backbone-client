@@ -92,24 +92,25 @@ imgSliderView = Backbone.View.extend({
  	},
  	initialize: function(options){
  		this.options = options || {};
- 		if(this.options.tags){
+ 		/*if(this.options.tags){}*/
  		this.found = _.find(this.options.content, function(item){
  			
  			return item.get('tags').name === this.options.tags.tag;
  		}, this);
- 	} 
+ 	 
  		this.render();
  	},
  	render: function(){
  		//console.log("audio render");
- 		if(this.options.tag){
+ 		/*if(this.options.tag){
+ 			} else {
+ 				//console.log(this.options);
+ 				this.$el.html(this.template({src: this.options.url.src, original: undefined}));
+ 			}*/
  		this.$el.html(this.template(this.found.get('fileurls')));
  		this.$el.append(this.captionTemplate({description: this.found.get('description'),
  												rights: this.found.get('rights') || ""}));
- 	} else {
- 		//console.log(this.options);
- 		this.$el.html(this.template({src: this.options.url.src, original: undefined}));
- 	}
+ 	
  		this.$el.show();
  		return this;
  	},
@@ -203,8 +204,8 @@ GalleryView = Backbone.View.extend({
 	},
 
 	launchAudioPlayer: function(event){
-		console.log(event.target.dataset);
-		new AudioView({el: "#audio-player-container", url: event.target.dataset});
+		//console.log(event.target.dataset);
+		//new AudioView({el: "#audio-player-container", url: event.target.dataset});
 }
 });
 
