@@ -166,8 +166,8 @@ Your browser does not support the audio element.
 </script>
 
 <script type="text/template" id="audio-caption-template">
-<div class="audio-caption-fixed">
-<marquee>
+<div class="audio-caption-fixed" style='bottom:35px; width:92%;'>
+<marquee behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0.01, 0);" onmouseout="this.setAttribute('scrollamount', 5, 0);">
 <span><%=description.text %></span>
 <em><%=rights.text %></em>
 </marquee>
