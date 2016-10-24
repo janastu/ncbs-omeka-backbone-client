@@ -43,16 +43,18 @@ imgSliderView = Backbone.View.extend({
 		this.model.set("total", this.options.content.length);
 		this.$el.html(this.template(this.model.toJSON()));
 		this.viewer = ImageViewer(this.$('.image-container'), {
-			snapView: false,
+			snapView: true,
 			zoomOnMouseWheel: true,
 			maxZoom: 400
 		});
+		//this.listenTo(app.tabsView, "refreshViewer", this.refreshSlide);
+		//app.tabsView.on("refreshViewer", this.refreshSlide, this);
 		this.listenTo(this.model, "change", this.render);
 		this.render();
 
 	},
 	render: function(){
-		
+	
 		if(this.model.get('currentIndex') > this.model.get('total')) {
 			this.model.set('currentIndex', 1);
 		} else if( this.model.get('currentIndex')<1) {
@@ -68,7 +70,7 @@ imgSliderView = Backbone.View.extend({
 		this.$el.append(this.footerTemplate(this.model.toJSON()));
 		this.model.set("total", this.options.content.length);
 		this.viewer.refresh();
-		this.$('img').css('max-width', '100%', 'max-height', 'auto');
+		//this.$('img').css('max-width', '100%', 'max-height', 'auto');
 	},
 	slideDecrement: function(e){
 		this.model.set('currentIndex', this.model.get('currentIndex')-1);

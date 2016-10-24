@@ -109,7 +109,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		el: "#content",
 		template: _.template($('#sub-theme-nav-tabs').html()),
 		events: {
-			"click ul li a": "refreshViewer"
+			"shown.bs.tab a[data-toggle='tab']": "refreshViewer"
 		},
 		initialize: function(options){
 			this.siteMap = [
@@ -143,7 +143,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.Gallery = new GalleryView({content: this.options.content, theme: this.tags[0]});
 		},
 		refreshViewer: function(event){
-			//console.log(event.target, "refresh viewer");
+			console.log(event, this.mediaContainer.imgSlideSubViews);
+			_.each(this.mediaContainer.imgSlideSubViews, function(item){
+				item.viewer.refresh();
+				return item;
+			});
 
 		}
 	});
@@ -157,9 +161,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		initialize: function(options) {
 			this.options = options || {};
 			this.spans = this.$("span");
+			this.imgSlideSubViews = [];
 			this.groupedMedia = _.groupBy(this.options.media, function(item){
 				return item.get('mime_type');
 			});
+			
 			//console.log(this.groupedMedia);
 	
 		},
@@ -205,9 +211,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				var nsort = sorted.sort(naturalCompare);
 				// append the list of images to Dom
 				if(sorted.length){
-					sliderModel = new imgSliderModel();
-					this.slider =  new imgSliderView({el: span, content: nsort, model: sliderModel});
-					sliderModel.set("hack", span.innerHTML);
+					
+					this.slider =  new imgSliderView({el: span, content: nsort, model: new imgSliderModel()});
+					this.imgSlideSubViews.push(this.slider);
+					//this.slider.trigger("refreshSlide");
+					//sliderModel.set("hack", span.innerHTML);
 				}				
 			}, this);
 			
