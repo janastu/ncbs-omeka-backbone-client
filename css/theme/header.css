@@ -84,7 +84,7 @@ a:hover {
 
 
 .container {
-  width: 80%;
+  /*width: 80%;*/
   margin: 0 auto;
   padding: 0 30px; }
 
@@ -158,7 +158,11 @@ header {
     transition: all 0.3s; }
   header nav {
     display: inline-block;
-    float: right; }
+    float: right; 
+    position: absolute;
+    right:173px;
+    top:-1px;
+  }
     header nav a {
       line-height: 70px;
       margin-left: 20px;
