@@ -177,7 +177,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				
 				//append the audio icon to dom
 				if(mappedAudio){
-					$(span).html('<i class="fa fa-play-circle audio-player-trigger" aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+'"></i>');
+					$(span).html('<i class="fa fa-play-circle audio-player-trigger"  style="cursor: pointer;"  aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+'"></i>');
 				}
 			}, this);
 

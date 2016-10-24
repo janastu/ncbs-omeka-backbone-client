@@ -104,9 +104,9 @@
     position: absolute;
     background-color: #f4f3e9;
     width: 100%;"></div>
- 		<video class="center-block" controls="" preload="auto" name="media" style="
+ 		<!-- <video class="center-block" controls="" preload="auto" name="media" style="
  		    height: 306px;
- 		"><source src="https://www.ncbs.res.in/ncbs25dev/ncbs_files/videos/2016_acknowledgments-audio-photo_ABOUT-PAGE.mp4" type="video/mp4"></video>
+ 		"><source src="https://www.ncbs.res.in/ncbs25dev/ncbs_files/videos/2016_acknowledgments-audio-photo_ABOUT-PAGE.mp4" type="video/mp4"></video> -->
  		</div>
 
  			<br/>
@@ -131,7 +131,7 @@
  		<p>Quotes from the following people were excerpted from oral history interviews conducted by Indira Chowdhury. (2002 - 2003). TIFR Archives. Oral History Project, TIFR Oral History Archives: P. Babu, P.K. Maitra, Obaid Siddiqi. Quotes from everyone else were excerpted from interviews that are part of an on-going NCBS Archives oral history project (July 2016 - April 2017). The voices you hear on this page are of a selection of people who generously gave their time to discuss the history of NCBS.</p>
  		<br/>
 
- 		<p>Designed by D.Epicentre (Sudebi Thakurata, Bharat Joshi, Tanvi Talwar, Saakshita Prabhakar, Probal Banerjee) and Developed by <a href="http://servelots.com/new/3d.html" target="_blank">Janastu</a> (T B Dinesh, Bhanu Prakash, T Pradyumna, A Shalini, Arun Kumar, Khushpreet, Nikitha Bharadwaj, Madhuvanthi, Amrapali)</p>
+ 		<p>Designed by D.Epicentre (Sudebi Thakurata, Bharat Joshi, Tanvi Talwar, Saakshita Prabhakar, Probal Banerjee) and Developed by <a href="http://servelots.com/new/3d.html" target="_blank">Janastu</a> (T B Dinesh, Bhanu Prakash, T Pradyumna, A Shalini, Arun Kumar, Khushpreet, Nikitha Bharadwaj, Madhuvanthi, Amrapali)</p><br>
  		<p>Feedback about the exhibit or need to get in touch with any of the record owners? 
  		ncbs25@ncbs.res.in</p>
    
@@ -163,8 +163,10 @@ Your browser does not support the audio element.
 
 <script type="text/template" id="img-slider-footer">
 <div class="footer-info">
-<span class="prev glyphicon glyphicon-chevron-left pull-left"/></span>
-<span  class="next glyphicon glyphicon-chevron-right pull-right"/></span>
+<%if(total >1){%>
+<span class="prev glyphicon glyphicon-chevron-left pull-left" style="cursor: pointer;"/></span>
+<span  class="next glyphicon glyphicon-chevron-right pull-right" style="cursor: pointer;"/></span>
+<%}%>
 <div class="text-center">
 <span class="glyphicon glyphicon-refresh slider-refresh" style="cursor:pointer;" ></span> 
     <span class="current"><%=currentIndex%></span>/
@@ -208,7 +210,7 @@ Your browser does not support the audio element.
 <div class="audio-gallery-item">
 <span><%=description%></span>
 <a href="<%=src%>" target="_blank">
-<i class="fa fa-play-circle gallery-player-trriger" aria-hidden="true" data-src="<%=src%>"></i>
+<i class="fa fa-play-circle gallery-player-trriger" aria-hidden="true" data-src="<%=src%>" style="cursor: pointer;"></i>
 </a>
 </div>
 </script>
