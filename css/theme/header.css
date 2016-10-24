@@ -201,7 +201,7 @@ header {
 
 /* =Media Queries
 -------------------------------------------------------------- */
-@media all and (max-width: 660px) {
+@media all and (max-width: 767px) {
   /* =Header
   -------------------------------------------------------------- */
   header h1#logo {
@@ -210,7 +210,7 @@ header {
     margin: 0 auto;
     height: 100px;
     line-height: 100px;
-    text-align: center; }
+    /*text-align: center;*/ }
   header nav {
     display: block;
     float: none;
@@ -218,18 +218,18 @@ header {
     text-align: center;
     margin: 0 auto; }
     header nav a {
-      line-height: 50px;
+      line-height: 41px;
       margin: 0 10px; }
   header.smaller {
     height: 75px; }
     header.smaller h1#logo {
       height: 40px;
-      line-height: 40px;
+      line-height: 70px;
       font-size: 30px; }
     header.smaller nav {
       height: 35px; }
       header.smaller nav a {
-        line-height: 35px; } }
+        line-height: 41px; } }
 @media all and (max-width: 600px) {
   .container {
     width: 100%; }
