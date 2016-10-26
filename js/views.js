@@ -165,30 +165,48 @@ GalleryView = Backbone.View.extend({
 	this.groupedItems = _.groupBy(this.items, function(item){
 		//console.log(item);
 		return item.get('mime_type');
-	})
+	});
+	this.$container = $('<div class="collapse">');
 	//console.log(this.items, this.groupedItems);
 	this.render();
 	},
 	render: function(){
 		var subTheme = this.siteMap[this.options.theme-1];
+		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
+			//find the dom node to append gallery items
+			var indexBuild = index+1;
+			var domElem = '#'+indexBuild+"-note";
+			//iterate over each item for the sub-theme
 			_.each(this.groupedItems['image/jpeg'], function(item){
+				
+				var fileTag = item.get('tags').name.split('-')[1];
+				if(subIndex == fileTag){
+					console.log(domElem, "in if");
+					this.$container.append(this.imgTemplate(item.toJSON()));
+				}
+
+			}, this);
+
+			_.each(this.groupedItems['audio/mpeg'], function(item){
 				//console.log(item.toJSON(), index, subIndex, "in second each");
 				var fileTag = item.get('tags').name.split('-')[1];
 				if(subIndex == fileTag){
-					var indexBuild = index+1;
-					var domElem = '#'+indexBuild+"-note";
-					console.log(domElem, "in if");
-					this.$(domElem).append(this.imgTemplate(item.toJSON()));
+					this.$container.append(this.audioTemplate({
+						description: item.get('description').text,
+						src: item.get('fileurls').original
+					}));
 				}
-				//var domID = subTheme
-				//console.log(fileTag, subTheme, "in second each end");
-				//this.$el.append(this.imgTemplate(item.toJSON()));
 			}, this);
-
+				this.$container.attr("id", indexBuild+"-gallery");
+				var collapseButton = '<a class="btn btn-primary" role="button" data-toggle="collapse" href="#'+indexBuild+'-gallery'+
+					'" aria-expanded="false" aria-controls="'+indexBuild+'-gallery'+'">GALLERY</a>';
+					
+				this.$(domElem).append($(collapseButton));
+				this.$(domElem).append(this.$container[0].outerHTML);
 		}, this);
 
-		_.each(subTheme, function(subIndex, index){
+		/*_.each(subTheme, function(subIndex, index){
 			_.each(this.groupedItems['audio/mpeg'], function(item){
 				//console.log(item.toJSON(), index, subIndex, "in second each");
 				var fileTag = item.get('tags').name.split('-')[1];
@@ -203,8 +221,12 @@ GalleryView = Backbone.View.extend({
 				}
 			}, this);
 
-		}, this);
+		}, this);*/
 		
+	},
+
+	appendGalleryToDom: function(galleryItems){
+
 	},
 
 	launchAudioPlayer: function(event){
