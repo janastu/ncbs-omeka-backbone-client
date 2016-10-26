@@ -132,8 +132,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			//var idForGallery = this.siteMap[this.tags[0]-1].split("").join("-").toLowerCase();
 			//console.log(idForGallery);
 			//this.$el.append("<div"+idForGallery+"><div>");
-			this.$("#ncbs-narrative-container .nav-tabs li:nth-child(2)").first().addClass("active");
-			this.$("#ncbs-narrative-container .tab-pane:nth-child(2)").first().addClass("active");
+			this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
+			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 			this.mediaContainer = new storyMediaView({
 				el:"#ncbs-narrative-container", 
 				tag: "1-india-ps-1", 
