@@ -137,6 +137,7 @@
 .gallery-player-trigger{
 	font-size:24px;
 	color: darkcyan;
+	cursor: pointer;
 }
 #main{
 	min-width: 1200px;

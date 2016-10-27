@@ -129,9 +129,6 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			
 			window.scrollTo(0,0);
 			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
-			//var idForGallery = this.siteMap[this.tags[0]-1].split("").join("-").toLowerCase();
-			//console.log(idForGallery);
-			//this.$el.append("<div"+idForGallery+"><div>");
 			this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 			this.mediaContainer = new storyMediaView({
@@ -183,7 +180,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 				
 				//append the audio icon to dom
 				if(mappedAudio){
-					$(span).html('<i class="fa fa-play-circle audio-player-trigger"  style="cursor: pointer;"  aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+'"></i>');
+					$(span).html('<i class="fa fa-play-circle audio-player-trigger"  style="cursor: pointer;"  aria-hidden="true" data-tag="'+mappedAudio.get('tags').name+
+							'"data-url="'+mappedAudio.get('fileurls').original+'"data-description="'+mappedAudio.get('description').text+'"data-rights="'+mappedAudio.get('rights').text+'"></i>');
 				}
 			}, this);
 
@@ -240,8 +238,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 
 		},
 		launchAudioPlayer: function(event){
-			//console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
-			new AudioView({el: "#audio-player-container", tags: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
+			console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
+			new AudioView({el: "#audio-player-container", data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 		}
 	});
 

@@ -97,30 +97,24 @@ imgSliderView = Backbone.View.extend({
  	initialize: function(options){
  		this.options = options || {};
  		/*if(this.options.tags){}*/
+ 		console.log(this.options);
+ 		//this.found is not needed - after change in architecture of dom data-* attribute
  		this.found = _.find(this.options.content, function(item){
- 			
- 			return item.get('tags').name === this.options.tags.tag;
+ 			return item.get('tags').name === this.options.data.tag;
  		}, this);
  	 
  		this.render();
  	},
  	render: function(){
- 		//console.log("audio render");
- 		/*if(this.options.tag){
- 			} else {
- 				//console.log(this.options);
- 				this.$el.html(this.template({src: this.options.url.src, original: undefined}));
- 			}*/
- 		this.$el.html(this.template(this.found.get('fileurls')));
- 		this.$el.append(this.captionTemplate({description: this.found.get('description'),
- 												rights: this.found.get('rights') || ""}));
+ 		this.$el.html(this.template({original: this.options.data.url}));
+ 		this.$el.append(this.captionTemplate({description: this.options.data.description || "", 
+ 												rights: this.options.data.rights || "" })); 
  	
  		this.$el.show();
  		return this;
  	},
  	closePlayer: function(event){
  		event.preventDefault();
- 		//console.log(this);
  		this.$('audio').trigger('pause');
  		this.$el.hide();
  		//$(this.el).children.remove();
@@ -149,7 +143,7 @@ GalleryView = Backbone.View.extend({
 	audioTemplate: _.template($("#gallery-audio-template").html()),
 	videoTemplate: _.template($("#gallery-video-template").html()),
 	events: {
-		"click .gallery-player-trriger": "launchAudioPlayer",
+		"click .gallery-player-trigger": "launchAudioPlayer",
 		"click .pannable": "imgViewerClickable"
 	},
 	initialize: function(options){
@@ -199,6 +193,7 @@ GalleryView = Backbone.View.extend({
 				if(subIndex == fileTag){
 					this.$container.append(this.audioTemplate({
 						description: item.get('description').text,
+						rights: item.get('rights').text,
 						src: item.get('fileurls').original
 					}));
 				}
@@ -231,8 +226,8 @@ GalleryView = Backbone.View.extend({
 	},
 
 	launchAudioPlayer: function(event){
-		//console.log(event.target.dataset);
-		//new AudioView({el: "#audio-player-container", url: event.target.dataset});
+		console.log(event.target.dataset);
+		new AudioView({el: "#audio-player-container", data: event.target.dataset});
 }
 });
 

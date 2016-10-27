@@ -127,6 +127,15 @@ Your browser does not support the audio element.
 </div>
 </script>
 
+<script type="text/template" id="audio-caption-template">
+<div class="audio-caption-fixed" style='bottom:35px; width:92%;'>
+<marquee behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0.01, 0);" onmouseout="this.setAttribute('scrollamount', 5, 0);">
+<span><%=description %></span>
+<em><%=rights %></em>
+</marquee>
+</div>
+</script>
+
 <!-- subtheme identity content start-->
 <script type="text/template" id="img-slider-template">
 <div class="" style="padding-top:15px; padding-bottom:5px;">
@@ -158,14 +167,7 @@ Your browser does not support the audio element.
 </div>
 </script>
 
-<script type="text/template" id="audio-caption-template">
-<div class="audio-caption-fixed" style='bottom:35px; width:92%;'>
-<marquee behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0.01, 0);" onmouseout="this.setAttribute('scrollamount', 5, 0);">
-<span><%=description.text %></span>
-<em><%=rights.text %></em>
-</marquee>
-</div>
-</script>
+
 
 <script type="text/template" id="video-player-template">
 <div class="" style="padding-top:15px; padding-bottom:5px;">
@@ -182,9 +184,8 @@ Your browser does not support the audio element.
 <script type="text/template" id="gallery-audio-template">
 <div class="audio-gallery-item" style="margin:10px;">
 <span><%=description%></span>
-<a href="<%=src%>" target="_blank">
-<i class="fa fa-play-circle gallery-player-trriger" aria-hidden="true" data-src="<%=src%>" style="cursor: pointer;"></i>
-</a>
+<i class="fa fa-play-circle gallery-player-trigger" aria-hidden="true" data-url="<%=src%>" data-description="<%=description%>" data-rights="<%=rights%>"></i>
+
 </div>
 </script>
 
