@@ -148,7 +148,8 @@ GalleryView = Backbone.View.extend({
 	imgTemplate: _.template($("#gallery-img-template").html()),
 	audioTemplate: _.template($("#gallery-audio-template").html()),
 	events: {
-		"click .gallery-player-trriger": "launchAudioPlayer"
+		"click .gallery-player-trriger": "launchAudioPlayer",
+		"click .pannable": "imgViewerClickable"
 	},
 	initialize: function(options){
 	this.options = options || {};
@@ -167,6 +168,7 @@ GalleryView = Backbone.View.extend({
 		return item.get('mime_type');
 	});
 	this.$container = $('<div class="collapse">');
+	this.viewer = ImageViewer();
 	//console.log(this.items, this.groupedItems);
 	this.render();
 	},
@@ -199,34 +201,19 @@ GalleryView = Backbone.View.extend({
 				}
 			}, this);
 				this.$container.attr("id", indexBuild+"-gallery");
-				var collapseButton = '<a class="btn btn-primary" role="button" data-toggle="collapse" href="#'+indexBuild+'-gallery'+
+				var collapseButton = '<a class="btn btn-success center-block gallery-btn" role="button" data-toggle="collapse" href="#'+indexBuild+'-gallery'+
 					'" aria-expanded="false" aria-controls="'+indexBuild+'-gallery'+'">GALLERY</a>';
 					
 				this.$(domElem).append($(collapseButton));
 				this.$(domElem).append(this.$container[0].outerHTML);
 		}, this);
-
-		/*_.each(subTheme, function(subIndex, index){
-			_.each(this.groupedItems['audio/mpeg'], function(item){
-				//console.log(item.toJSON(), index, subIndex, "in second each");
-				var fileTag = item.get('tags').name.split('-')[1];
-				if(subIndex == fileTag){
-					var indexBuild = index+1;
-					var domElem = '#'+indexBuild+"-note";
-					//console.log(domElem, "in if");
-					this.$(domElem).append(this.audioTemplate({
-						description: item.get('description').text,
-						src: item.get('fileurls').original
-					}));
-				}
-			}, this);
-
-		}, this);*/
-		
 	},
 
-	appendGalleryToDom: function(galleryItems){
-
+	imgViewerClickable: function(event){
+		event.preventDefault();
+		var imgSrc = event.currentTarget.src,
+		highResolutionImage = $(event.currentTarget).data('high-res-src');
+		this.viewer.show(imgSrc, highResolutionImage);
 	},
 
 	launchAudioPlayer: function(event){
