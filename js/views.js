@@ -147,6 +147,7 @@ GalleryView = Backbone.View.extend({
 	el: "#ncbs-narrative-container",
 	imgTemplate: _.template($("#gallery-img-template").html()),
 	audioTemplate: _.template($("#gallery-audio-template").html()),
+	videoTemplate: _.template($("#gallery-video-template").html()),
 	events: {
 		"click .gallery-player-trriger": "launchAudioPlayer",
 		"click .pannable": "imgViewerClickable"
@@ -176,6 +177,7 @@ GalleryView = Backbone.View.extend({
 		var subTheme = this.siteMap[this.options.theme-1];
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
+			console.log("subindex=", subIndex, index);
 			this.$container = $('<div class="collapse"></div>');
 			//find the dom node to append gallery items
 			var indexBuild = index+1;
@@ -198,6 +200,17 @@ GalleryView = Backbone.View.extend({
 					this.$container.append(this.audioTemplate({
 						description: item.get('description').text,
 						src: item.get('fileurls').original
+					}));
+				}
+			}, this);
+
+			_.each(this.groupedItems['video/mp4'], function(item){
+				var fileTag = item.get('tags').name.split('-')[1];
+				if(subIndex == fileTag){
+					this.$container.append(this.videoTemplate({
+						fileurls: item.get('fileurls'),
+						description: item.get('description') || "",
+						rights: item.get('rights') || ""
 					}));
 				}
 			}, this);
