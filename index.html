@@ -175,16 +175,26 @@ Your browser does not support the audio element.
 </script>
 
 <script type="text/template" id="gallery-img-template">
-<div class="img-gallery-item" data-tag="">
+<div class="img-gallery-item">
 <img src=<%=fileurls.square_thumbnail%> data-high-res-src=<%=fileurls.original%> class="img-responsive pannable" />
 </div>
 </script>
 <script type="text/template" id="gallery-audio-template">
-<div class="audio-gallery-item">
+<div class="audio-gallery-item" style="margin:10px;">
 <span><%=description%></span>
 <a href="<%=src%>" target="_blank">
 <i class="fa fa-play-circle gallery-player-trriger" aria-hidden="true" data-src="<%=src%>" style="cursor: pointer;"></i>
 </a>
+</div>
+</script>
+
+<script type="text/template" id="gallery-video-template">
+<div class="col-md-4" style="height:350px;">
+<video style="width:100%; margin:10px; height:auto;" class="center-block" controls="" name="media" 
+ 		><source src=<%=fileurls.original%>></video>
+ 		<span><%= description.text %></span>
+ 		<em><%=rights.text %></em>
+ 		</div>
 </div>
 </script>
 

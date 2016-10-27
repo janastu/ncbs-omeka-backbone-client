@@ -113,6 +113,7 @@
 	font-size:12px;
 }
 
+
 .global-audio-player{
 	position:fixed;
 	bottom:0px;
@@ -139,5 +140,14 @@
 }
 #main{
 	min-width: 1200px;
+}
+
+
+.gallery-btn{
+	margin-bottom: 15px;
+}
+
+.pannable{
+	cursor: pointer;
 }
 
