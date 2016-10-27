@@ -151,3 +151,7 @@
 	cursor: pointer;
 }
 
+.tab-content > .active {
+	width:80%;
+	margin:0 auto;
+}

@@ -156,7 +156,7 @@ GalleryView = Backbone.View.extend({
 	this.options = options || {};
 	this.siteMap = [["Space", "India", "Recognition", "Reflection"], ["Autonomy", "Paper", "Arch"],
 	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
-	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS Community", "Outside"]
+	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS", "Outside"]
 	];
 	//console.log(this.options);
 	this.items = _.compact(_.map(this.options.content, function(item){
