@@ -167,15 +167,16 @@ GalleryView = Backbone.View.extend({
 		//console.log(item);
 		return item.get('mime_type');
 	});
-	this.$container = $('<div class="collapse">');
 	this.viewer = ImageViewer();
 	//console.log(this.items, this.groupedItems);
 	this.render();
 	},
 	render: function(){
+
 		var subTheme = this.siteMap[this.options.theme-1];
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
+			this.$container = $('<div class="collapse"></div>');
 			//find the dom node to append gallery items
 			var indexBuild = index+1;
 			var domElem = '#'+indexBuild+"-note";

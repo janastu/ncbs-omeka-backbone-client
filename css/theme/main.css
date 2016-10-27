@@ -117,3 +117,6 @@
 	margin-bottom: 15px;
 }
 
+.pannable{
+	cursor: pointer;
+}
