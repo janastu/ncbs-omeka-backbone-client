@@ -146,6 +146,7 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		refreshViewer: function(event){
 			console.log(event, this.mediaContainer.imgSlideSubViews);
 			_.each(this.mediaContainer.imgSlideSubViews, function(item){
+				item.render();
 				item.viewer.refresh();
 				return item;
 			});

@@ -41,20 +41,19 @@ imgSliderView = Backbone.View.extend({
 		this.model = this.options.model;
 		this.model.set("content", this.options.content);
 		this.model.set("total", this.options.content.length);
+		//this.listenTo(app.tabsView, "refreshViewer", this.refreshSlide);
+		//app.tabsView.on("refreshViewer", this.refreshSlide, this);
+		this.listenTo(this.model, "change", this.render, this);
+		this.render();
+
+	},
+	render: function(){
 		this.$el.html(this.template(this.model.toJSON()));
 		this.viewer = ImageViewer(this.$('.image-container'), {
 			snapView: true,
 			zoomOnMouseWheel: true,
 			maxZoom: 400
 		});
-		//this.listenTo(app.tabsView, "refreshViewer", this.refreshSlide);
-		//app.tabsView.on("refreshViewer", this.refreshSlide, this);
-		this.listenTo(this.model, "change", this.render);
-		this.render();
-
-	},
-	render: function(){
-	
 		if(this.model.get('currentIndex') > this.model.get('total')) {
 			this.model.set('currentIndex', 1);
 		} else if( this.model.get('currentIndex')<1) {
