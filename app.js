@@ -4,7 +4,7 @@
 
 require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'libs/text!templates/footer.html'], function (headerTpl, homeTpl, footerTpl) {
 
-	app = {};
+	app = window.app || {};
 	// Site content from omeka api as required by the client 
 	//interfaces.
 	storyCollection = Backbone.Collection.extend({
@@ -16,7 +16,6 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 	});
 	APIcontent = new storyCollection;
 	app.controller = AppController();
-	//console.log(app);
 	app.init = function() {
 		app = new ApplicationRouter();
 		app.state={};
@@ -24,17 +23,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 
 	};
 	$("#spinner-launch").toggle();
-	//app.init();
-	//hack - to call init a delay beacause some view components 
-	//are undefined in the runtime on the server
-	//APIcontent.once("add", app.init);
-	function checkForContentToInit(){
-		if(APIcontent.length){
-			app.init();
-		}
-		APIcontent.once("add", app.init);
-	}
-	checkForContentToInit();
+
+
 
 	HeaderView = Backbone.View.extend({
 		el: "#header",
@@ -126,10 +116,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.options = options || {};
 			this.tags = this.options.tag.split('-');
 			this.listenTo(this.collection, "add", this.render);
+			//this.listenTo(APIcontent, "add", this.render);
+			//APIcontent.once("add", this.render);
 		},
 		render: function(){
 			this.model = this.collection.get(this.tags[0]);
-			
 			window.scrollTo(0,0);
 			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1], 
 						tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
@@ -137,14 +128,12 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 			this.mediaContainer = new storyMediaView({
 				el:"#ncbs-narrative-container", 
-				tag: "1-india-ps-1", 
-				media: this.options.content
+				media: APIcontent.groupByTags(0)[this.tags[0]]
 			});
 			this.mediaContainer.render();
-			this.Gallery = new GalleryView({content: this.options.content, theme: this.tags[0]});
+			this.Gallery = new GalleryView({content: APIcontent.groupByTags(0)[this.tags[0]], theme: this.tags[0]});
 		},
 		refreshViewer: function(event){
-			console.log(event, this.mediaContainer.imgSlideSubViews);
 			_.each(this.mediaContainer.imgSlideSubViews, function(item){
 				item.render();
 				item.viewer.refresh();
@@ -154,20 +143,23 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		}
 	});
 
-	});
+
 
 	storyMediaView = Backbone.View.extend({
 		events: {
 			"click .audio-player-trigger": "launchAudioPlayer"
 		},
 		initialize: function(options) {
+			this.siteMap = ["identity", "institution-building", "growth", "research", "education", "ripple-effect",
+							"intersections"];
 			this.options = options || {};
+			console.log(this.options);
 			this.spans = this.$("span");
 			this.imgSlideSubViews = [];
 			this.groupedMedia = _.groupBy(this.options.media, function(item){
 				return item.get('mime_type');
 			});
-			
+			this.listenTo(APIcontent, "change", this.reRoute);
 			//console.log(this.groupedMedia);
 	
 		},
@@ -245,6 +237,11 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 		launchAudioPlayer: function(event){
 			console.log(event.target.dataset, event.currentTarget, "clicked audio icon");
 			new AudioView({el: "#audio-player-container", data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
+		},
+		reRoute: function(){
+			var routeIndex = this.options.tag.split('-')[0];
+			console.log(this.siteMap[routeIndex-1]);
+			app.navigate(this.siteMap[routeIndex-1], {trigger: true});
 		}
 	});
 
@@ -266,8 +263,11 @@ function naturalCompare(a, b) {
     return ax.length - bx.length;
 }
 
+app.init();
+}); // end require statement
 
-})();
+
+})(); // end window load
 
 
 
