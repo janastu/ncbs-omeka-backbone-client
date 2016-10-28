@@ -120,6 +120,9 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			["Education", "Building knowledge", "Mentorship"],
 			["Ripple Effect", "Effects and Toll", "Interaction/Isolation"],
 			["Intersections", "Gender Equality", "Hierarchy & Class", "NCBS Community", "Outside World"]];
+			this.tabIconPath = ["img/Assets/identity_inside-01.png", "img/Assets/instituin_inside-01.png",
+				"img/Assets/growth_inside.png", "img/Assets/research-inside.png", "img/Assets/education_inside1.png",
+				 "img/Assets/ripple_inside.png", "img/Assets/intersections_inside.png"];
 			this.options = options || {};
 			this.tags = this.options.tag.split('-');
 			this.listenTo(this.collection, "add", this.render);
@@ -128,7 +131,8 @@ require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'li
 			this.model = this.collection.get(this.tags[0]);
 			
 			window.scrollTo(0,0);
-			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1]}));
+			this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1], 
+						tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
 			this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 			this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 			this.mediaContainer = new storyMediaView({

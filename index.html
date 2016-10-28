@@ -204,10 +204,23 @@ Your browser does not support the audio element.
 
 
 <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist" style="margin-top:125px; margin-bottom:10px;">
+  <ul class="nav nav-tabs <%=className%>" role="tablist" style="margin-top:125px; margin-bottom:10px; margin-left:10%;">
+  
   <% _.each(sitemap, function(arr,index) {%>
 
-  <li role="presentation" class=""><a href="#<%=index%>-note" aria-controls="<%=index%>-note" role="tab" data-toggle="tab"><!--img src="img/Assets/identity.png" alt="category_identity" class="img-responsive" style="max-width:15px; display:inline;"/><span--><%=arr%><!--/span--></a></li>
+  <li role="presentation" class="">
+  <a href="#<%=index%>-note" aria-controls="<%=index%>-note" role="tab" data-toggle="tab">
+  <% if(index === 0) {%>
+  	<img src="<%=tabIcon%>" alt="category_identity" class="img-responsive" style="max-width:25px; display:inline; height:20px;"/>
+  <%}%>
+  <span style="padding:10px; font-weight:bold;">
+  <%=arr%>
+  <% if(index === 0) {%> 
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding-left: 10px;"></span>
+  <%}%>
+  </span>
+  </a>
+  </li>
   <%});%>
     
   </ul>
