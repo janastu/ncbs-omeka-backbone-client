@@ -158,15 +158,15 @@ Your browser does not support the audio element.
 <div class="" style="padding-top:15px; padding-bottom:5px;">
 
     <div class="image-container"></div>
+    <%if(total >1){%>
+	<span class="prev glyphicon glyphicon-chevron-left pull-left" style="top: -300px; cursor: pointer;"/></span>
+	<span  class="next glyphicon glyphicon-chevron-right pull-right" style="top: -300px; cursor: pointer;"/></span>
+<%}%>
 </div>    
 </script>
 
 <script type="text/template" id="img-slider-footer">
 <div class="footer-info">
-<%if(total >1){%>
-<span class="prev glyphicon glyphicon-chevron-left pull-left" style="cursor: pointer;"/></span>
-<span  class="next glyphicon glyphicon-chevron-right pull-right" style="cursor: pointer;"/></span>
-<%}%>
 <div class="text-center">
 <%if(total >1){%>
     <span class="current"><%=currentIndex%></span>/
