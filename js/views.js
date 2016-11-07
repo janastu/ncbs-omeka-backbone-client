@@ -68,7 +68,7 @@ imgSliderView = Backbone.View.extend({
 		this.$('.footer-info').remove();
 		this.$el.append(this.footerTemplate(this.model.toJSON()));
 		this.model.set("total", this.options.content.length);
-		this.viewer.refresh();
+		//this.viewer.refresh();
 		//this.$('img').css('max-width', '100%', 'max-height', 'auto');
 	},
 	slideDecrement: function(e){
