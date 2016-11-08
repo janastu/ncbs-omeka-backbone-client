@@ -16,22 +16,14 @@ var ApplicationRouter = Backbone.Router.extend({
 		//"*actions": "home"
 	},
 	initialize: function() {
-		this.headerView = new HeaderView();
-		this.headerView.render();
-		this.footerView = new FooterView();
-		this.footerView.render();
-		$('#ncbs-content-policy').modal();
-		this.omekaItems = APIcontent.groupByTags(0);
-		$("#spinner-launch").toggle();
+		//$('#ncbs-content-policy').modal();
+		//$("#spinner-launch").toggle();
 	},
 	home: function() {
 		console.log("in home");
-		if(app.state.view){
-			app.state.view.$el.html('');
-		}
 		this.homeView = new HomeView({el: "#content"});
 		this.homeView.render();
-		this.state.view=this.homeView;
+		//this.state.view=this.homeView;
 
 	},
 	about: function(){
@@ -42,20 +34,19 @@ var ApplicationRouter = Backbone.Router.extend({
 		//url pattern - > #theme1?sub-theme=name&state=""
 		console.log(APIcontent);
 		
-		this.tabsView = new subthemeNav({
-			collection: omekaCollections, 
-			tag: "1-*", 
-			content: this.omekaItems[1]
-		});
-		this.tabsView.render();
-		//$("#spinner-launch").toggle();
+				this.tabsView = new subthemeNav({
+							collection: omekaCollections, 
+							tag: "1-*", 
+							content: APIcontent
+							});
+				this.tabsView.render();
 	},
 	theme2: function(query){
 		
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "2-*", 
-			content: this.omekaItems[2]
+			content: APIcontent
 		});
 		this.tabsView.render();
 		
@@ -64,7 +55,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "3-*", 
-			content: this.omekaItems[3]
+			content: APIcontent
 		});
 		this.tabsView.render();
 		
@@ -73,7 +64,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "4-*", 
-			content: this.omekaItems[4]
+			content: APIcontent
 		});
 		this.tabsView.render();
 	},
@@ -81,7 +72,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "5-*", 
-			content: this.omekaItems[5]
+			content: APIcontent
 		});
 		this.tabsView.render();
 	}, 
@@ -89,7 +80,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "6-*", 
-			content: this.omekaItems[6]
+			content: APIcontent
 		});
 		this.tabsView.render();
 	},
@@ -97,7 +88,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.tabsView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "7-*", 
-			content: this.omekaItems[7]
+			content: APIcontent
 		});
 		this.tabsView.render();
 	}

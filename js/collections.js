@@ -1,6 +1,8 @@
 
 /* Collections and controller */
 
+
+
 $.ajaxSetup({
 beforeSend: function(jqXHR) {
     jqXHR.crossDomain ={
