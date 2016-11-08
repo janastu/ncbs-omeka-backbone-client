@@ -4,6 +4,7 @@
 	app = window.app || {};
 	// Site content from omeka api as required by the client 
 	//interfaces.
+	app.controller = AppController();
 	storyCollection = Backbone.Collection.extend({
 		groupByTags: function(index){
 			return this.groupBy(function(item){
@@ -12,16 +13,17 @@
 		}
 	});
 	APIcontent = new storyCollection;
-	app.controller = AppController();
+	
 	
 	app.init = function() {
-		$('#ncbs-content-policy').modal();
+		//$('#ncbs-content-policy').modal();
 		app.router = new ApplicationRouter();
 		this.headerView = new HeaderView();
 		this.headerView.render();
 		this.footerView = new FooterView();
 		this.footerView.render();
 		Backbone.history.start();
+
 		//$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
 	};

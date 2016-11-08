@@ -144,7 +144,7 @@ GalleryView = Backbone.View.extend({
 	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
 	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS", "Outside"]
 	];
-	this.$container = $('<div class="collapse"></div>');
+	
 	this.listenToOnce(this.collection, "add", this.render);
 
 	this.viewer = ImageViewer();
@@ -153,8 +153,7 @@ GalleryView = Backbone.View.extend({
 	},
 	render: function(){
 		console.log(this.collection);
-		//clear the gallery container
-		this.$container.innerHTML = ""; //$('<div class="collapse"></div>');
+		
 
 		this.items = _.compact(this.collection.map(function(item){
 			if(item.get('tags').name.split('-').length<3){
@@ -170,7 +169,8 @@ GalleryView = Backbone.View.extend({
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
 			console.log("subindex=", subIndex, index);
-		
+			//clear the gallery container
+			this.$container = $('<div class="collapse"></div>');
 			//find the dom node to append gallery items
 			var indexBuild = index+1;
 			var domElem = '#'+indexBuild+"-note";

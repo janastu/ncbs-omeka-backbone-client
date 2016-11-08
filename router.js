@@ -16,13 +16,14 @@ var ApplicationRouter = Backbone.Router.extend({
 		//"*actions": "home"
 	},
 	initialize: function() {
-		//$('#ncbs-content-policy').modal();
+		
 		//$("#spinner-launch").toggle();
 	},
 	home: function() {
 		console.log("in home");
 		this.homeView = new HomeView({el: "#content"});
 		this.homeView.render();
+		$('#ncbs-content-policy').modal();
 		//this.state.view=this.homeView;
 
 	},

@@ -230,7 +230,7 @@
 }
 .img-gallery-item{
 	display: inline-block;
-	margin: 5px;
+	margin-top: 5px;
 }
 .gallery-player-trigger{
 	font-size:24px;
