@@ -22,12 +22,15 @@ var ApplicationRouter = Backbone.Router.extend({
 			if(this.contentView){
 				if(this.contentView.mediaContainer){
 					_.each(this.contentView.mediaContainer.imgSlideSubViews, function(imgSubview){
+						imgSubview.unbind();
 						imgSubview.remove();
 					});
 				}
 				if(this.contentView.Gallery){
+					this.contentView.Gallery.unbind();
 					this.contentView.Gallery.remove();
 				}
+				this.contentView.unbind();
 				this.contentView.remove();
 			}
 		}
