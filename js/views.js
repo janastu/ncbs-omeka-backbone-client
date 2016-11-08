@@ -3,16 +3,7 @@
 
 
 
-    DummyView = Backbone.View.extend({
-    	template: _.template($("#dummy-view").html()),
-    	initialize: function(options){
-    		this.options = options || {};
-    		this.render
-    	},
-    	render: function(options){
-    		this.$el.html(this.template);
-    	}
-    });
+
 
 
 imgSliderModel = Backbone.Model.extend({
@@ -161,7 +152,10 @@ GalleryView = Backbone.View.extend({
 	//this.render();
 	},
 	render: function(){
-		
+		console.log(this.collection);
+		//clear the gallery container
+		this.$container.innerHTML = ""; //$('<div class="collapse"></div>');
+
 		this.items = _.compact(this.collection.map(function(item){
 			if(item.get('tags').name.split('-').length<3){
 				return item;
@@ -176,11 +170,12 @@ GalleryView = Backbone.View.extend({
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
 			console.log("subindex=", subIndex, index);
-			//clear the gallery container
-			this.$container.innerHTML = ""; //$('<div class="collapse"></div>');
+		
 			//find the dom node to append gallery items
 			var indexBuild = index+1;
 			var domElem = '#'+indexBuild+"-note";
+
+
 			//iterate over each item for the sub-theme
 			_.each(this.groupedItems['image/jpeg'], function(item){
 				
@@ -214,11 +209,16 @@ GalleryView = Backbone.View.extend({
 					}));
 				}
 			}, this);
+				
+				//clear previously appended elements if any
+				this.$(domElem).find(".gallery-btn").remove();	
+				this.$(domElem).find(".collapse").remove();
+				//add an ID reference for collapse plugin to call
 				this.$container.attr("id", indexBuild+"-gallery");
 				var collapseButton = '<a class="btn btn-success center-block gallery-btn" role="button" data-toggle="collapse" href="#'+indexBuild+'-gallery'+
 					'" aria-expanded="false" aria-controls="'+indexBuild+'-gallery'+'">GALLERY</a>';
-					
-				this.$(domElem).append($(collapseButton));
+				
+				this.$(domElem).append(collapseButton);	
 				this.$(domElem).append(this.$container[0].outerHTML);
 		}, this);
 	},
@@ -231,19 +231,25 @@ GalleryView = Backbone.View.extend({
 	},
 
 	launchAudioPlayer: function(event){
-		console.log(event.target.dataset);
+		
 		new AudioView({el: "#audio-player-container", data: event.target.dataset});
-},
-
-	checkCollectionLength: function() {
-		if(this.collection.length > 900){
-			console.log("collection length greater than 900");
-			this.render();
-		}
-		console.log("collection length is less");
-	}
+}
 });
 
+
+
+/*
+
+DummyView = Backbone.View.extend({
+	template: _.template($("#dummy-view").html()),
+	initialize: function(options){
+		this.options = options || {};
+		this.render
+	},
+	render: function(options){
+		this.$el.html(this.template);
+	}
+});
 
 
 ImageView = Backbone.View.extend({
@@ -259,7 +265,7 @@ ImageView = Backbone.View.extend({
 		this.render();
 	},
 	render: function(model){
-		//console.log(this.collection);
+		
 		this.collection.each(function(item){
 			this.$container.append(this.$el.append(this.template(item.toJSON())));
 		}, this);
@@ -288,5 +294,5 @@ ImageView = Backbone.View.extend({
 
 
 	}
-});
+});*/
 

@@ -138,10 +138,11 @@
 				});
 				this.mediaContainer.render();
 				this.Gallery = new GalleryView({
-					content: APIcontent.groupByTags(0)[this.tags[0]],
+					//content: APIcontent.groupByTags(0)[this.tags[0]],
 					collection:APIcontent, 
 					theme: this.tags[0]
 				});
+				this.Gallery.render();
 			},
 			refreshViewer: function(event){
 				_.each(this.mediaContainer.imgSlideSubViews, function(item){
