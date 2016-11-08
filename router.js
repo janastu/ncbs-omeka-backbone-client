@@ -18,28 +18,35 @@ var ApplicationRouter = Backbone.Router.extend({
 	initialize: function() {
 		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
+		this.viewCleanup = function() {
+			if(this.contentView){
+				if(this.contentView.mediaContainer){
+					_.each(this.contentView.mediaContainer.imgSlideSubViews, function(imgSubview){
+						imgSubview.remove();
+					});
+				}
+				if(this.contentView.Gallery){
+					this.contentView.Gallery.remove();
+				}
+				this.contentView.remove();
+			}
+		}
 	},
 	home: function() {
 	
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new HomeView();
 		this.contentView.render();
 		//this.state.view=this.homeView;
 
 	},
 	about: function(){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new aboutView();
 		this.contentView.render();
 	},
 	theme1: function(query) {
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		//url pattern - > #theme1?sub-theme=name&state=""
 		
 				this.contentView = new subthemeNav({
@@ -50,9 +57,7 @@ var ApplicationRouter = Backbone.Router.extend({
 				this.contentView.render();
 	},
 	theme2: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "2-*", 
@@ -62,9 +67,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		
 	},
 	theme3: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "3-*", 
@@ -74,9 +77,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		
 	},
 	theme4: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "4-*", 
@@ -85,9 +86,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.contentView.render();
 	},
 	theme5: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "5-*", 
@@ -96,9 +95,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.contentView.render();
 	}, 
 	theme6: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "6-*", 
@@ -107,9 +104,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.contentView.render();
 	},
 	theme7: function(query){
-		if(this.contentView){
-			this.contentView.remove();
-		}
+		this.viewCleanup();
 		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "7-*", 
