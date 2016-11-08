@@ -87,16 +87,17 @@
 		});	
 
 		aboutView = Backbone.View.extend({
-			el: "#content",
+			id: "content",
 			template: _.template($("#about-page-template").html()),
 			
 			
 			initialize: function() {
-				//this.$container = $("#main");
+				this.$container = $("#main");
 				
 			},
 			render: function() {
-				this.$el.html(this.template);
+				this.$container.append(this.$el.html(this.template));
+				//this.$el.html(this.template);
 			}
 			
 		});	
