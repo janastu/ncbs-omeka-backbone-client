@@ -71,7 +71,7 @@
 			}
 		})
 		HomeView = Backbone.View.extend({
-			el: "#content",
+			id: "content",
 			template: homeTpl,
 			
 			
@@ -102,7 +102,7 @@
 		});	
 
 		subthemeNav = Backbone.View.extend({
-			el: "#content",
+			id: "content",
 			template: _.template($('#sub-theme-nav-tabs').html()),
 			events: {
 				"shown.bs.tab a[data-toggle='tab']": "refreshViewer"
@@ -121,15 +121,19 @@
 					 "img/Assets/ripple_inside.png", "img/Assets/intersections_inside.png"];
 				this.options = options || {};
 				this.tags = this.options.tag.split('-');
+				this.$parent=$("#main");
+				//this.collection.on("add change", this.render);
 				this.listenTo(this.collection, "add", this.render);
 				//this.listenTo(APIcontent, "add", this.render);
 				//APIcontent.once("add", this.render);
 			},
 			render: function(){
+				//this.remove();
 				this.model = this.collection.get(this.tags[0]);
 				window.scrollTo(0,0);
 				this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1], 
-							tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
+											tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
+				this.$parent.append(this.$el);
 				this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 				this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 				this.mediaContainer = new storyMediaView({
@@ -164,13 +168,13 @@
 			},
 			initialize: function(options) {
 				this.options = options || {};
-
+				//this.collection.once("add", this.render);
 				this.listenToOnce(this.collection, "add", this.render);
 				//this.listenTo(this.collection, "change", this.reRoute);
 				this.siteMap = ["identity", "institution-building", "growth", "research", "education", "ripple-effect",
 								"intersections"];
 				
-				console.log(this.options);
+				
 				this.spans = this.$("span");
 				this.imgSlideSubViews = [];
 				//this.render();
@@ -253,14 +257,14 @@
 
 			},
 			launchAudioPlayer: function(event){
-				console.log(event.target.dataset, event.currentTarget, app, "clicked audio icon");
+				//console.log(event.target.dataset, event.currentTarget, app, "clicked audio icon");
 				new AudioView({el: "#audio-player-container", data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 			},
 			reRoute: function(){
 				if(this.collection.length > 900){
 					this.render();
 				}
-				console.log("collection length is less");
+				//console.log("collection length is less");
 				/*var routeIndex = this.options.theme.split('-')[0];
 				console.log(this.siteMap[routeIndex-1], this.options);
 				app.router.navigate(this.siteMap[routeIndex-1], {trigger: true});*/

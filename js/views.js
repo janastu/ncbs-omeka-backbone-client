@@ -71,7 +71,7 @@ imgSliderView = Backbone.View.extend({
 		this.model.set('currentIndex', this.model.get('currentIndex')+1);
 	},
 	refreshSlide: function(e){
-		console.log(e.target, "refreshed");
+		//console.log(e.target, "refreshed");
 		this.model.set('currentIndex', this.model.get('currentIndex')+1);
 		this.model.set('currentIndex', 1);
 
@@ -89,7 +89,7 @@ imgSliderView = Backbone.View.extend({
  	initialize: function(options){
  		this.options = options || {};
  		/*if(this.options.tags){}*/
- 		console.log(this.options);
+ 		//console.log(this.options);
  		//this.found is not needed - after change in architecture of dom data-* attribute
  		this.found = _.find(this.options.content, function(item){
  			return item.get('tags').name === this.options.data.tag;
@@ -144,7 +144,7 @@ GalleryView = Backbone.View.extend({
 	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
 	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS", "Outside"]
 	];
-	
+	//this.collection.once("add", this.render);
 	this.listenToOnce(this.collection, "add", this.render);
 
 	this.viewer = ImageViewer();
@@ -152,7 +152,7 @@ GalleryView = Backbone.View.extend({
 	//this.render();
 	},
 	render: function(){
-		console.log(this.collection);
+		//console.log(this.collection);
 		
 
 		this.items = _.compact(this.collection.map(function(item){
@@ -168,7 +168,7 @@ GalleryView = Backbone.View.extend({
 		var subTheme = this.siteMap[this.options.theme-1];
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
-			console.log("subindex=", subIndex, index);
+			//console.log("subindex=", subIndex, index);
 			//clear the gallery container
 			this.$container = $('<div class="collapse"></div>');
 			//find the dom node to append gallery items
@@ -181,7 +181,7 @@ GalleryView = Backbone.View.extend({
 				
 				var fileTag = item.get('tags').name.split('-')[1];
 				if(subIndex == fileTag){
-					console.log(domElem, "in if");
+					//console.log(domElem, "in if");
 					this.$container.append(this.imgTemplate(item.toJSON()));
 				}
 

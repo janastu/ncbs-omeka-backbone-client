@@ -16,82 +16,106 @@ var ApplicationRouter = Backbone.Router.extend({
 		//"*actions": "home"
 	},
 	initialize: function() {
-		
+		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
 	},
 	home: function() {
-		console.log("in home");
-		this.homeView = new HomeView({el: "#content"});
-		this.homeView.render();
-		$('#ncbs-content-policy').modal();
+	
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new HomeView();
+		this.contentView.render();
 		//this.state.view=this.homeView;
 
 	},
 	about: function(){
-		this.aboutPage = new aboutView();
-		this.aboutPage.render();
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new aboutView();
+		this.contentView.render();
 	},
 	theme1: function(query) {
+		if(this.contentView){
+			this.contentView.remove();
+		}
 		//url pattern - > #theme1?sub-theme=name&state=""
-		console.log(APIcontent);
 		
-				this.tabsView = new subthemeNav({
+				this.contentView = new subthemeNav({
 							collection: omekaCollections, 
 							tag: "1-*", 
 							content: APIcontent
 							});
-				this.tabsView.render();
+				this.contentView.render();
 	},
 	theme2: function(query){
-		
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "2-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 		
 	},
 	theme3: function(query){
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "3-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 		
 	},
 	theme4: function(query){
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "4-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 	},
 	theme5: function(query){
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "5-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 	}, 
 	theme6: function(query){
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "6-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 	},
 	theme7: function(query){
-		this.tabsView = new subthemeNav({
+		if(this.contentView){
+			this.contentView.remove();
+		}
+		this.contentView = new subthemeNav({
 			collection: omekaCollections, 
 			tag: "7-*", 
 			content: APIcontent
 		});
-		this.tabsView.render();
+		this.contentView.render();
 	}
 });
 
