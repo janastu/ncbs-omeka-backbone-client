@@ -1,6 +1,8 @@
 //View Partials - Common header and footer	
 
 
+
+
     DummyView = Backbone.View.extend({
     	template: _.template($("#dummy-view").html()),
     	initialize: function(options){
@@ -151,27 +153,31 @@ GalleryView = Backbone.View.extend({
 	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
 	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS", "Outside"]
 	];
-	//console.log(this.options);
-	this.items = _.compact(_.map(this.options.content, function(item){
-		if(item.get('tags').name.split('-').length<3){
-			return item;
-		}
-	}));
-	this.groupedItems = _.groupBy(this.items, function(item){
-		//console.log(item);
-		return item.get('mime_type');
-	});
+	this.$container = $('<div class="collapse"></div>');
+	this.listenToOnce(this.collection, "add", this.render);
+
 	this.viewer = ImageViewer();
 	//console.log(this.items, this.groupedItems);
-	this.render();
+	//this.render();
 	},
 	render: function(){
+		
+		this.items = _.compact(this.collection.map(function(item){
+			if(item.get('tags').name.split('-').length<3){
+				return item;
+			}
+		}));
+		this.groupedItems = _.groupBy(this.items, function(item){
+			//console.log(item);
+			return item.get('mime_type');
+		});
 
 		var subTheme = this.siteMap[this.options.theme-1];
 		//iterate through each sub-theme to find items applicable for gallery
 		_.each(subTheme, function(subIndex, index){
 			console.log("subindex=", subIndex, index);
-			this.$container = $('<div class="collapse"></div>');
+			//clear the gallery container
+			this.$container.innerHTML = ""; //$('<div class="collapse"></div>');
 			//find the dom node to append gallery items
 			var indexBuild = index+1;
 			var domElem = '#'+indexBuild+"-note";
@@ -227,7 +233,15 @@ GalleryView = Backbone.View.extend({
 	launchAudioPlayer: function(event){
 		console.log(event.target.dataset);
 		new AudioView({el: "#audio-player-container", data: event.target.dataset});
-}
+},
+
+	checkCollectionLength: function() {
+		if(this.collection.length > 900){
+			console.log("collection length greater than 900");
+			this.render();
+		}
+		console.log("collection length is less");
+	}
 });
 
 

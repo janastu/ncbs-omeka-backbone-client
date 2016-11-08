@@ -16,21 +16,14 @@ var ApplicationRouter = Backbone.Router.extend({
 		//"*actions": "home"
 	},
 	initialize: function() {
-		this.headerView = new HeaderView();
-		this.headerView.render();
-		this.footerView = new FooterView();
-		this.footerView.render();
-		$('#ncbs-content-policy').modal();
-		$("#spinner-launch").toggle();
+		//$('#ncbs-content-policy').modal();
+		//$("#spinner-launch").toggle();
 	},
 	home: function() {
 		console.log("in home");
-		if(app.state.view){
-			app.state.view.$el.html('');
-		}
 		this.homeView = new HomeView({el: "#content"});
 		this.homeView.render();
-		this.state.view=this.homeView;
+		//this.state.view=this.homeView;
 
 	},
 	about: function(){
