@@ -1,38 +1,45 @@
 
-
+/* Main views of the site are defined here - mainly, Home, about, Header, footer, subtheme(tabsview)
+and story media view - sub views for media is defined in js/views.js*/
 (function(){
+	/* Global application object, with all the functions, it's instances, views, collections or data
+	console log app to see its contents */
+
 	app = window.app || {};
-	// Site content from omeka api as required by the client 
-	//interfaces.
+
+	// call to start the api requests to the Omeka server
+	// will return true
 	app.controller = AppController();
-	storyCollection = Backbone.Collection.extend({
+
+	// Site content required by the client interfaces.
+	// the items, files and collections are put through makesitecontent method to add 
+	// models to this app.APIcontent collection - and views will listen to this collection for rendering
+	// particular media and meta content 
+	var storyCollection = Backbone.Collection.extend({
 		groupByTags: function(index){
 			return this.groupBy(function(item){
 				return item.get('tags').name.split('-')[index];
 			}, index);
 		}
 	});
-	APIcontent = new storyCollection;
+	app.APIcontent = new storyCollection;
 	
 	
 	app.init = function() {
-		//$('#ncbs-content-policy').modal();
 		app.router = new ApplicationRouter();
-		this.headerView = new HeaderView();
+		this.headerView = new app.HeaderView();
 		this.headerView.render();
-		this.footerView = new FooterView();
+		this.footerView = new app.FooterView();
 		this.footerView.render();
 		Backbone.history.start();
-
-		//$('#ncbs-content-policy').modal();
-		//$("#spinner-launch").toggle();
 	};
 
+// require to import the html files where the templates are declared for the view partials
 	require(['libs/text!templates/header.html', 'libs/text!templates/home.html', 'libs/text!templates/footer.html'], function (headerTpl, homeTpl, footerTpl) {
-		
 
-
-		HeaderView = Backbone.View.extend({
+// View partial - HEADER it's instance can be accessed as app.headerView
+// template headerTpl context is from path libs/text!templates/header.html
+		app.HeaderView = Backbone.View.extend({
 			el: "#header",
 			templateFileName: "header.html",
 			template: headerTpl,
@@ -40,10 +47,12 @@
 			initialize: function() {
 				// $.get(this.templateFileName, function(data){console.log(data);this.template=data});		
 			},
+
 			render: function() {
 				$(this.el).html(_.template(this.template));
 				this.scrollEffect();
 			},
+			//A scrolling effect for the header
 			scrollEffect: function(){
 				window.addEventListener('scroll', function(e){
 			    var distanceY = window.pageYOffset || document.documentElement.scrollTop,
@@ -60,49 +69,64 @@
 			    }
 			});
 			}
-
 		});
 
-		FooterView = Backbone.View.extend({
+
+// View partial - FOOTER it's instance can be accessed as app.footerView
+// template footerTpl context is from path libs/text!templates/footer.html
+		app.FooterView = Backbone.View.extend({
 			el: "#footer",
 			template: footerTpl,
+
 			render: function() {
 				this.$el.html(_.template(this.template));
 			}
-		})
-		HomeView = Backbone.View.extend({
+		});
+
+
+// Home page content 
+// template homeTpl context is from path libs/text!templates/home.html
+		app.HomeView = Backbone.View.extend({
 			id: "content",
 			template: homeTpl,
-			
-			
+
 			initialize: function() {
 				this.$container = $("#main");
-				
 			},
-			render: function() {
 
+			render: function() {
 				this.$container.append(this.$el.html(_.template(this.template)));
 			}
-			
 		});	
 
-		aboutView = Backbone.View.extend({
+
+// About page content - template available in index.html
+		app.aboutView = Backbone.View.extend({
 			id: "content",
 			template: _.template($("#about-page-template").html()),
 			
-			
 			initialize: function() {
 				this.$container = $("#main");
-				
 			},
+
 			render: function() {
 				this.$container.append(this.$el.html(this.template));
 				//this.$el.html(this.template);
 			}
-			
 		});	
 
-		subthemeNav = Backbone.View.extend({
+
+/* Each subtheme is rendered with this view 
+this view listens to app.omekaCollections which is passed as an option to the view. 
+template context in index.html which is a bootstrap tabs implementation
+Requirements: this.siteMap is the navigation tabs and count for each subtheme
+this.tabIconPath is the individual icons for each subtheme
+this.options.tag is a number which co-relates to the theme number -> 1 for identity, 2 for Institution Building
+and so on...
+ this.collection is an array of object with serves the text content in this views
+ along with the tags for rendering media */
+
+		app.subthemeNav = Backbone.View.extend({
 			id: "content",
 			template: _.template($('#sub-theme-nav-tabs').html()),
 			events: {
@@ -123,74 +147,79 @@
 				this.options = options || {};
 				this.tags = this.options.tag.split('-');
 				this.$parent=$("#main");
-				//this.collection.on("add change", this.render);
 				this.listenTo(this.collection, "add", this.render);
-				//this.listenTo(APIcontent, "add", this.render);
-				//APIcontent.once("add", this.render);
 			},
 			render: function(){
-				//this.remove();
 				this.model = this.collection.get(this.tags[0]);
 				window.scrollTo(0,0);
+				// the template expects a JSON object with properties content(text), sitemap(the navtabs),
+				// tabIcon (context icons), className(each theme has different colors)
 				this.$el.html(this.template({content: this.model.toJSON(), sitemap:this.siteMap[this.tags[0]-1], 
 											tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
 				this.$parent.append(this.$el);
+
+				//After rendering the tabs view, the default tab needs to be switched active
 				this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 				this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
+
+				// Initializing the child view, mediaContainer is an instance of storyMediaView
+				// Gallery view renders a collapsible gallery for each tab
 				this.mediaContainer = new storyMediaView({
 					el:"#ncbs-narrative-container", 
-					collection:APIcontent,
+					collection:app.APIcontent,
 					theme: this.tags[0]
-					//media: APIcontent.groupByTags(0)[this.tags[0]]
+					//media: app.APIcontent.groupByTags(0)[this.tags[0]]
 				});
 				this.mediaContainer.render();
 				this.Gallery = new GalleryView({
-					//content: APIcontent.groupByTags(0)[this.tags[0]],
-					collection:APIcontent, 
+					//content: app.APIcontent.groupByTags(0)[this.tags[0]],
+					collection:app.APIcontent, 
 					theme: this.tags[0]
 				});
 				this.Gallery.render();
 			},
+
+			//bug fix: The image viewer behaves abnormaly when rendered in an hidden element
+			//solution: every time a tab was shown, the imageViewer should be re-rendered and refreshed
 			refreshViewer: function(event){
 				_.each(this.mediaContainer.imgSlideSubViews, function(item){
 					item.render();
 					item.viewer.refresh();
-					return item;
 				});
 
 			}
 		});
 
 
+/* This is the child view for the subtheme view - Every subtheme or tab text content will contain
+TAGS in <span></span>. so, this view will get all spans and check and match the tags from DOM to the 
+tags in the app.APIcontent, which is the collection this view will listen to. */
 
-		storyMediaView = Backbone.View.extend({
+		var storyMediaView = Backbone.View.extend({
 			events: {
 				"click .audio-player-trigger": "launchAudioPlayer"
 			},
 			initialize: function(options) {
 				this.options = options || {};
-				//this.collection.once("add", this.render);
 				this.listenToOnce(this.collection, "add", this.render);
-				//this.listenTo(this.collection, "change", this.reRoute);
 				this.siteMap = ["identity", "institution-building", "growth", "research", "education", "ripple-effect",
 								"intersections"];
-				
-				
+				// All the spans in the DOM
 				this.spans = this.$("span");
+				// A reference to the child views to unbind them when switching routes
 				this.imgSlideSubViews = [];
-				//this.render();
-				//console.log(this.groupedMedia);
+				this.videoSubview = [];
 			},
 			render: function() {
+				// Group media by mime type
 				this.groupedMedia = _.groupBy(this.collection.groupByTags(0)[this.options.theme[0]], function(item){
 					return item.get('mime_type');
 				});
-				
+				/* START rendering the audio icons in between the text */
 				//iterate to each span from dom view
 				_.each(this.spans, function(span){
 					//find the matching tag from the file tags to match the tag in dom view
 					var mappedAudio = _.find(this.groupedMedia["audio/mpeg"], function(item){
-						//console.log(span.innerHTML, item.get('tags').name, 'matched?')
 						if(span.innerHTML === item.get('tags').name){
 							return item;	
 						}
@@ -202,7 +231,9 @@
 								'"data-url="'+mappedAudio.get('fileurls').original+'"data-description="'+mappedAudio.get('description').text+'"data-rights="'+mappedAudio.get('rights').text+'"></i>');
 					}
 				}, this);
+				/* END rendering the audio icons in between the text*/
 
+				/* START rendering the Image slider view in between the text*/
 				//iterate to each span from dom view
 				_.each(this.spans, function(span){
 					//find the matching tag from the file tags to match the tag in dom view
@@ -227,14 +258,14 @@
 					var nsort = sorted.sort(naturalCompare);
 					// append the list of images to Dom
 					if(sorted.length){
-						
 						this.slider =  new imgSliderView({el: span, content: nsort, model: new imgSliderModel()});
 						this.imgSlideSubViews.push(this.slider);
-						//this.slider.trigger("refreshSlide");
-						//sliderModel.set("hack", span.innerHTML);
-					}				
+					}
+
 				}, this);
-				
+				/* END rendering the Image slider view in between the text*/
+
+				/* START rendering the Video players in between the text*/
 				//iterate to each span from dom view
 				_.each(this.spans, function(span){
 					//find the matching tag from the file tags to match the tag in dom view
@@ -248,31 +279,28 @@
 					//append the audio icon to dom
 					if(mappedVideo){
 						//console.log(mappedVideo.toJSON());
-						new VideoView({el: span, content: mappedVideo});
+						this.video = new VideoView({el: span, content: mappedVideo});
+						this.videoSubview.push(this.video);
 					}
 				}, this);
-
-				//$("#spinner-launch").toggle();
-
+				/* END rendering the Video players in between the text*/
 				return this;
 
 			},
+			// Bind event to the rendered audio icons to launch an Audio player when clicked
 			launchAudioPlayer: function(event){
-				//console.log(event.target.dataset, event.currentTarget, app, "clicked audio icon");
-				new AudioView({el: "#audio-player-container", data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
-			},
-			reRoute: function(){
-				if(this.collection.length > 900){
-					this.render();
+				event.preventDefault();
+				if(app.currentAudio){
+					app.currentAudio.unbind();
+					app.currentAudio.remove();
 				}
-				//console.log("collection length is less");
-				/*var routeIndex = this.options.theme.split('-')[0];
-				console.log(this.siteMap[routeIndex-1], this.options);
-				app.router.navigate(this.siteMap[routeIndex-1], {trigger: true});*/
+				//console.log(event.target.dataset, event.currentTarget, app, "clicked audio icon");
+				app.currentAudio = new AudioView({data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
 			}
 		});
 
-
+// While sorting the order of the tags, we need to check for natural sorting since the tag is a text
+// with numbers marked as order
 
 	function naturalCompare(a, b) {
 	    var ax = [], bx = [];

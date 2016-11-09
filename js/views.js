@@ -80,6 +80,7 @@ imgSliderView = Backbone.View.extend({
 
 
  AudioView = Backbone.View.extend({
+ 	id: "audio-player-container", 
  	template: _.template($("#audio-player-template").html()),
  	captionTemplate: _.template($("#audio-caption-template").html()),
  	//galleryTemplate: _.template($("gallery-audio-template").html()),
@@ -88,28 +89,27 @@ imgSliderView = Backbone.View.extend({
  	},
  	initialize: function(options){
  		this.options = options || {};
- 		/*if(this.options.tags){}*/
- 		//console.log(this.options);
+ 		
  		//this.found is not needed - after change in architecture of dom data-* attribute
- 		this.found = _.find(this.options.content, function(item){
+ 		/*this.found = _.find(this.options.content, function(item){
  			return item.get('tags').name === this.options.data.tag;
- 		}, this);
- 	 
+ 		}, this);*/
+ 	 	this.$parent = $('body');
  		this.render();
  	},
  	render: function(){
  		this.$el.html(this.template({original: this.options.data.url}));
  		this.$el.append(this.captionTemplate({description: this.options.data.description || "", 
  												rights: this.options.data.rights || "" })); 
- 	
- 		this.$el.show();
+ 		this.$parent.append(this.$el);
+ 		//this.$el.show();
  		return this;
  	},
  	closePlayer: function(event){
  		event.preventDefault();
  		this.$('audio').trigger('pause');
- 		this.$el.hide();
- 		//$(this.el).children.remove();
+ 		this.unbind();
+ 		this.remove();
  	}
  });
 
@@ -148,12 +148,9 @@ GalleryView = Backbone.View.extend({
 	this.listenToOnce(this.collection, "add", this.render);
 
 	this.viewer = ImageViewer();
-	//console.log(this.items, this.groupedItems);
-	//this.render();
+
 	},
 	render: function(){
-		//console.log(this.collection);
-		
 
 		this.items = _.compact(this.collection.map(function(item){
 			if(item.get('tags').name.split('-').length<3){
@@ -231,8 +228,12 @@ GalleryView = Backbone.View.extend({
 	},
 
 	launchAudioPlayer: function(event){
-		
-		new AudioView({el: "#audio-player-container", data: event.target.dataset});
+		event.preventDefault();
+		if(app.currentAudio){
+			app.currentAudio.unbind();
+			app.currentAudio.remove();
+		}
+		app.currentAudio = new AudioView({data: event.target.dataset});
 }
 });
 

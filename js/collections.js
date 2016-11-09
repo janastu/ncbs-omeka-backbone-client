@@ -65,16 +65,16 @@ var collectionProto = Backbone.Collection.extend({
 				
 					return {
 						id: item.id,
-						description: omekaItems.getContextText(item, "Description") || null,
-						rights: omekaItems.getContextText(item, "Rights") || null,
-						format: omekaItems.getContextText(item, "Format") || null,
+						description: app.omekaItems.getContextText(item, "Description") || null,
+						rights: app.omekaItems.getContextText(item, "Rights") || null,
+						format: app.omekaItems.getContextText(item, "Format") || null,
 						tags: item.get('tags')[0] || null,
-						mime_type: files.getFileUrlsById(item.get('id')).get('mime_type') || null, 
-						fileurls: files.getFileUrlsById(item.get('id')).get('file_urls') || null
+						mime_type: app.files.getFileUrlsById(item.get('id')).get('mime_type') || null, 
+						fileurls: app.files.getFileUrlsById(item.get('id')).get('file_urls') || null
 					} 
 				});
 	
-		APIcontent.add(pages);
+		app.APIcontent.add(pages);
 	}
 });
 
@@ -107,8 +107,8 @@ context.fetch({
 });*/
 
 
-omekaCollections = new collectionProto;
-omekaCollections.fetch({
+app.omekaCollections = new collectionProto;
+app.omekaCollections.fetch({
 	url: PAGES.config.getOmekaCollections
 }).then(function(response){
 	//hack to be removed in production
@@ -119,8 +119,8 @@ omekaCollections.fetch({
 	checkMakeSiteContent('collections');
 });
 
-files = new FilesCollection;
-files.fetch({
+app.files = new FilesCollection;
+app.files.fetch({
 	url: PAGES.config.getOmekaFiles
 }).then(function(response){
 	//hack to be removed in production
@@ -132,8 +132,8 @@ files.fetch({
 });
 
 window.content=[];
-omekaItems = new collectionProto();
-omekaItems.fetch({
+app.omekaItems = new collectionProto();
+app.omekaItems.fetch({
 	url: PAGES.config.getOmekaItems,
 }).then(function(response){
 	//hack to be removed in production
@@ -156,7 +156,7 @@ function checkMakeSiteContent(typ) {
 			items_done = true;
 	}
 	if (files_done && collections_done &&  items_done)
-		omekaItems.makeSiteContent();
+		app.omekaItems.makeSiteContent();
 
 }
 return true;

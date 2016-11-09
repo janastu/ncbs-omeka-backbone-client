@@ -19,101 +19,114 @@ var ApplicationRouter = Backbone.Router.extend({
 		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
 		this.viewCleanup = function() {
-			if(this.contentView){
-				if(this.contentView.mediaContainer){
-					_.each(this.contentView.mediaContainer.imgSlideSubViews, function(imgSubview){
-						imgSubview.unbind();
-						imgSubview.remove();
+			if(this.currentView){
+				if(this.currentView.mediaContainer){
+					//to cleanup all the img subviews from the tabsview
+					_.each(this.currentView.mediaContainer.imgSlideSubViews, function(imgviewNode){
+						imgviewNode.unbind();
+						imgviewNode.remove();
+					});
+					//to cleanup all video nodes from tabsview
+					_.each(this.currentView.mediaContainer.videoSubview, function(videoNode){
+						videoNode.unbind();
+						videoNode.remove();
 					});
 				}
-				if(this.contentView.Gallery){
-					this.contentView.Gallery.unbind();
-					this.contentView.Gallery.remove();
+				//clean up Gallery view
+				if(this.currentView.Gallery){
+					this.currentView.Gallery.unbind();
+					this.currentView.Gallery.remove();
 				}
-				this.contentView.unbind();
-				this.contentView.remove();
+				//cleanup the tabs view or the content node
+				this.currentView.unbind();
+				this.currentView.remove();
+			}
+			//clean up audio player on route change
+			if(app.currentAudio){
+				app.currentAudio.unbind();
+				app.currentAudio.remove();
 			}
 		}
 	},
 	home: function() {
 	
 		this.viewCleanup();
-		this.contentView = new HomeView();
-		this.contentView.render();
+		this.currentView = new app.HomeView();
+		this.currentView.render();
 		//this.state.view=this.homeView;
 
 	},
 	about: function(){
 		this.viewCleanup();
-		this.contentView = new aboutView();
-		this.contentView.render();
+		this.currentView = new app.aboutView();
+		this.currentView.render();
 	},
 	theme1: function(query) {
 		this.viewCleanup();
 		//url pattern - > #theme1?sub-theme=name&state=""
 		
-				this.contentView = new subthemeNav({
-							collection: omekaCollections, 
+				this.currentView = new app.subthemeNav({
+							collection: app.omekaCollections, 
 							tag: "1-*", 
-							content: APIcontent
+							content: app.APIcontent
 							});
-				this.contentView.render();
+				this.currentView.render();
 	},
 	theme2: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "2-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 		
 	},
 	theme3: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "3-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 		
 	},
 	theme4: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "4-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 	},
 	theme5: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "5-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 	}, 
 	theme6: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "6-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 	},
 	theme7: function(query){
 		this.viewCleanup();
-		this.contentView = new subthemeNav({
-			collection: omekaCollections, 
+		this.currentView = new app.subthemeNav({
+			collection: app.omekaCollections, 
 			tag: "7-*", 
-			content: APIcontent
+			content: app.APIcontent
 		});
-		this.contentView.render();
+		this.currentView.render();
 	}
 });
 
