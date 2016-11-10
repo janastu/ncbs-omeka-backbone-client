@@ -1,9 +1,6 @@
-//View Partials - Common header and footer	
-
-
-
-
-
+/* Subviews for the application, namely the Image slider view
+ using http://ignitersworld.com/lab/imageViewer.html audio player view, video view
+ and gallery view */
 
 
 imgSliderModel = Backbone.Model.extend({

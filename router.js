@@ -18,6 +18,9 @@ var ApplicationRouter = Backbone.Router.extend({
 	initialize: function() {
 		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
+		//loading a test image on router init so that the .htaccess login dialog will open on site launch
+		this.testImg = new Image();
+		this.testImg.src = "https://www.ncbs.res.in/ncbs25/omeka/files/thumbnails/72e51417b77adaafccc6798ab6b2b136.jpg";
 		this.viewCleanup = function() {
 			if(this.currentView){
 				if(this.currentView.mediaContainer){
