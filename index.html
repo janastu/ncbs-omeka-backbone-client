@@ -13,7 +13,16 @@
 		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
 		<link type="text/css" rel="stylesheet" href="libs/ImageViewer-master/imageviewer.css" />
 		<style>
-
+      video { 
+         /*width:305px; 
+         height:160px;  */
+         background:transparent url('img/Assets/video-loading.gif') no-repeat 0 0; 
+        -webkit-background-size:10% 15%; 
+         -moz-background-size:10% 15%; 
+         -o-background-size:10% 15%; 
+         background-size:10% 15%; 
+         background-position: 50%;
+      }
 		</style>
 	</head>
 
@@ -171,7 +180,7 @@ Your browser does not support the audio element.
 
 <script type="text/template" id="video-player-template">
 <div class="" style="padding-top:15px; padding-bottom:5px;">
-<video style="width:100%;" class="center-block" controls="" preload="metadata" name="media" 
+<video  style="width:100%;" class="center-block" controls="" preload="metadata" name="media" 
  		><source src=<%=fileurls.original%>></video>
  		</div>
 </script>
