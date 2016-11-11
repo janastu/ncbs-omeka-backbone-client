@@ -255,3 +255,17 @@
 	margin:0 auto;
 }
 
+.scrollHelper {
+	position: fixed;
+	bottom: 15%;
+	right: 0px;
+	/*background-color: aqua;*/
+	height: 50px;
+	width: 50px;
+}
+
+.scrollHelper span{
+	/*display: flex;*/
+	font-size:20px;
+	margin-left:15px;
+}

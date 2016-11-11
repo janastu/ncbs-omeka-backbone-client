@@ -234,7 +234,26 @@ GalleryView = Backbone.View.extend({
 }
 });
 
+	ScrollHelper = Backbone.View.extend({
+		el: "body",
+		events: {
+			"click #scroll-to-top": "goToWindowTop",
+			"click #scroll-to-bottom": "goToWindowBottom"
+		},
+		initialize: function(){
 
+		},
+		goToWindowTop: function(event){
+			event.preventDefault();
+			//console.log(event.currentTarget);
+			window.scrollTo(0,0);
+		},
+		goToWindowBottom: function(event){
+			event.preventDefault();
+			console.log(event.currentTarget);
+			window.scrollTo(0,document.body.scrollHeight);
+		}
+	});
 
 /*
 
