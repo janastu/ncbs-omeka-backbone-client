@@ -256,3 +256,13 @@
 	margin:0 auto;
 }
 
+ video { 
+         /*width:305px; 
+         height:160px;  */
+         background:transparent url('img/Assets/video-loading.gif') no-repeat 0 0; 
+        -webkit-background-size:10% 15%; 
+         -moz-background-size:10% 15%; 
+         -o-background-size:10% 15%; 
+         background-size:10% 15%; 
+         background-position: 50%;
+      }
