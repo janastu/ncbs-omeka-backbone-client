@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jasmine Spec Runner v2.5.2 testing NCBS</title>
+
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.5.2/jasmine_favicon.png">
+  <link rel="stylesheet" href="lib/jasmine-2.5.2/jasmine.css">
+  <script type="text/javascript" src="../../libs/jquery-1.10.2-min.js"></script>
+  <script src="lib/jasmine-2.5.2/jasmine.js"></script>
+  <script src="lib/jasmine-2.5.2/jasmine-html.js"></script>
+
+  <script src="lib/jasmine-2.5.2/boot.js"></script>
+  <script src="lib/jasmine-2.5.2/jasmine-jquery.js"></script>
+  <script src="lib/jasmine-2.5.2/sinon-1.17.6.js"></script>
+  <script src="lib/jasmine-2.5.2/jasmine-sinon.js"></script>
+  <!-- include source files here... -->
+  
+  <!--script src="src/Player.js"></script>
+  <script src="src/Song.js"></script-->
+
+        <!-- Templates and scripts start -->
+
+       <script type="text/template" id="dummy-view">
+       <div class="container" style="background-color:#f4f3e9; height:600px;" id="ncbs-narrative-container">
+       <div class="panel panel-default" style="top:150px;position:relative;">
+         <div class="panel-body">
+         <div class="center-block">
+           <h1> Coming soon! </h1>
+           </div>
+         </div>
+       </div>
+       
+       </div>
+       </script>
+
+       <script type="text/template" id="header-template">
+        <header>
+            <div class="container clearfix" style="width:1200px;">
+                <h1 id="logo">
+                  <a href="#" target="">
+                    <img src="img/Assets/ncbs_logo_introtext.png" alt="LOGO" />
+                  </a>
+                </h1>
+                <nav class=" pull-right" style="">
+                    <ul class="nav navbar-nav navbar-right">
+                        </ul>
+                          <a href="#about" target="">About</a>
+                          <a href="https://www.ncbs.res.in/" target="_blank">NCBS</a>
+                          
+                    
+                </nav>
+            </div>
+        </header><!-- /header -->
+        <ul class="nav nabar-nav" style="    position: fixed;
+            right: 43px; top:8px; font-weight:600;
+            z-index: 1000; ">
+              <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white; font-size:18px;">Sandbox <span style="border-top-color:#fff;" class="caret"></span></a>
+          <ul class="dropdown-menu" style="background-color:rgba(102, 102, 102, 0.2); color:white; border-radius:0px; margin-top:14px;">
+            <li><a href="sandbox/ephemera">Ephemera</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="sandbox/peopleplex">Peopleplex</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="sandbox/space_tour">Space Tour</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="sandbox/timeline">Timeline</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="sandbox/oral_history">Oral History</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="sandbox/mosaic">Mosaic template</a></li>
+          </ul>
+        </li>
+        <ul>
+       </script>
+       <script type="text/template" id="navigation-template">
+
+        <div class="row" id="ncbs-nav-footer">
+          <div class="col-lg-offset-1">
+            <div style="font-family:roboto;font-size: 24px;margin: 2px; color:#333726;">
+               <p>THEMES</p>
+        </div>
+        </div>
+          <div class="col-lg-offset-1" style="display:flex;">
+
+          <a href="#identity" target="">  
+          <div class="panel panel-ncbs-foot">
+             <div class="panel-body">
+              <div class="sub-theme-nav-item">
+                
+                  <img src="img/Assets/identity.png" alt="category_identity" class="img-thumbnail" />
+                
+              
+              </div>
+            </div>
+          </div>
+          <div class="ncbs-foot-nav-text  text-center">Identity</div>
+          </a>
+
+          <a href="#institution-building" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  
+                    <img src="img/Assets/Institution_Building.png" alt="category_Institution_Building" class="img-thumbnail" style="margin-top:-5px;"/>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text  text-center">Institution Building</div>
+            </a>
+            <a href="#growth" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  
+                  <img src="img/Assets/growth.png" alt="category_growth" class="img-thumbnail" style="margin-top:-5px; width:93px; margin-left:17px;"/>
+                
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text   text-center">Growth</div>
+            </a>
+            <a href="#research" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  <img src="img/Assets/research-1.png" alt="category_research" class="img-thumbnail" style="width: 90px; margin-left: 15px;"/>
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text  text-center">Research</div>
+            </a>
+            <a href="#education" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  <img src="img/Assets/education.png" alt="category_education" class="img-thumbnail" style="margin-top:26px;"/>
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text  text-center">Education</div>
+            </a>
+            <a href="#ripple-effect" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  
+                  <img src="img/Assets/ripple_effect.png" alt="category_ripple_effect" class="img-thumbnail" style="margin-top:-7px;"/>
+                
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text  text-center">Ripple Effect</div>
+            </a>
+            <a href="#intersections" target="">
+            <div class="panel panel-ncbs-foot">
+               <div class="panel-body">
+                <div class="sub-theme-nav-item">
+                  
+                  <img src="img/Assets/intersections.png" alt="category_intersections" class="img-thumbnail"/>
+                
+                </div>
+              </div>
+            </div>
+            <div class="ncbs-foot-nav-text  text-center">Intersections</div>
+          </a>
+          <br />
+          <hr />
+          
+        </div>
+        <div class="col-sm-12">
+          <div class="text-center" style="margin-top:15px; font-family: roboto;">
+            <a href="#about" style="cursor: pointer;     color: #333726;">copyright &copy 2016</a>
+          </div>
+          <div class="text-center" style="margin-top:2px; font-family: roboto; color: #333726">
+            <p>This site is better viewed on a 13-inch screen or larger. Mobile responsiveness in progress.</p>
+          </div>
+          
+
+        </div>
+        </div>
+
+       </script>
+
+       <script type="text/template" id="home-page-template">
+        <!-- Home page - Banner image-->
+
+        <div class="row-fluid">
+
+            <img src="img/2016-TIFR-bird-graffiti_crop6.jpg" 
+                class="img-responsive" />
+                <div class="col-sm-3">
+                <div style="" class="ncbs-home-text" id="ncbs-home-text-collapsible">
+
+                  <!--img class="center-block" src="img/Assets/ncbs_logo_introtext.png" /-->
+            
+                <br/>
+                  <p style="margin-top:45px;">On Oct 22, 1991, the Department of Atomic Energy sent a letter to the Tata Institute for Fundamental Research. It conveyed the President &apos;s sanction for a new biology research centre in Bangalore. Only upon looking back, however, does the letter appear as a bookend of sorts to a decade-plus process.</p>
+                  <br />
+                  <p>The National Centre for Biological Sciences (NCBS) completes 25 years this year. The NCBS@25 exhibit is built around seven themes to reflect upon the history of the institution. The themes are given below and are better viewed in sequence. The Sandbox icon on the top leads to a Timeline and other experimental archival tools.</p>
+                  <br />
+                  <p>In history-writing, stories sometimes surface by bestowing significance on available material, willing them to become inflection points. For instance, even chipping off a wall, as seen on the right, can take upon an intriguing new life of its own. The themes celebrate such multiple interpretations and bring to light the tapestry of NCBS, weaved by over 70 story tellers. Along with over 600 photographs, official records, letters, and the occasional lab note, they allow a glimpse into a tangled history and unlikely journey. </p>
+                </div>
+              </div>
+
+          
+        </div>
+       </script>
+       
+       <script type="text/template" id="about-page-template">
+       <div class="container" style="background-color:#f4f3e9; margin-top:15px;" id="ncbs-about-container">
+       <div >
+       <div class="center-block" style="height: 120px;
+        position: absolute;
+        background-color: #f4f3e9;
+        width: 100%;"></div>
+        <!-- <video class="center-block" controls="" preload="auto" name="media" style="
+            height: 306px;
+        "><source src="https://www.ncbs.res.in/ncbs25dev/ncbs_files/videos/2016_acknowledgments-audio-photo_ABOUT-PAGE.mp4" type="video/mp4"></video> -->
+        </div>
+
+          <br/>
+        <blockquote><p>“When you are in the middle of a story, it isn't a story at all, but only a confusion, a dark roaring, a blindness. It is only afterwards that it becomes anything like a story when you're telling it to yourself or someone else.”</p>
+        <footer> -- Stories We Tell. Directed by Sarah Polley. 2012</footer>
+        </blockquote>
+
+        <br/>
+
+        <h3 class="text-center">NCBS @ 25</h3>
+        
+        <br/>
+
+        <p>The NCBS@25 digital exhibit contains records (images, audio and video excerpts, text) under copyright or under third party ownership. These records are given on loan to NCBS for the purposes of this exhibit. Material may only be reproduced for academic and non-commercial use, and only with the explicit permission of the record owners, as mentioned in the caption for each image, and audio and video clip. Please respect the honour code and the generosity of the donors in sharing this material with a wider audience.</p>
+        <br/>
+        <p>The design team gratefully acknowledges the invaluable support of the following institutes and people:</p>
+        <br/>
+        <p>Tata Institute of Fundamental Research (TIFR) Archives; and the offices of Architecture and Engineering, IT, Research Development Office, Establishment and Instrumentation, National Centre for Biological Sciences.</p>
+        <br/>
+        <p>A. Sreenath, Anil Ananthaswamy, George Antony, Aditya Asopa, Savita Ayyar, Champakali Ayyub, B.V. Sreekantan, Prasanta Baruah, Upinder Bhalla, Soumya Bhattacharjee, Aditi Bhattacharya, Chandrashekhar, Chinmayee Chandrashekhara, Sumantra Chattarji, Indira Chowdhury, D. R. Lad, G. Gajendra, Prem Chandra Gautam, Archit Guha, H. Bhagya, H. Krishnamurthy, H. Mohan, Gaiti Hasan, Shobha Jagtap, Mamtha Jaigopal, Jeevaraju, Sudhanshu Jha, Man Mohan Johri, K. S. Vishalakshi, K. Venkataramanathan, K. VijayRaghavan, Pavan Kumar Kaushik, Anubhab Khan, Sudhir Krishna, Anusha Krishnan, Ajith Kumar, Anand Kumar, L. S. Shashidhara, M. S. Swaminathan, Saurabh Mahajan, Priyanka Mathai, Debakshi Mullick, Mathew K Mathew, Satyajit Mayor, Issac F. Murzello, N. Shanthakumary, Rudra Naik, Vidyanand Nanjundiah, Maithreyi Narasimha, Samadhan Narwade, Shannon Olsson, P. Balaram, P. N. Bhavsar, P.P. Divakaran, P. Ranjith, Dasaradhi Palakodeti, Knight Paul Pandian, Mitradas Panicker, R. Chetana, R. Hema, R. Parvathi, R. Sowdhamini, R.D. John, Bhavya Ramakrishnan, Uma Ramakrishnan, Ashok Rao, B. J. Rao, C.N.R. Rao, Satyajit Rath, Krishanu Ray, Oindrila Raychaudhuri, Raj Rewal, S. Savitha, S. N. Basha, Taslimarif Saiyed, Vinaya Sahasrabuddhe, Sanjay Sane, Apurva Sarin, Kalyani Sharma, Shobhona Sharma, Archana Shetty, Dilawar Singh, Ram Naresh Singh, Virendra Singh, Sammitha Sreevathsa, Govind Swarup, T. Eswar, T. J. Felix, T. M. Sahadevan, Krishnapriya Tamma, Mukund Thattai, Parvathi Thangam, Thejaprakash, Deepti Trivedi, Sandip Trivedi, U.B. Poornima, Jayant Udgaonkar, Vidita Vaidya, Shaju Varghese, Veera, Noor Zainab, and the families of K.S. Krishnan and Obaid Siddiqi.</p>
+        <br/>
+        <p>Quotes from the following people were excerpted from oral history interviews conducted by Indira Chowdhury. (2002 - 2003). TIFR Archives. Oral History Project, TIFR Oral History Archives: P. Babu, P.K. Maitra, Obaid Siddiqi. Quotes from everyone else were excerpted from interviews that are part of an on-going NCBS Archives oral history project (July 2016 - April 2017). The voices you hear on this page are of a selection of people who generously gave their time to discuss the history of NCBS.</p>
+        <br/>
+
+        <p>Designed by D.Epicentre (Sudebi Thakurata, Bharat Joshi, Tanvi Talwar, Saakshita Prabhakar, Probal Banerjee) and Developed by <a href="http://servelots.com/new/3d.html" target="_blank">Janastu</a> (T B Dinesh, Bhanu Prakash, T Pradyumna, A Shalini, Arun Kumar, Khushpreet, Nikitha Bharadwaj, Madhuvanthi, Amrapali)</p><br>
+        <p>Feedback about the exhibit or need to get in touch with any of the record owners? 
+        ncbs25@ncbs.res.in</p>
+       
+       </div>
+       </script>
+         
+    <!-- global audio player template -->
+    <script type="text/template" id="audio-player-template">
+    <div class="global-audio-player" >
+    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <audio controls autoplay class="center-block" style="margin-top:10px; width:100%; padding-left: 15px; padding-right: 15px;">
+      <%if(original){%>
+      <source src="<%=original%>" type="audio/mpeg">
+      <%}else{%>
+        <source src="<%=src%>" type="audio/mpeg">
+        <%}%>
+    Your browser does not support the audio element.
+    </audio>
+    </div>
+    </script>
+
+    <script type="text/template" id="audio-caption-template">
+    <div class="audio-caption-fixed" style='bottom:35px; width:92%;'>
+    <marquee behavior="scroll" direction="left" onmouseover="this.setAttribute('scrollamount', 0.01, 0);" onmouseout="this.setAttribute('scrollamount', 5, 0);">
+    <span><%=description %></span>
+    <em><%=rights %></em>
+    </marquee>
+    </div>
+    </script>
+
+    <!-- subtheme identity content start-->
+    <script type="text/template" id="img-slider-template">
+    <div class="" style="padding-top:15px; padding-bottom:5px;">
+
+        <div class="image-container"></div>
+        <%if(total >1){%>
+      <span class="prev glyphicon glyphicon-chevron-left pull-left" style="font-size: 24px; top: -300px; cursor: pointer;"/></span>
+      <span  class="next glyphicon glyphicon-chevron-right pull-right" style="font-size: 24px; top: -300px; cursor: pointer;"/></span>
+    <%}%>
+    </div>    
+    </script>
+
+    <script type="text/template" id="img-slider-footer">
+    <div class="footer-info">
+    <div class="text-center">
+    <%if(total >1){%>
+        <span class="current"><%=currentIndex%></span>/
+        <span class="total"><%=total%></span>
+     <%}%>
+     </div>
+    </div>
+    </script>
+
+    <script type="text/template" id="caption-template">
+    <div class="featured-img-caption">
+
+    <span><%=description.text %></span>
+    <%if(rights.text){%>
+    <em><%=rights.text %></em>
+    <%}%>
+    </div>
+    </script>
+
+
+
+    <script type="text/template" id="video-player-template">
+    <div class="" style="padding-top:15px; padding-bottom:5px;">
+    <video  style="width:100%;" class="center-block" controls="" preload="metadata" name="media" 
+        ><source src=<%=fileurls.original%>></video>
+        </div>
+    </script>
+
+    <script type="text/template" id="gallery-img-template">
+    <div class="img-gallery-item col-sm-3">
+    <img src=<%=fileurls.square_thumbnail%> data-high-res-src=<%=fileurls.original%> class="img-responsive pannable" />
+    </div>
+    </script>
+    <script type="text/template" id="gallery-audio-template">
+    <div class="audio-gallery-item col-sm-3" style="height:200px; overflow:hidden; margin-top:5px;">
+    <i class="fa fa-play-circle gallery-player-trigger" aria-hidden="true" data-url="<%=src%>" data-description="<%=description%>" data-rights="<%=rights%>"></i>
+    <span><%=description%></span>
+    </div>
+    </script>
+
+    <script type="text/template" id="gallery-video-template">
+    <div class="col-sm-5" style="height:350px; ">
+    <video style="width:100%; margin:10px; height:auto;" class="center-block" controls="" preload="metadata" name="media" 
+        ><source src=<%=fileurls.original%>></video>
+        <span><%= description.text %></span>
+        <em><%=rights.text %></em>
+        </div>
+    </div>
+    </script>
+
+    <script type="text/template" id="sub-theme-nav-tabs">
+    <div class="container" style="background-color:#f4f3e9;" id="ncbs-narrative-container">
+
+
+    <!-- Nav tabs -->
+      <ul class="nav nav-tabs <%=className%>" role="tablist" style="margin-top:125px; margin-bottom:10px; margin-left:10%;">
+      
+      <% _.each(sitemap, function(arr,index) {%>
+
+      <li role="presentation" class="">
+      <a href="#<%=index%>-note" aria-controls="<%=index%>-note" role="tab" data-toggle="tab">
+      <% if(index === 0) {%>
+        <img src="<%=tabIcon%>" alt="category_identity" class="img-responsive" style="max-width:25px; display:inline; height:20px;"/>
+      <%}%>
+      <span style="padding:10px; font-weight:bold;">
+      <%=arr%>
+      <% if(index === 0) {%> 
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding-left: 10px;"></span>
+      <%}%>
+      </span>
+      </a>
+      </li>
+      <%});%>
+        
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="container tab-content">
+      <% _.each(sitemap, function(arr,index) {%>
+        <%var i = index+1;%>
+        <%var idGallery = arr.split(" ").join("-")%>
+        
+      <div role="tabpanel" class="tab-pane" id="<%=index%>-note">
+      <%= content.element_texts[i].text %>
+      <div id="<%=idGallery%>"></div>
+      </div>
+
+      <%});%>
+        
+      </div>
+
+      
+    </div>
+    </script>
+
+    <script type="text/javascript" src="../../libs/underscore-1.5.2-min.js"></script>     
+    
+
+    <script type="text/javascript" src="../../libs/backbone-1.1.0-min.js"></script>
+    <script type="text/javascript" src="../../libs/classie.js"></script>
+    <script type="text/javascript" src="../../libs/require.min.js"></script> 
+    <script type="text/javascript" src="../../libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../libs/ImageViewer-master/imageviewer.min.js"></script>
+    <!--script type="text/javascript" src="../../libs/text.js"></script-->  
+
+    <script type="text/javascript" src="../../js/collections.js"></script>
+    <script type="text/javascript" src="../../js/views.js"></script>
+      
+    <script type="text/javascript" src="../../router.js"></script> 
+    <script type="text/javascript" src="../../app.js"></script>
+
+  <!-- include spec files here... -->
+
+  
+  <script src="spec/home-spec.js"></script>
+  <!--script src="spec/SpecHelper.js"></script>
+  <script src="spec/PlayerSpec.js"></script-->
+
+</head>
+
+<body>
+</body>
+</html>

@@ -230,7 +230,7 @@
 }
 .img-gallery-item{
 	display: inline-block;
-	margin-top: 5px;
+	margin-top: 15px;
 }
 .gallery-player-trigger{
 	font-size:24px;
@@ -259,7 +259,7 @@
  video { 
          /*width:305px; 
          height:160px;  */
-         background:transparent url('img/Assets/video-loading.gif') no-repeat 0 0; 
+         background:transparent url('../../img/Assets/video-loading.gif') no-repeat 0 0; 
         -webkit-background-size:10% 15%; 
          -moz-background-size:10% 15%; 
          -o-background-size:10% 15%; 

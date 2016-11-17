@@ -42,7 +42,7 @@ var FilesCollection = Backbone.Collection.extend({
 		
 	}
 });
-var collectionProto = Backbone.Collection.extend({
+window.collectionProto = Backbone.Collection.extend({
 	
 	filterItemsByTag: function(tag){
 		this.filter(function(model){

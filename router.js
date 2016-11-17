@@ -21,14 +21,14 @@ var ApplicationRouter = Backbone.Router.extend({
 		
 		this.viewCleanup = function() {
 			if(this.currentView){
-				if(this.currentView.mediaContainer){
+				if(this.currentView.mediaHandler){
 					//to cleanup all the img subviews from the tabsview
-					_.each(this.currentView.mediaContainer.imgSlideSubViews, function(imgviewNode){
+					_.each(this.currentView.mediaHandler.imgSlideSubViews, function(imgviewNode){
 						imgviewNode.unbind();
 						imgviewNode.remove();
 					});
 					//to cleanup all video nodes from tabsview
-					_.each(this.currentView.mediaContainer.videoSubview, function(videoNode){
+					_.each(this.currentView.mediaHandler.videoSubview, function(videoNode){
 						videoNode.unbind();
 						videoNode.remove();
 					});
@@ -66,7 +66,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.viewCleanup();
 		//url pattern - > #theme1?sub-theme=name&state=""
 		
-				this.currentView = new app.subthemeNav({
+				this.currentView = new app.ThemeTabs({
 							collection: app.omekaCollections, 
 							tag: "1-*", 
 							content: app.APIcontent
@@ -75,7 +75,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme2: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "2-*", 
 			content: app.APIcontent
@@ -85,7 +85,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme3: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "3-*", 
 			content: app.APIcontent
@@ -95,7 +95,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme4: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "4-*", 
 			content: app.APIcontent
@@ -104,7 +104,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme5: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "5-*", 
 			content: app.APIcontent
@@ -113,7 +113,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	}, 
 	theme6: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "6-*", 
 			content: app.APIcontent
@@ -122,7 +122,7 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	theme7: function(query){
 		this.viewCleanup();
-		this.currentView = new app.subthemeNav({
+		this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
 			tag: "7-*", 
 			content: app.APIcontent
