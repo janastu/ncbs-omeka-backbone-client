@@ -1,19 +1,6 @@
 
 $(function(){
 
-describe("Dummy view", function(){
-	beforeEach(function(){
-		this.view = new DummyView();
-	});
-
-
-	it("should exist", function(){
-		expect(this.view).toBeDefined();
-	});	
-});
-
-
-
 describe("Home view", function(){
 	
 	beforeEach(function(){
