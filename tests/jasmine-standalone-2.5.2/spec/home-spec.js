@@ -37,10 +37,51 @@ describe("Home view", function(){
 		it("Has Children", function(){
 			expect(this.view.$el.children().length).toEqual(1);
 		});
+		it("ID to be content", function(){
+			expect(this.view.el.id).toEqual("content");
+		});
 		
 	});
 	
 });
+
+
+describe("About view", function(){
+	
+	beforeEach(function(){
+		this.view = new app.aboutView();	
+	});
+
+	describe("instantiation", function() {
+		it("should exist", function(){
+			expect(this.view).toBeDefined();
+		});
+
+		it("Should create a Div element", function() {
+		      expect(this.view.el.nodeName).toBe("DIV");
+		});
+
+	});
+	describe("render about", function(){
+		beforeEach(function () {
+		       this.view.render();
+		   });
+		it("Has Children", function(){
+			expect(this.view.$el.children().length).toEqual(1);
+		});
+
+		it("Has text nodes", function(){
+			expect(this.view.el.TEXT_NODE).toEqual(3);
+		});
+
+		it("ID to be content", function(){
+			expect(this.view.el.id).toEqual("content");
+		});
+		
+	});
+	
+});
+
 
 });
 
