@@ -265,4 +265,9 @@
          -o-background-size:10% 15%; 
          background-size:10% 15%; 
          background-position: 50%;
-      }
+}
+
+/* Hiding gallery in identity/reflections*/
+ #4-note > .gallery-btn{
+ 	display: none;
+}
