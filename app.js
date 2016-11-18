@@ -11,19 +11,6 @@ and story media view - sub views for media is defined in js/views.js*/
 	// will return true
 	app.controller = AppController();
 
-	// Site content required by the client interfaces.
-	// the items, files and collections are put through makesitecontent method to add 
-	// models to this app.APIcontent collection - and views will listen to this collection for rendering
-	// particular media and meta content 
-	var storyCollection = Backbone.Collection.extend({
-		groupByTags: function(index){
-			return this.groupBy(function(item){
-				return item.get('tags').name.split('-')[index];
-			}, index);
-		}
-	});
-	app.APIcontent = new storyCollection;
-	
 	
 	app.init = function() {
 		app.router = new ApplicationRouter();
