@@ -46,6 +46,7 @@ var ApplicationRouter = Backbone.Router.extend({
 			if(app.currentAudio){
 				app.currentAudio.unbind();
 				app.currentAudio.remove();
+				app.currentAudio = null;
 			}
 			if(newViewConfig !== "home" && newViewConfig !== "about"){
 				this.currentView = new app.ThemeTabs(newViewConfig);
