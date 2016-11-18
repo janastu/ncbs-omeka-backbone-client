@@ -93,11 +93,12 @@
 	template context in index.html which is a bootstrap tabs implementation
 	Requirements: this.siteMap is the navigation tabs and count for each subtheme
 	this.tabIconPath is the individual icons for each subtheme
-	this.options.tag is a number which co-relates to the theme number -> 1 for identity, 2 for Institution Building
-	and so on...
+	this.options.tag is a number which co-relates to the theme number -> 1 for identity, 
+	2 for Institution Building and so on...
 	 this.collection is an array of object which serves the text content in this views
 	 along with the tags for rendering media */
-
+	 //TODO: issue#72 when tabs are hidden - should check for any audio or video playing to stop
+	 //https://github.com/janastu/ncbs-omeka-backbone-client/issues/72
 			app.ThemeTabs = Backbone.View.extend({
 				id: "content",
 				template: _.template($('#sub-theme-nav-tabs').html()),
