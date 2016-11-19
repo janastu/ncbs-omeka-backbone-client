@@ -117,12 +117,18 @@
 					["Identity","Space for biology", "Science in India", "Recognition", "Reflections"],
 					["Institution Building", "Space & Autonomy", "Paper Trails", "Architecture"],
 					["Growth", "Hiring", "Start-ups", "Collaborations", "Student Selections", "Scaling"],
-					["Research", "Basic/Applied toggle", "Areas and shifts", "Processes", "Queries and tools"],
+					["Research", "Basic/Applied toggle", "Areas and shifts", "Processes", 
+					"Queries and tools"],
 					["Education", "Building knowledge", "Mentorship"],
 					["Ripple Effect", "Effects and Toll", "Interaction/Isolation"],
-					["Intersections", "Gender Equality", "Hierarchy & Class", "NCBS Community", "Outside World"]];
-					this.tabIconPath = ["img/Assets/identity_inside-01.png", "img/Assets/instituin_inside-01.png",
-						"img/Assets/growth_inside.png", "img/Assets/research-inside.png", "img/Assets/education_inside1.png",
+					["Intersections", "Gender Equality", "Hierarchy & Class", "NCBS Community", 
+					"Outside World"]
+					];
+					//Each Theme has an unique icon in the first tab with css and color scheme
+					this.tabIconPath = ["img/Assets/identity_inside-01.png", 
+						"img/Assets/instituin_inside-01.png",
+						"img/Assets/growth_inside.png", "img/Assets/research-inside.png", 
+						"img/Assets/education_inside1.png",
 						 "img/Assets/ripple_inside.png", "img/Assets/intersections_inside.png"];
 					
 					this.tags = this.options.tag.split('-');
@@ -130,12 +136,15 @@
 					this.listenTo(app.omekaCollections, "add", this.render);
 				},
 				render: function(){
-					//this.model = this.collection.get(this.tags[0]) || new Backbone.Model;
 					window.scrollTo(0,0);
 					// the template expects a JSON object with properties content(text), sitemap(the navtabs),
 					// tabIcon (context icons), className(each theme has different colors)
-					this.$el.html(this.template({content: this.collection.get(this.tags[0]).toJSON(), sitemap:this.siteMap[this.tags[0]-1], 
-												tabIcon: this.tabIconPath[this.tags[0]-1], className: this.siteMap[this.tags[0]-1][0]+"-tabs"}));
+					this.$el.html(this.template({
+												content: app.omekaCollections.get(this.tags[0]).toJSON(), 
+												sitemap:this.siteMap[this.tags[0]-1], 
+												tabIcon: this.tabIconPath[this.tags[0]-1], 
+												className: this.siteMap[this.tags[0]-1][0]+"-tabs"
+											}));
 					this.$parent.append(this.$el);
 
 					//After rendering the tabs view, the default tab needs to be switched active
@@ -143,20 +152,11 @@
 					this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 
 					// Initializing the child view, mediaHandler is an instance of storyMediaView
-					// Gallery view renders a collapsible gallery for each tab
+			
 					this.mediaHandler = new storyMediaView({
-						el:"#ncbs-narrative-container", 
-						collection:app.APIcontent,
 						theme: this.tags[0]
-						//media: app.APIcontent.groupByTags(0)[this.tags[0]]
 					});
 					this.mediaHandler.render();
-					this.Gallery = new GalleryView({
-						//content: app.APIcontent.groupByTags(0)[this.tags[0]],
-						collection: app.APIcontent, 
-						theme: this.tags[0]
-					});
-					this.Gallery.render();
 				},
 
 				//bug fix: The image viewer behaves abnormaly when rendered in an hidden element
@@ -176,6 +176,7 @@
 	tags in the app.APIcontent, which is the collection this view will listen to. */
 
 			var storyMediaView = Backbone.View.extend({
+				el: "#ncbs-narrative-container",
 				events: {
 					"click .audio-player-trigger": "launchAudioPlayer"
 				},
@@ -183,11 +184,11 @@
 					//called from app.ThemeTabs
 					//{el:"#ncbs-narrative-container", collection:app.APIcontent, theme: this.tags[0]}
 					this.options = options || {};
-					this.listenToOnce(this.collection, "add", this.render);
+					this.listenToOnce(app.APIcontent, "add", this.render);
 					this.siteMap = ["identity", "institution-building", "growth", "research", "education", "ripple-effect",
 									"intersections"];
-					// All the spans in the DOM
-					this.spans = this.$("span");
+					// All the spans in the DOM currentView
+					this.spans = app.router.currentView.$("span");
 					// A reference to the child views to unbind them when switching routes
 					this.imgSlideSubViews = [];
 					this.videoSubview = [];
@@ -195,9 +196,9 @@
 				render: function() {
 					// Group media by mime type
 
-					this.groupedMedia = _.chain(this.collection.groupByTags(0)[this.options.theme[0]])
+					/*this.groupedMedia = _.chain(app.APIcontent.groupByTags(0)[this.options.theme])
 												.groupBy(function(item){ return item.get('mime_type')})
-												._wrapped;
+												._wrapped;*/
 					
 					//iterate over each span from dom view
 					_.each(this.spans, function(span){
@@ -207,7 +208,13 @@
 						//find the matching tag from the file tags to match the tag in dom view
 						//which will be an array of items for images and sort by the order of the tags
 						// last attribute seperated by "-"
-						var mappedImages = _.chain(this.groupedMedia["image/jpeg"]).map(function(item){
+						var mappedImages = _.chain(
+							_.chain(app.APIcontent.groupByTags(0)[this.options.theme])
+									.groupBy(function(item){ 
+										return item.get('mime_type');
+									})
+									._wrapped["image/jpeg"])
+											.map(function(item){
 							//the grouping is based on the 3rd char in tag series seperated by "-""
 							var tagArray = item.get('tags').name.split('-');
 							var domTagmatch = tagArray.splice(3, 2);
@@ -231,7 +238,11 @@
 
 						/* START rendering the Video players in between the text*/
 						//find the matching tag from the file tags to match the tag in dom view
-						var mappedVideo = _.find(this.groupedMedia["video/mp4"], function(item){
+						var mappedVideo = _.find(_.chain(app.APIcontent.groupByTags(0)[this.options.theme])
+												.groupBy(function(item){ 
+													return item.get('mime_type');
+												})
+												._wrapped["video/mp4"], function(item){
 							//console.log(span.innerHTML, item.get('tags').name, 'matched?')
 							if(span.innerHTML === item.get('tags').name){
 								return item;	
@@ -249,7 +260,11 @@
 
 						/* START rendering the audio icons in between the text */
 						//find the matching tag from the file tags to match the tag in dom view
-						var mappedAudio = _.find(this.groupedMedia["audio/mpeg"], function(item){
+						var mappedAudio = _.find(_.chain(app.APIcontent.groupByTags(0)[this.options.theme])
+												.groupBy(function(item){ 
+													return item.get('mime_type');
+												})
+												._wrapped["audio/mpeg"], function(item){
 							return item.get('tags').name === span.innerHTML;
 						});
 						
@@ -261,6 +276,15 @@
 
 						/* END rendering the audio icons in between the text*/
 					}, this);
+					
+
+					// Gallery view renders a collapsible gallery for each tab
+					this.Gallery = new GalleryView({ 
+						theme: this.options.theme
+					});
+					this.Gallery.render();
+
+					//this.delegateEvents();
 					return this;
 				},
 				// Bind event to the rendered audio icons to launch an Audio player when clicked
@@ -271,7 +295,7 @@
 						app.currentAudio.remove();
 					}
 					//console.log(event.target.dataset, event.currentTarget, app, "clicked audio icon");
-					app.currentAudio = new AudioView({data: event.target.dataset, content: this.groupedMedia["audio/mpeg"]});
+					app.currentAudio = new AudioView({data: event.target.dataset});
 				}
 			});
 
@@ -424,8 +448,7 @@ GalleryView = Backbone.View.extend({
 	["Hiring", "Startup", "Collaboration",  "Students", "Scaling"], ["Toggle", "Shifts", "Process", "Tool"],
 	["Knowledge", "Mentor"], ["Effect_Toll", "Isolation"], ["Gender", "Hierarchy", "NCBS", "Outside"]
 	];
-	//this.collection.once("add", this.render);
-	this.listenToOnce(this.collection, "add", this.render);
+	this.listenToOnce(app.APIcontent, "add", this.render);
 
 	this.viewer = ImageViewer();
 
@@ -440,7 +463,7 @@ GalleryView = Backbone.View.extend({
 			var indexBuild = index+1;
 			var domElem = '#'+indexBuild+"-note";
 
-			_.chain(this.collection.groupByTags(0)[this.options.theme])
+			_.chain(app.APIcontent.groupByTags(0)[this.options.theme])
 				.map(function(item){   	// mapped array of items that belong to gallery only
 					 if(item.get('tags').name.split('-').length<3){  // match by tags
 					 	return item;

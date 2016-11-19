@@ -19,7 +19,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
 		
-		this.viewCleanup = function(newViewConfig) {
+		this.unmountAndMountViews = function(newViewConfig) {
 			if(this.currentView){
 				if(this.currentView.mediaHandler){
 					//to cleanup all the img subviews from the tabsview
@@ -46,7 +46,7 @@ var ApplicationRouter = Backbone.Router.extend({
 			if(app.currentAudio){
 				app.currentAudio.unbind();
 				app.currentAudio.remove();
-				app.currentAudio = null;
+				//app.currentAudio = null;
 			}
 			if(newViewConfig !== "home" && newViewConfig !== "about"){
 				this.currentView = new app.ThemeTabs(newViewConfig);
@@ -56,24 +56,24 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	home: function() {
 	
-		this.viewCleanup("home");
+		this.unmountAndMountViews("home");
 		this.currentView = new app.HomeView();
 		this.currentView.render();
 		//this.state.view=this.homeView;
 
 	},
 	about: function(){
-		this.viewCleanup("about");
+		this.unmountAndMountViews("about");
 		this.currentView = new app.aboutView();
 		this.currentView.render();
 	},
 	theme1: function(query) {
 		//call view cleanup to unbind stale views and instantiate new view
 		// arguments is the view options
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "1-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		
 				/*this.currentView = new app.ThemeTabs({
@@ -84,10 +84,10 @@ var ApplicationRouter = Backbone.Router.extend({
 				this.currentView.render();*/
 	},
 	theme2: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "2-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
@@ -98,10 +98,10 @@ var ApplicationRouter = Backbone.Router.extend({
 		
 	},
 	theme3: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "3-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
@@ -112,10 +112,10 @@ var ApplicationRouter = Backbone.Router.extend({
 		
 	},
 	theme4: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "4-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
@@ -125,10 +125,10 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.currentView.render();*/
 	},
 	theme5: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "5-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
@@ -138,10 +138,10 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.currentView.render();*/
 	}, 
 	theme6: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "6-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
@@ -151,10 +151,10 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.currentView.render();*/
 	},
 	theme7: function(query){
-		this.viewCleanup({
+		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
 			tag: "7-*", 
-			content: app.APIcontent
+			//content: app.APIcontent
 		});
 		/*this.currentView = new app.ThemeTabs({
 			collection: app.omekaCollections, 
