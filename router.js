@@ -1,5 +1,5 @@
 /* Application router and controller */
-
+//TODO: url pattern - > #theme1?sub-theme=name&state=""
 
 var ApplicationRouter = Backbone.Router.extend({
 	routes: {
@@ -19,7 +19,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		$('#ncbs-content-policy').modal();
 		//$("#spinner-launch").toggle();
 		
-		this.viewCleanup = function() {
+		this.viewCleanup = function(newViewConfig) {
 			if(this.currentView){
 				if(this.currentView.mediaHandler){
 					//to cleanup all the img subviews from the tabsview
@@ -46,88 +46,122 @@ var ApplicationRouter = Backbone.Router.extend({
 			if(app.currentAudio){
 				app.currentAudio.unbind();
 				app.currentAudio.remove();
+				app.currentAudio = null;
+			}
+			if(newViewConfig !== "home" && newViewConfig !== "about"){
+				this.currentView = new app.ThemeTabs(newViewConfig);
+				this.currentView.render();
 			}
 		}
 	},
 	home: function() {
 	
-		this.viewCleanup();
+		this.viewCleanup("home");
 		this.currentView = new app.HomeView();
 		this.currentView.render();
 		//this.state.view=this.homeView;
 
 	},
 	about: function(){
-		this.viewCleanup();
+		this.viewCleanup("about");
 		this.currentView = new app.aboutView();
 		this.currentView.render();
 	},
 	theme1: function(query) {
-		this.viewCleanup();
-		//url pattern - > #theme1?sub-theme=name&state=""
+		//call view cleanup to unbind stale views and instantiate new view
+		// arguments is the view options
+		this.viewCleanup({
+			collection: app.omekaCollections, 
+			tag: "1-*", 
+			content: app.APIcontent
+		});
 		
-				this.currentView = new app.ThemeTabs({
+				/*this.currentView = new app.ThemeTabs({
 							collection: app.omekaCollections, 
 							tag: "1-*", 
 							content: app.APIcontent
 							});
-				this.currentView.render();
+				this.currentView.render();*/
 	},
 	theme2: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "2-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "2-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 		
 	},
 	theme3: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "3-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "3-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 		
 	},
 	theme4: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "4-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "4-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 	},
 	theme5: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "5-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "5-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 	}, 
 	theme6: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "6-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "6-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 	},
 	theme7: function(query){
-		this.viewCleanup();
-		this.currentView = new app.ThemeTabs({
+		this.viewCleanup({
 			collection: app.omekaCollections, 
 			tag: "7-*", 
 			content: app.APIcontent
 		});
-		this.currentView.render();
+		/*this.currentView = new app.ThemeTabs({
+			collection: app.omekaCollections, 
+			tag: "7-*", 
+			content: app.APIcontent
+		});
+		this.currentView.render();*/
 	}
 });
 
