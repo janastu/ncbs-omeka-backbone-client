@@ -65,6 +65,40 @@ $(function(){
 	  	    window.app.aboutView.restore();
 	  	  });
 	  });
+
+	  describe("Identity Theme handler", function() {
+	  	beforeEach(function(){
+	  		this.collection = new Backbone.Collection();
+	  		/*this.omekaCollectionStub = sinon.stub(window, "collectionProto");
+	  		this.fetchStub = sinon.stub(this.omekaCollectionStub, "fetch")
+	  		      .returns(null);*/
+	  		this.themeViewStub = sinon.stub(window.app, "ThemeTabs")
+	  							.returns(new Backbone.View());
+	  		this.router.theme1();
+	  	});
+
+
+	  it("fires the Identity theme", function() {
+	    this.router.bind("route:theme1", this.routeSpy);
+	    this.router.navigate("identity", true);
+	    expect(this.routeSpy).toHaveBeenCalledOnce();
+	    expect(this.routeSpy).toHaveBeenCalledWith();
+	  });
+
+	  
+
+	  	it("creates a Identity page view", function(){
+	  		expect(this.themeViewStub).toHaveBeenCalledOnce();
+	  		/*expect(this.themeViewStub).toHaveBeenCalledWith({
+	  			collection: this.collection
+	  		});*/
+	  	});
+
+	  	afterEach(function() {
+	  	    window.app.ThemeTabs.restore();
+	  	    //window.app.omekaCollections.restore();
+	  	  });
+	  });
 	});
 /* Router testing End*/
 
