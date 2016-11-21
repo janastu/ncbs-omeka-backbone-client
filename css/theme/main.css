@@ -256,6 +256,7 @@
 	margin:0 auto;
 }
 
+
  video { 
          /*width:305px; 
          height:160px;  */
@@ -270,4 +271,19 @@
 /* Hiding gallery in identity/reflections -- not WOrking needs FIX*/
 #ncbs-narrative-container #4-note .gallery-btn{
  	display: none;
+}
+.scrollHelper {
+	position: fixed;
+	bottom: 0px;
+	right: 15px;
+	/*background-color: aqua;
+	height: 50px;
+	width: 50px;*/
+}
+
+.scrollHelper i{
+	/*display: flex;
+	margin-left:15px;*/
+	font-size:30px;
+	cursor: pointer;
 }
