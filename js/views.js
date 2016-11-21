@@ -309,7 +309,7 @@ imgSliderModel = Backbone.Model.extend({
 		content: [],
 		currentIndex: 1,
 		total: "",
-		hack: ""
+		currentZoom: 0
 	},
 	initialize: function() {
 
@@ -323,7 +323,7 @@ imgSliderView = Backbone.View.extend({
 	events: {
 		"click .prev": "slideDecrement",
 		"click .next": "slideIncrement",
-		"click .slider-refresh": "refreshSlide"
+		"click img": "zoomControl"
 	},
 	initialize: function(options){
 		//Image slider view using http://ignitersworld.com/lab/imageViewer.html
@@ -334,13 +334,11 @@ imgSliderView = Backbone.View.extend({
 		this.model.set("total", this.options.content.length);
 		this.$el.html(this.template(this.model.toJSON()));
 		this.viewer = ImageViewer(this.$('.image-container'), {
-			snapView: true,
-			zoomOnMouseWheel: true,
-			maxZoom: 400
+			zoomOnMouseWheel: false
 		});
 		//this.listenTo(app.tabsView, "refreshViewer", this.refreshSlide);
 		//app.tabsView.on("refreshViewer", this.refreshSlide, this);
-		this.listenTo(this.model, "change", this.render, this);
+		this.listenTo(this.model, "change:currentIndex", this.render, this);
 		this.render();
 
 	},
@@ -368,11 +366,10 @@ imgSliderView = Backbone.View.extend({
 	slideIncrement: function(e){
 		this.model.set('currentIndex', this.model.get('currentIndex')+1);
 	},
-	refreshSlide: function(e){
-		//console.log(e.target, "refreshed");
-		this.model.set('currentIndex', this.model.get('currentIndex')+1);
-		this.model.set('currentIndex', 1);
-
+	zoomControl: function(e){
+		e.preventDefault();
+		//zoom on one click instead of default doubleclick
+		this.viewer.zoom(200, {x:500, y:500});
 	}
 });
 

@@ -288,3 +288,9 @@
 	cursor: pointer;
 	color: #aca98c;
 }
+
+.iv-image-wrap {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+	cursor: zoom-in;
+}
