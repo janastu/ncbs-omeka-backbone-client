@@ -235,7 +235,7 @@ GalleryView = Backbone.View.extend({
 });
 
 	ScrollHelper = Backbone.View.extend({
-		el: "body",
+		el: "#scroller",
 		events: {
 			"click #scroll-to-top": "goToWindowTop",
 			"click #scroll-to-bottom": "goToWindowBottom"
@@ -254,7 +254,8 @@ GalleryView = Backbone.View.extend({
 			window.scrollTo(0,document.body.scrollHeight);
 		}
 	});
-
+	
+	app.scroller = new ScrollHelper();
 /*
 
 DummyView = Backbone.View.extend({
