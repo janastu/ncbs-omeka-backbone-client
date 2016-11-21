@@ -267,7 +267,7 @@
          background-position: 50%;
 }
 
-/* Hiding gallery in identity/reflections*/
- #4-note > .gallery-btn{
+/* Hiding gallery in identity/reflections -- not WOrking needs FIX*/
+#ncbs-narrative-container #4-note .gallery-btn{
  	display: none;
 }
