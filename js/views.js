@@ -535,6 +535,7 @@ GalleryView = Backbone.View.extend({
 			"click #scroll-to-bottom": "goToWindowBottom"
 		},
 		initialize: function(){
+			$('[data-toggle="tooltip"]').tooltip();
 		},
 		goToWindowTop: function(event){
 			event.preventDefault();
@@ -543,7 +544,7 @@ GalleryView = Backbone.View.extend({
 		},
 		goToWindowBottom: function(event){
 			event.preventDefault();
-			console.log(event.currentTarget);
+			//console.log(event.currentTarget);
 			window.scrollTo(0,document.body.scrollHeight);
 		}
 	});
