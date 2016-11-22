@@ -268,17 +268,18 @@
          background-position: 50%;
 }
 
-/* Hiding gallery in identity/reflections -- not WOrking needs FIX*/
-#ncbs-narrative-container #4-note .gallery-btn{
+/* Hiding gallery in identity/reflections -- not WOrking
+seems reason is beacause if ID is starting with an integer. 
+the fix is to use \3 as suggested @ https://mothereff.in/css-escapes*/
+#\34 -note  .gallery-btn{
  	display: none;
 }
+
+
 .scrollHelper {
 	position: fixed;
 	bottom: 0px;
 	right: 15px;
-	/*background-color: aqua;
-	height: 50px;
-	width: 50px;*/
 }
 
 .scrollHelper i{
