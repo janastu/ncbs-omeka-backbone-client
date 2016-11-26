@@ -163,6 +163,8 @@
 				//solution: every time a tab was shown, the imageViewer should be re-rendered and refreshed
 				refreshViewer: function(event){
 					_.each(this.mediaHandler.imgSlideSubViews, function(item){
+						/*item.viewer.load(item.model.get('content')[item.model.get('currentIndex')-1].get('fileurls').thumbnail,
+														item.model.get('content')[item.model.get('currentIndex')-1].get('fileurls').original);*/
 						item.render();
 						item.viewer.refresh();
 					});
@@ -349,6 +351,7 @@ imgSliderView = Backbone.View.extend({
 			this.model.set('currentIndex', this.model.get('total'));
 		}
 		this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').thumbnail, this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').original);
+		//this.viewer.load(this.model.get('content')[this.model.get('currentIndex')-1].get('fileurls').thumbnail);
 		this.$(".featured-img-caption").remove();
 		window.imager = this.model;
 		//console.log(this.model.get('content')[this.model.get('currentIndex')-1].get('description').text, this.model.get('content')[this.model.get('currentIndex')-1].get('rights').text);
@@ -549,6 +552,20 @@ GalleryView = Backbone.View.extend({
 	app.scroller = new ScrollHelper();
 
 
+	pageNotFound = Backbone.View.extend({
+		id: "content",
+		tagName: "div",
+		template: _.template($("#page-not-found-view").html()),
+		initialize: function(options){
+			this.options = options || {};
+			this.$parent = $("#main");
+			this.render();
+		},
+		render: function(options){
+			this.$parent.append(this.$el.html(this.template));
+		}
+	});
+
 	//Helper for sorting the items by tags
 	// While sorting the order of the tags, we need to check for natural sorting since the tag is a text
 	// with numbers marked as order
@@ -568,7 +585,8 @@ GalleryView = Backbone.View.extend({
 	          return ax.length - bx.length;
 	      }
 	
-/*
+	
+
 
 /*DummyView = Backbone.View.extend({
 	tagName: "div",

@@ -12,8 +12,8 @@ var ApplicationRouter = Backbone.Router.extend({
 		"research": "theme4",
 		"education": "theme5",
 		"ripple-effect": "theme6",
-		"intersections": "theme7"
-		//"*actions": "home"
+		"intersections": "theme7",
+		"*notfound": "notfound"
 	},
 	initialize: function() {
 		$('#ncbs-content-policy').modal();
@@ -48,10 +48,10 @@ var ApplicationRouter = Backbone.Router.extend({
 				app.currentAudio.remove();
 				//app.currentAudio = null;
 			}
-			if(newViewConfig !== "home" && newViewConfig !== "about"){
+			if(newViewConfig !== "home" && newViewConfig !== "about" && newViewConfig !== "notfound"){
 				this.currentView = new app.ThemeTabs(newViewConfig);
 				this.currentView.render();
-			}
+			} 
 		}
 	},
 	home: function() {
@@ -110,6 +110,11 @@ var ApplicationRouter = Backbone.Router.extend({
 			collection: app.omekaCollections, 
 			tag: "7-*"
 		});
+	},
+	notfound: function(){
+		this.unmountAndMountViews("notfound");
+		console.log("notfound");
+		this.currentView = new pageNotFound();
 	}
 });
 
