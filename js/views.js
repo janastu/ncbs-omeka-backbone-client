@@ -117,7 +117,7 @@
 					this.siteMap = [
 					["Identity","Space for biology", "Science in India", "Recognition", "Reflections"],
 					["Institution Building", "Space & Autonomy", "Paper Trails", "Architecture"],
-					["Growth", "Hiring", "Start-ups", "Collaborations", "Student Selections", "Scaling"],
+					["Growth", "Hiring", "Startups", "Collaborations", "Student Selections", "Scaling"],
 					["Research", "Basic and Applied toggle", "Areas and shifts", "Processes", 
 					"Queries and tools"],
 					["Education", "Building knowledge", "Mentorship"],
