@@ -150,13 +150,13 @@
 					this.$parent.append(this.$el);
 
 					//After rendering the tabs view, the default tab needs to be switched active
-					if(this.options.query == undefined){
+					if(this.options.query == "intro"){
 						this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
 						this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
 					} else {
 						_.each($("#ncbs-narrative-container .nav-tabs li"), function(item){ 
 							var tabList = item.innerText.toLowerCase().trim().split(" "),
-							urlTabState = window.location.hash.split("/")[2].split("-"),
+							urlTabState = window.location.hash.split("/")[3].split("-"),
 							compareResult = _.difference(tabList,urlTabState);
 							//console.log(tabList, urlTabState, compareResult);
 							if(compareResult.length == 0){
@@ -184,16 +184,19 @@
 					}
 				},
 				updateRoute: function(event){
-					//app.router.navigate("#/identity/space-for-biology", true);
-					console.log(event.target.innerText.toLowerCase());
-					if(event.target.innerText.toLowerCase() == window.location.hash.split("#/")[1].split("/")[0]){
-						var urlFragmentPath = " ";
+
+					var urlFragmentPath = "", //variable to build url path
+					eventEmittedby = event.target.innerText.toLowerCase().trim(), //text of the event target
+					urlThemeparam = window.location.hash.split("#/")[1].split("/")[1].trim(); //current theme from the url
+					//url pattern check
+					if( eventEmittedby == urlThemeparam || eventEmittedby == ""){
+						urlFragmentPath = "/intro";
 					} else {
-						var urlFragmentPath = "/"+event.target.innerText.toLowerCase().split(" ").join("-");
+						urlFragmentPath = "/"+event.target.innerText.toLowerCase().split(" ").join("-");
 					}
-					
-					var urlThemePath = "#/"+window.location.hash.split("#/")[1].split("/")[0];
-					console.log(urlFragmentPath, urlThemePath);
+					//build url to navigate
+					var urlThemePath = "#/theme/"+window.location.hash.split("#/")[1].split("/")[1];
+					//navigate to built path
 					app.router.navigate(urlThemePath+urlFragmentPath, true);
 				}
 			});

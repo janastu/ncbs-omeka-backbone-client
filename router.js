@@ -5,6 +5,11 @@ var ApplicationRouter = Backbone.Router.extend({
 	routes: {
 		"": "home",
 		"about": "about",
+		"theme/:name": "themeHandler",
+		"theme/:name/": "themeHandler",
+		"theme/:name/:section": "themeHandler",
+		"theme/:name/:section/": "themeHandler",
+
 		"identity": "theme1",
 		"identity/:query": "theme1",
 		"institution-building": "theme2",
@@ -84,6 +89,22 @@ var ApplicationRouter = Backbone.Router.extend({
 		this.unmountAndMountViews("about");
 		//this.currentView = new app.aboutView();
 		//this.currentView.render();
+	},
+	themeHandler: function(theme, section) {
+		this.Themes = ["identity", "institution-building", "growth", "research", "education",
+							"ripple-effect", "intersections"];
+		
+		this.now = section;
+		if(!this.now){
+			this.now = "intro";
+		}
+		
+		this.unmountAndMountViews({
+			//collection: app.omekaCollections, 
+			tag: this.Themes.indexOf(theme)+1+"-*",
+			query: this.now
+		});
+
 	},
 	theme1: function(query) {
 		
