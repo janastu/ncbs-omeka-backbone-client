@@ -10,7 +10,7 @@ beforeSend: function(jqXHR) {
     };    
 },
 success:function(result, status, xhr){
-	console.log(result, status, xhr, "setup");
+	//console.log(result, status, xhr, "setup");
 
 },
 error: function(result, status, xhr){
@@ -35,7 +35,7 @@ AppController = function(){
 	};
 
 
-	function checkMakeSiteContent(typ) {
+	 PAGES.checkMakeSiteContent = function(typ) {
 		switch(typ) {
 			case 'files':
 				files_done = true;
@@ -44,8 +44,15 @@ AppController = function(){
 			case 'items':
 				items_done = true;
 		}
-		if (files_done && collections_done &&  items_done)
+		if (typ === "files"){
 			app.omekaItems.makeSiteContent();
+			files_done = false;
+		}
+		if(typ === "items"){
+			app.omekaItems.getFilesForItems();
+			items_done = false;
+		}
+		
 
 	}
 
@@ -60,7 +67,17 @@ AppController = function(){
 			}, index);
 		}
 	});
+	var cacheStory = new storyCollection;
 	app.APIcontent = new storyCollection;
+	cacheStory.fetch({
+		cache: true,
+		url: "https://jants.cloudant.com/ncbs-narrative/d2dffbc585d35241ec14e22f565eefaa",
+		headers: {"Authorization": "Basic amFudHM6YnJ0MW1yaDJzem4z"},
+		success: function(response) {
+			//console.log(response.toJSON()[0].narrative, "jants");
+			app.APIcontent.set(response.toJSON()[0].narrative);
+		}
+	});	
 	
 
 	
@@ -77,15 +94,8 @@ AppController = function(){
 		}
 	});
 	// instance with omeka files content
-	app.files = new FilesCollection;
-	app.files.fetch({
-		cache: true,
-		//expires: 43200,
-		//prefill: true,
-		url: PAGES.config.getOmekaFiles
-	}).then(function(response){
-		checkMakeSiteContent('files');
-	});
+	//app.files = new FilesCollection;
+
 
 	
 
@@ -106,6 +116,33 @@ AppController = function(){
 					}
 			});
 	},
+		getFilesForItems: function(){
+			//fileArray = [];
+			var self = this;
+			tempFiles = new FilesCollection;
+			fetchFiles = new FilesCollection;
+
+		    app.omekaItems.each(function(item){
+				var fileUrl = item.toJSON().files.url;
+				fetchFiles.fetch({
+							cache: true,
+							expires: 43200,
+							url: fileUrl,
+							success: function(collection, response, options){
+								tempFiles.add(response);
+								fetchFiles.setter();
+							}
+						});
+		
+			});
+			
+			fetchFiles.setter =function() {
+				if(tempFiles.length == self.length){
+					app.files.set(tempFiles.models);
+					PAGES.checkMakeSiteContent('files');
+				}
+			}
+		},
 		makeSiteContent: function() {
 
 		
@@ -122,7 +159,7 @@ AppController = function(){
 					} 
 			});
 	
-		app.APIcontent.add(pages);
+		app.APIcontent.set(pages);
 	}
 });
 	// instance with omeka collections content
@@ -133,19 +170,12 @@ AppController = function(){
 		//prefill: true,
 		url: PAGES.config.getOmekaCollections
 	}).then(function(response){
-		checkMakeSiteContent('collections');
+		PAGES.checkMakeSiteContent('collections');
 	});
 
-	//instance omeka items content
-	app.omekaItems = new collectionProto();
-	app.omekaItems.fetch({
-		cache: true,
-		//expires: 43200,
-		//prefill: true,
-		url: PAGES.config.getOmekaItems,
-	}).then(function(response){
-		checkMakeSiteContent('items');
-	});
+	/*//instance omeka items content
+	app.omekaItems = new collectionProto();*/
+	
 // collection for the meta data set - > not used in this app
 var ContextCollection = Backbone.Collection.extend({
 	getContextName: function(arg){

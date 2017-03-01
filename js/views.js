@@ -16,7 +16,7 @@
 
 				render: function() {
 					$(this.el).html(_.template(this.template));
-					this.scrollEffect();
+					//this.scrollEffect();
 				},
 				//A scrolling effect for the header
 				scrollEffect: function(){
@@ -103,7 +103,8 @@
 				id: "content",
 				template: _.template($('#sub-theme-nav-tabs').html()),
 				events: {
-					"shown.bs.tab a[data-toggle='tab']": "refreshViewer"
+					"shown.bs.tab a[data-toggle='tab']": "initMediaEl",
+					"click .nav-tabs a[data-toggle='tab']": "updateRoute"
 				},
 				initialize: function(options){
 					//called from router.js 
@@ -117,10 +118,10 @@
 					["Identity","Space for biology", "Science in India", "Recognition", "Reflections"],
 					["Institution Building", "Space & Autonomy", "Paper Trails", "Architecture"],
 					["Growth", "Hiring", "Start-ups", "Collaborations", "Student Selections", "Scaling"],
-					["Research", "Basic/Applied toggle", "Areas and shifts", "Processes", 
+					["Research", "Basic and Applied toggle", "Areas and shifts", "Processes", 
 					"Queries and tools"],
 					["Education", "Building knowledge", "Mentorship"],
-					["Ripple Effect", "Effects and Toll", "Interaction/Isolation"],
+					["Ripple Effect", "Effects and Toll", "Interaction and Isolation"],
 					["Intersections", "Gender Equality", "Hierarchy & Class", "NCBS Community", 
 					"Outside World"]
 					];
@@ -133,6 +134,7 @@
 					
 					this.tags = this.options.tag.split('-');
 					this.$parent=$("#main");
+					
 					this.listenTo(app.omekaCollections, "add", this.render);
 				},
 				render: function(){
@@ -148,27 +150,51 @@
 					this.$parent.append(this.$el);
 
 					//After rendering the tabs view, the default tab needs to be switched active
-					this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
-					this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
-
-					// Initializing the child view, mediaHandler is an instance of storyMediaView
-			
-					this.mediaHandler = new storyMediaView({
-						theme: this.tags[0]
-					});
-					this.mediaHandler.render();
+					if(this.options.query == undefined){
+						this.$("#ncbs-narrative-container .nav-tabs li").first().addClass("active");
+						this.$("#ncbs-narrative-container .tab-pane").first().addClass("active");
+					} else {
+						_.each($("#ncbs-narrative-container .nav-tabs li"), function(item){ 
+							var tabList = item.innerText.toLowerCase().trim().split(" "),
+							urlTabState = window.location.hash.split("/")[2].split("-"),
+							compareResult = _.difference(tabList,urlTabState);
+							//console.log(tabList, urlTabState, compareResult);
+							if(compareResult.length == 0){
+								var panePartialID = this.siteMap[this.tags[0]-1].indexOf(item.innerText.trim()),
+								activePaneID = "#"+panePartialID+"-note";
+								$('#ncbs-narrative-container .nav-tabs a[href='+activePaneID+']').tab('show');
+								/*$(item).addClass("active");
+								this.$(activePaneID).addClass("active");*/
+							}
+						}, this);
+					}
 				},
 
 				//bug fix: The image viewer behaves abnormaly when rendered in an hidden element
 				//solution: every time a tab was shown, the imageViewer should be re-rendered and refreshed
-				refreshViewer: function(event){
-					_.each(this.mediaHandler.imgSlideSubViews, function(item){
-						/*item.viewer.load(item.model.get('content')[item.model.get('currentIndex')-1].get('fileurls').thumbnail,
-														item.model.get('content')[item.model.get('currentIndex')-1].get('fileurls').original);*/
-						item.render();
-						item.viewer.refresh();
-					});
-
+				initMediaEl: function(event){
+					  this.mediaHandler = new storyMediaView({
+					  	theme: this.tags[0]
+					  });
+					  this.mediaHandler.render();
+					  if(this.mediaHandler.imgSlideSubViews){
+						_.each(this.mediaHandler.imgSlideSubViews, function(item){
+							item.viewer.refresh();
+						});
+					}
+				},
+				updateRoute: function(event){
+					//app.router.navigate("#/identity/space-for-biology", true);
+					console.log(event.target.innerText.toLowerCase());
+					if(event.target.innerText.toLowerCase() == window.location.hash.split("#/")[1].split("/")[0]){
+						var urlFragmentPath = " ";
+					} else {
+						var urlFragmentPath = "/"+event.target.innerText.toLowerCase().split(" ").join("-");
+					}
+					
+					var urlThemePath = "#/"+window.location.hash.split("#/")[1].split("/")[0];
+					console.log(urlFragmentPath, urlThemePath);
+					app.router.navigate(urlThemePath+urlFragmentPath, true);
 				}
 			});
 
@@ -186,11 +212,13 @@
 					//called from app.ThemeTabs
 					//{el:"#ncbs-narrative-container", collection:app.APIcontent, theme: this.tags[0]}
 					this.options = options || {};
+					
 					this.listenToOnce(app.APIcontent, "add", this.render);
 					this.siteMap = ["identity", "institution-building", "growth", "research", "education", "ripple-effect",
 									"intersections"];
 					// All the spans in the DOM currentView
-					this.spans = app.router.currentView.$("span");
+					//this.spans = app.router.currentView.$("span");
+					this.spans = app.router.currentView.$(".tab-pane.active span");
 					// A reference to the child views to unbind them when switching routes
 					this.imgSlideSubViews = [];
 					this.videoSubview = [];
@@ -232,6 +260,7 @@
 						
 						// append the list of images to Dom by instantiating the slider subview
 						if(mappedImages.length){
+							
 							var slider =  new imgSliderView({el: span, content: mappedImages, model: new imgSliderModel()});
 							this.imgSlideSubViews.push(slider);
 						}
@@ -254,6 +283,8 @@
 						//append the audio icon to dom
 						if(mappedVideo){
 							//console.log(mappedVideo.toJSON());
+							/*$(span).parent().addClass("clearfix");
+							$(span).css({"width": "50%", "float": "right"});*/
 							this.video = new VideoView({el: span, content: mappedVideo});
 							this.videoSubview.push(this.video);
 						}
@@ -285,7 +316,7 @@
 						theme: this.options.theme
 					});
 					this.Gallery.render();
-
+					
 					//this.delegateEvents();
 					return this;
 				},
@@ -338,6 +369,11 @@ imgSliderView = Backbone.View.extend({
 		this.viewer = ImageViewer(this.$('.image-container'), {
 			zoomOnMouseWheel: false
 		});
+		/*window.bLazy = new Blazy({ 
+					       container : '.image-container' // all images
+					   });*/
+		//this.$el.css({"width": "200px", "height": "200px", "float": "right"});
+		//this.$el.css("float", "right");
 		//this.listenTo(app.tabsView, "refreshViewer", this.refreshSlide);
 		//app.tabsView.on("refreshViewer", this.refreshSlide, this);
 		this.listenTo(this.model, "change:currentIndex", this.render, this);

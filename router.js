@@ -6,13 +6,19 @@ var ApplicationRouter = Backbone.Router.extend({
 		"": "home",
 		"about": "about",
 		"identity": "theme1",
-		"identity?:query": "theme1",
+		"identity/:query": "theme1",
 		"institution-building": "theme2",
+		"institution-building/:query": "theme2",
 		"growth": "theme3",
+		"growth/:query": "theme3",
 		"research": "theme4",
+		"research/:query": "theme4",
 		"education": "theme5",
+		"education/:query": "theme5",
 		"ripple-effect": "theme6",
+		"ripple-effect/:query": "theme6",
 		"intersections": "theme7",
+		"intersections/:query": "theme7",
 		"*notfound": "notfound"
 	},
 	initialize: function() {
@@ -20,6 +26,17 @@ var ApplicationRouter = Backbone.Router.extend({
 		//$("#spinner-launch").toggle();
 		
 		this.unmountAndMountViews = function(newViewConfig) {
+			/*if(newViewConfig.tag){
+
+				app.omekaItems.fetch({
+					cache: true,
+					//expires: 43200,
+					//prefill: true,
+					url: PAGES.config.getOmekaItems+"?collection="+newViewConfig.tag.split('-')[0],
+				}).then(function(response){
+					PAGES.checkMakeSiteContent('items');
+				});
+			}*/
 			if(this.currentView){
 				if(this.currentView.mediaHandler){
 					//to cleanup all child views of tabsview, like the img subviews, video subview
@@ -51,6 +68,7 @@ var ApplicationRouter = Backbone.Router.extend({
 			if(newViewConfig !== "home" && newViewConfig !== "about" && newViewConfig !== "notfound"){
 				this.currentView = new app.ThemeTabs(newViewConfig);
 				this.currentView.render();
+				console.log(newViewConfig);
 			} 
 		}
 	},
@@ -64,51 +82,60 @@ var ApplicationRouter = Backbone.Router.extend({
 	},
 	about: function(){
 		this.unmountAndMountViews("about");
-		this.currentView = new app.aboutView();
-		this.currentView.render();
+		//this.currentView = new app.aboutView();
+		//this.currentView.render();
 	},
 	theme1: function(query) {
+		
 		//call view cleanup to unbind stale views and instantiate new view
 		// arguments is the view options
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "1-*"
+			tag: "1-*",
+			query: query
 		});
 	},
 	theme2: function(query){
+	
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "2-*"
+			tag: "2-*",
+			query: query
 		});
 	},
 	theme3: function(query){
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "3-*"
+			tag: "3-*",
+			query: query
 		});
 	},
 	theme4: function(query){
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "4-*"
+			tag: "4-*",
+			query: query
 		});
 	},
 	theme5: function(query){
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "5-*"
+			tag: "5-*",
+			query: query
 		});
 	}, 
 	theme6: function(query){
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "6-*"
+			tag: "6-*",
+			query: query
 		});
 	},
 	theme7: function(query){
 		this.unmountAndMountViews({
 			collection: app.omekaCollections, 
-			tag: "7-*"
+			tag: "7-*",
+			query: query
 		});
 	},
 	notfound: function(){
