@@ -298,7 +298,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
     color: #1a837f;
 }
 .sandbox-item{
-    background-color: #f4f3e9;
+    background-color: rgba(244, 243, 233, 0.51);
     height:200px;
 }
 #home-peopleplex-img-container {
