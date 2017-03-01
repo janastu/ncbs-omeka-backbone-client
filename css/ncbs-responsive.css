@@ -1,0 +1,374 @@
+
+/*CSS for body*/
+body {
+    overflow-x: hidden;
+    padding: 0px;
+    background-color:  rgba(176, 241, 239, 0.2);
+    /* background-color:#f4f3e9;  */
+     font-family: 'Roboto', sans-serif;
+     text-align: justify;
+}
+
+/* Fonts */
+.headings-font{
+    font-family: 'Playfair Display SC', serif;
+}
+
+.ncbs-blockquotes{
+    font-family: 'Permanent Marker', cursive;
+}
+/* anchor links */
+a {
+    color: #a65c21;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffaa65;
+    font-weight: bold;
+    text-decoration: none;
+}
+/* anchor links END*/
+/*CSS for header*/
+@media (max-width: 767px)
+.navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #FFFFFF;
+}
+
+.navbar-inverse {
+    border-radius:0px;
+}
+
+.navbar-header-bg_col{
+    /*background-image: url(../images/bg_img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    background: #50C9C3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #50C9C3 , #96DEDA); /* Chrome 10-25, Safari 5.1-6 */
+    background: -moz-linear-gradient(to left, #50C9C3 , #96DEDA);   /* For Firefox (3.6 to 15) */
+    background-image: -o-linear-gradient(to left, #50C9C3 , #96DEDA); /* For old Opera (11.1 to 12.0) */
+    background: linear-gradient(to left, #50C9C3 , #96DEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background-color: rgba(102,102,102,0.5);
+    background-blend-mode: multiply;
+	
+
+    margin-bottom: 0px;
+    border-color:transparent;
+}
+
+.navbar-header-border-color{
+    color: #F4F3E9;
+}
+
+.navbar-header-link-color{
+    color:#FFFFFF;
+}
+
+.navbar-header-link-hover-color{
+    color:#FFF;
+}
+
+/*.dropdown-box-color {
+    background-color:transparent;
+}*/
+
+.navbar-inverse .navbar-nav>li>a {
+    color:#FFFFFF;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+    color: #fff;
+    background-color:rgba(102,102,102,0.66);;
+}
+
+
+.navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover
+{
+color: #FFFFFC;
+}
+.logo-responsive
+{
+padding:5px;
+}
+
+
+.home-hero-bg
+{
+background-image:url(../images/bg_img.jpg);
+background-repeat: no-repeat;
+    background-size: cover;
+	background-color: rgba(102,102,102,0.2);
+
+}
+.home-hero-lefttext-container
+{
+	margin-top: 10px;
+    background-color: rgba(102, 102, 102, 0.2);
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #f2f2f2;
+    padding: 15px;
+    border-radius: 0px;
+	
+
+
+}
+
+.theme-dropdown-icon {
+    width:30px;
+    padding:4px;
+    margin-right:5px;
+	}
+	
+	
+.theme-dropdown-icon:hover{
+padding:1px;
+background-position: 0 -25px;
+}
+
+#themes-dropdown-growth{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+#themes-dropdown-research{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+
+
+
+
+
+
+
+.navbar-inverse {
+border-radius:0px;
+font-size:16px;
+   }
+   
+   
+
+.navbar-inverse .navbar-toggle {
+
+
+    border-color: #CDCCB9;
+}
+
+
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #ffffff;
+}
+
+.dropdown-menu>li>a {
+    font-weight:300;
+    color:#FFFFFF;
+}
+
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    color: #FFFFFF;
+	font-size:16px;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu li a:hover{
+
+    background-color:rgba(172, 176, 175, 0.5);
+    color:#FFFFFF;
+    font-weight:600;
+    font-size:16px;
+
+}
+.navbar-inverse .navbar-nav .open .dropdown-menu li a:hover .theme-dropdown-icon{
+padding:1px;
+background-position: 0 -25px;
+}
+
+.dropdown-menu-style{
+    background-color:rgba(102,102,102,0.66);
+    color:white; 
+    border-radius:0px; 
+    margin-top:14px;
+    font-size:15px;
+}
+
+/*CSS for home container*/
+.home-hero-bg{
+    background: #50C9C3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #50C9C3 , #96DEDA); /* Chrome 10-25, Safari 5.1-6 */
+    background: -moz-linear-gradient(to left, #50C9C3 , #96DEDA);   /* For Firefox (3.6 to 15) */
+    background-image: -o-linear-gradient(to left, #50C9C3 , #96DEDA); /* For old Opera (11.1 to 12.0) */
+    background: linear-gradient(to left, #50C9C3 , #96DEDA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /*background: linear-gradient(215deg, #aed7d3 10%, rgba(99,133,133,1) 100%);
+    background: -moz-linear-gradient(276deg, #aed7d3 10%, rgba(99,133,133,1) 100%);  ff3.6+ /
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #aed7d3), color-stop(100%, rgba(99,133,133,1))); / safari4+,chrome /
+background: -webkit-linear-gradient(276deg, #aed7d3 10%, rgba(99,133,133,1) 100%); / safari5.1+,chrome10+ /
+background: -o-linear-gradient(276deg, #aed7d3 10%, rgba(99,133,133,1) 100%); / opera 11.10+ /
+background: -ms-linear-gradient(276deg, #aed7d3 10%, rgba(99,133,133,1) 100%); / ie10+ /
+background: linear-gradient(180deg, #aed7d3 10%, rgba(99,133,133,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', endColorstr='#638585',GradientType=0 ); / ie6-9 */
+}
+
+
+
+
+.home-hero-lefttext-removepadding h3 {
+	padding:0px;
+    text-align:center;
+}
+
+
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.panel-background{
+    background-color: transparent;
+}
+/*CSS for About block*/
+#about {
+    /*width:60%;*/
+    padding:30px;
+    color: rgba(17, 17, 17, 0.7);
+    font-size:16px;
+    color: #1a837f;
+}
+
+.theme-about-video {
+    /*margin-left: 8%;*/
+    width: 100%;
+    height:100%;
+    padding:15px;
+}
+
+#about blockquote {
+    border-left: 5px solid #7de4e0;
+    color: #539794;
+}
+#about blockquote footer {
+    color: #539794;
+}
+
+@media (max-width:893px){
+    .theme-about-video{
+        height:100px;
+    }
+}
+
+/* Ephemera Section */
+#ephemera {
+    background-color: #7DE4E0;
+    padding:35px;
+    font-size:18px;
+    color:#fff;
+}
+#ephemera h3 {
+    color: #1a837f;
+}
+#ephemera-img-container {
+    padding:15px;
+}
+#ephemera-text-wrap {
+    padding:15px;
+    margin-top: 10%;
+    color: #1a837f;
+}
+.captionEphImg {
+    padding:15px;
+    text-align: left;
+        color: #5f5f5f;
+        font-family: roboto;
+        font-size: 12px;
+}
+/* END Ephemera */
+/* Peopleplex section start */
+#home-sandbox {
+    background-color: #f4f3e9;
+    padding:35px;
+    font-size:18px;
+    color:#fff;
+}
+#home-sandbox h3 {
+    color: #1a837f;
+}
+.sandbox-item{
+    background-color: #f4f3e9;
+    height:200px;
+}
+#home-peopleplex-img-container {
+    padding:15px 15px 5px 15px;
+}
+#home-peopleplex-text-wrap {
+    padding:5px 15px 15px 15px;
+    
+}
+.items-row-wrap{
+    padding:15px;
+    color: #1a837f;
+}
+/* Peopleplex section END */
+
+/* Acknowledgements section*/
+.ack-section{
+    background-color: #539794;
+    color: #fff;
+}
+.ack-section .container {
+    /*width:60%;*/
+    padding: 30px;
+}
+
+/* Acknowledgements END */
+
+
+/*CSS for footer*/
+
+/*.footer-content-text
+{
+    cursor: pointer;     
+    color: #333726;
+    margin-top:2px; 
+    font-family: 'Roboto', sans-serif;
+    color: #333726;
+}
+
+.footer-text-style
+{
+    margin-top:80px;
+    font-family: 'Roboto', sans-serif;
+    padding: 15px;
+    border-top: solid 1px #ffffff;
+}
+footer
+{
+
+    text-align: -webkit-center;
+
+}*/
+
+
+ @media only screen and (max-width: 1200px) 
+ {
+    .theme-insect-image
+    {
+        margin-top: 15%;
+    }
+    
+}
+
+ @media only screen and (max-width: 992px) 
+ {
+    .theme-insect-image
+    {
+        margin-top: 0%;
+    }
+    
+}
+
+ 

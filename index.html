@@ -1,9 +1,24 @@
+<!--Virtual Tour of Obaid Siddiqi's Lab.
+Credits: Pannellum https://pannellum.org/ -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	    <title>NCBS 25</title>
+	     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="NCBS@25 - Thirteen ways of looking at NCBS">
+    <meta name="description" content="The National Centre for Biological Sciences (NCBS) completes 25 years this year. The NCBS@25 exhibit is built around thirteen ways to reflect upon the history of the institution.">
+    <meta name="author" content="Venkat Srinivasan">
+     <meta name="image" content="https://www.ncbs.res.in/ncbs25/img/Assets/ncbs_logo_introtext.png">
+     <meta property="og:title" content="NCBS@25 - Thirteen ways of looking at NCBS"/>
+     <meta property="og:image" content="https://www.ncbs.res.in/ncbs25/img/Assets/ncbs_logo_introtext.png"/>
+     <meta property="og:url" content="https://www.ncbs.res.in/ncbs25/"/>
+     <meta property="og:site_name" content="NCBS@25"/>
+     <meta property="og:description" content="The National Centre for Biological Sciences (NCBS) completes 25 years this year. The NCBS@25 exhibit is built around thirteen ways to reflect upon the history of the institution."/>
+         
+    <title>NCBS@25</title>
+  
 	    <link rel="icon" href="img/Assets/ncbs_favicon.png" sizes="10x10" type="image/png">
       <!--link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
       <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
@@ -23,17 +38,31 @@
       <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
       <meta name="theme-color" content="#000">
 
-	    <meta name="description" content="Thirteen ways of looking at NCBS" />
-	    <meta name="author" content="Venkat Srinivasan" />
 		
-		<link rel="stylesheet" href="libs/font-awesome-4.6.3/css/font-awesome.min.css">
+	
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
-		<link type="text/css" rel="stylesheet" href="css/theme/header.css" />
+		<!--link type="text/css" rel="stylesheet" href="css/theme/header.css" /-->
 		<link type="text/css" rel="stylesheet" href="css/theme/main.css">
+
+        <!-- Custom CSS -->
+        <link href="css/modern-business.css" rel="stylesheet">
+      <!-- NCBS CSS  -->
+      <link href="css/ncbs-responsive.css" rel="stylesheet">
+      
+        <!-- font for Blockquotes -->
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+        <!-- Font for headings -->
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Playfair+Display+SC:900" rel="stylesheet">
+      
 		<link type="text/css" rel="stylesheet" href="libs/ImageViewer-master/imageviewer.css" />
-		<style>
-     
-		</style>
+		<link rel="stylesheet" href="libs/font-awesome-4.6.3/css/font-awesome.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      
+
 	</head>
 
 	<body>
@@ -139,7 +168,139 @@
    </div>
    </script>
    <script type="text/template" id="header-template">
-    <header>
+   <!-- Navigation -->
+
+   <nav class="navbar navbar-inverse navbar-default navbar-static-top navbar-header-bg_col" role="navigation">
+       <div class="container-fluid">
+           <!-- Brand and toggle get grouped for better mobile display -->
+           <div class="navbar-header ">
+
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ncbs-navbar-collapse">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+               </button>
+               
+               <!--ncbs25 logo-->
+       <div class="logo-responsive ">
+       
+
+             <a href="#" target="">  
+             <img src="img/Assets/ncbs_logo_header.png" alt="logo" >
+             </a>
+               <!--/.ncbs logo--> 
+       </div>
+
+           </div>
+           <!-- Collect the nav links, forms, and other content for toggling -->
+           <div class="collapse navbar-collapse" id="ncbs-navbar-collapse">
+               <!--Menu-->           
+               <ul class="nav navbar-nav navbar-right navbar-header-link-color navbar-header-link-hover-color">
+
+                   <!--Menu About-->
+                   <li>
+                   
+                       <a href="#about" class="navbar-header-link-color"><b>About</a></b>
+                   </li>
+
+                   <!--Menu Themes-->
+                   <li class="dropdown " >
+
+                       <a href="#" class="dropdown-toggle navbar-header-link-color" data-toggle="dropdown"><b>Themes</b> <b class="caret"></b></a>
+
+                       <ul class="dropdown-menu dropdown-menu-style" >
+
+                           <li >
+                               <a href="#/identity"> <img src="images/identity_inside-01.png" alt="id" class="theme-dropdown-icon">Identity</a>
+                           </li>
+                           <li class="divider" ></li>
+                 <li>
+                               <a href="#/institution-building">
+                               <img src="images/instituin_inside-01.png" alt="id" class="theme-dropdown-icon">
+                              Institution Building</a>
+                           </li>
+                            <li class="divider" ></li>
+                           <li>
+                               <a href="#/growth">
+                               <img src="images/growth_inside.png" alt="id" class="theme-dropdown-icon" id="themes-dropdown-growth">
+                               Growth</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="#/research">
+                               <img src="images/research-inside.png" alt="res" class="theme-dropdown-icon" id="themes-dropdown-research">Research</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="#/education">
+                               <img src="images/education_inside1.png" alt="edu" class="theme-dropdown-icon">Education</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="#/ripple-effect">
+                               <img src="images/ripple_inside.png" alt="rf" class="theme-dropdown-icon">Ripple Effect</a>
+                           </li>
+
+                           <li class="divider"></li>
+                           <li>
+                               <a href="#/intersections">
+                               <img src="images/intersections_inside.png" alt="inter" class="theme-dropdown-icon">Intersectiosn</a>
+                           </li>
+
+                       </ul>
+                   </li>
+
+                   <!--Menu Sandbox-->
+                   <li class="dropdown">
+                       <a href="#" class="dropdown-toggle navbar-header-link-color" data-toggle="dropdown"><b>Sandbox</b> <b class="caret"></b></a>
+                       <ul class="dropdown-menu dropdown-menu-style" >
+                           <li>
+                               <a href="blog-home-1.html">Ephemera</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="blog-home-2.html">
+                               Peopleplex</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="blog-post.html">Space Tour</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="blog-home-2.html">
+                               Timeline</a>
+                           </li>
+                           <li class="divider"></li>
+
+                           <li>
+                               <a href="blog-home-2.html">
+                               Oral History</a>
+                           </li>
+                           <li class="divider"></li>
+                           <li>
+                               <a href="blog-home-2.html">
+                               Mosaic Template</a>
+                           </li>
+
+
+
+                       </ul>
+                   </li>
+                   
+                   
+               </ul>
+
+               <!-- /.navbar-collapse -->
+           </div>
+           
+           <!-- /.container -->
+       </div>
+       
+   </nav>
+
+    <!--header>
         <div class="container clearfix" style="width:1200px;">
             <h1 id="logo">
               <a href="#" target="">
@@ -155,7 +316,7 @@
                 
             </nav>
         </div>
-    </header><!-- End header -->
+    </header>
     <ul class="nav nabar-nav" style="    position: fixed;
         right: 43px; top:8px; font-weight:600;
         z-index: 1000; ">
@@ -175,7 +336,7 @@
         <li><a href="sandbox/mosaic">Mosaic template</a></li>
       </ul>
     </li>
-    <ul>
+    <ul-->
    </script>
 
    <script type="text/template" id="navigation-template">
@@ -289,33 +450,233 @@
    </script>
 
    <script type="text/template" id="home-page-template">
-    <!-- Home page - Banner image-->
-<div /*style="background: url(img/bg_img.jpg); background-size:cover; min-height:615px;"*/>
-    <div class="row-fluid">
+       <!-- Page Content -->
+       <div class="container-fluid home-hero-bg" >
 
-        <img src="img/2016-TIFR-bird-graffiti_crop6.jpg" 
-            class="img-responsive" style="min-width: 1332px;"/>
-            <div class="col-sm-3">
-            <div style="" class="ncbs-home-text" id="ncbs-home-text-collapsible">        
-            <br/>
-            <h4 style="margin-top:45px;" class="text-center">Thirteen ways of looking at NCBS</h4>
-              <p style="margin-top:5px;">
-              On Oct 22, 1991, the Department of Atomic Energy sent a letter to the Tata Institute for Fundamental Research. It conveyed the President&apos;s sanction for a new biology research centre in Bangalore. It stands as a bookend of sorts to a decade-plus process.</p>
-            <br />
-              <p>The National Centre for Biological Sciences (NCBS) completes 25 years this year. The NCBS@25 exhibit is built around thirteen ways to reflect upon the history of the institution. Browse the seven story themes below (better viewed in sequence). And explore the six widgets under the Sandbox icon including a Timeline and other experimental archival tools.</p>
-           <br />
-              <p>In history-writing, stories sometimes surface by bestowing significance on available material. Even chipping off a wall, as seen on the right, can take upon an intriguing new life of its own. The exhibit celebrates such multiple interpretations. It brings to light the tapestry of NCBS, weaved by over 70 story tellers. Along with over 600 photographs, official records, letters, and the occasional lab note, they allow a glimpse into a tangled history and unlikely journey.</p>
-            </div>
-          </div>
+            
+           <!-- Row-->
+           <div class="row">
 
-          <!--div class="col-sm-9">
-          <img src="img/insect.png" class="img-responsive" />
-          </div-->
+               <!--Column grid-->
+               <div class="col-md-5" >
 
-      
-    </div>
-    </div>
+                   <div class="panel home-hero-lefttext-container"> 
+
+                       <div class="panel-heading home-hero-lefttext-removepadding" >
+                           <h2 class="headings-font text-center"> Thirteen ways of looking at NCBS</h2>
+                       </div>
+            
+                       <div class="panel-body home-hero-lefttext-removepadding "  >
+               <!--<div class="col-sm-4">
+               <img src="intro-bg.jpg" alt="bg">
+               </div>-->
+                           <p align="justify">
+              
+                           <p>On Oct 22, 1991, the Department of Atomic Energy sent a letter to the Tata Institute for Fundamental Research. 
+                           It conveyed the President&#39;s sanction for a new biology research centre in Bangalore.
+                           It stands as a bookend of sorts to a decade-plus process.</p>
+
+                           <p>The National Centre for Biological Sciences (NCBS) completes 25 years this year.
+                           The NCBS@25 exhibit is built around thirteen ways to reflect upon the history of the institution.
+                           Browse the seven story themes below (better viewed in sequence). And explore the six widgets under
+                           the Sandbox icon including a Timeline and other experimental archival tools.</p>
+    
+
+                           <p>In history-writing, stories sometimes surface by bestowing significance on available material. Even chipping off a wall, as seen on the right, can take upon an intriguing new life of its own. The exhibit celebrates such multiple interpretations. It brings to light the tapestry of NCBS, weaved by over 70 story tellers. Along with over 600 photographs, official records, letters, and the occasional lab note, they allow a glimpse into a tangled history and unlikely journey.</p>
+
+                       </div>
+
+                   </div>
+
+               <!--/.Column grid-->
+               </div>
+
+
+               <!--Column grid-->
+               <div class="col-md-7">
+
+                   <div class="panel panel-background">
+
+                      <!-- <div class="panel-heading">
+                           <h4><i class="fa fa-fw fa-gift"></i></h4>
+                       </div>-->
+
+                       <!--Insect image-->
+                       <div class="panel-body theme-insect-image">
+                           
+                         <img src="images/insect.png" alt="bg" class="img-responsive">
+                       <!--/.Insect image-->     
+                       </div>
+
+                   </div>
+
+               <!--/.Column grid-->
+               </div> 
+
+
+           <!-- /.row -->       
+           </div>
+
+       <!--/.Container-->    
+       </div>
+
+           <!-- About Container-->  
+           <div id="about" class="container">
+               <div class="row">
+                    <h1 class="headings-font text-center">NCBS @ 25</h1>
+               
+                    <br/>
+
+                    <p>The NCBS@25 digital exhibit contains records (images, audio and video excerpts, text) under copyright or under third party ownership. These records are given on loan to NCBS for the purposes of this exhibit. Material may only be reproduced for academic and non-commercial use, and only with the explicit permission of the record owners, as mentioned in the caption for each image, and audio and video clip. Please respect the honour code and the generosity of the donors in sharing this material with a wider audience.</p>
+                    
+               </div>
+               <!--Row-->            
+               <div class="row">
+                   <!--Column grid--> 
+                  <div class="col-xs-12">
+
+                   <!--Youtube video--> 
+                   <div class="center-block">
+                     <iframe class="theme-about-video" src="https://www.youtube.com/embed/O8wESXFHZY8" frameborder="0" allowfullscreen></iframe>
+                   <!--/.Youtube video-->  
+                   </div>
+
+                   <div>
+
+                       <blockquote class="ncbs-blockquotes"><p>“When you are in the middle of a story, it isn't a story at all, but only a confusion, a dark roaring, a blindness. It is only afterwards that it becomes anything like a story when you're telling it to yourself or someone else.”</p>
+                         <footer> -- Stories We Tell. Directed by Sarah Polley. 2012</footer>
+                       </blockquote>
+                     
+
+                       <br/>
+                       
+
+                                   </div>
+
+                  <!--/.Column grid-->
+                  </div>
+
+               <!-- /.row -->   
+               </div>
+             </div>
+       <!--/.About text END--> 
+
+       <!-- Ephemera start -->
+       <div id="ephemera">
+           <div class="container">
+               <div class="row">
+
+                   <div class="col-sm-6">
+                       <div id="ephemera-text-wrap">
+                       <h1 class="headings-font text-center">EPHEMERA</h1>
+                       <p>"Ephemera focuses on a single image of curiosity from across the history of NCBS, TIFR and their communities."<br />See the caption below for more details. Each refresh results in a new image.</p>
+                   </div>
+                   </div>
+                   <div class="col-sm-6">
+                       <div id="ephemera-img-container">
+                           <img src="https://www.ncbs.res.in/ncbs25/sandbox/ephemera/img/Ephemera/TIFR-Post-Lunch-Walk.jpg" style="width: 100%;">
+                           <div class="captionEphImg col-md-12">The TIFR Wind Tunnel: Every day after lunch, the windy corridor between the Homi Bhabha Auditorium and the main academic block is the place where people walk back and forth to burn off their lunch, perhaps very different from the architects vision when they designed the building. </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       <!-- Ephemera END -->
+
+
+              <!-- sandbox item list section start -->
+              <div class="container-fluid">
+              <!-- Spacetour section start -->
+             
+              <div class ="row">
+              </div>
+              <!-- Spacetour section end -->
+
+               
+                      <div class="row items-row-wrap">
+                          <h1 class="headings-font text-center">SANDBOX</h1>
+
+                            <div class="col-md-3">
+                            <div class="sandbox-item">
+                              
+                              <div id="home-peopleplex-text-wrap">
+                              <h3 class="headings-font text-center">Peopleplex Visualization</h3>
+                              <p>Peopleplex is an echo chamber filled with interview excerpts of people involved in the early days of NCBS and those interviewed for this exhibit. </p>
+                          </div>
+                          </div>
+                        </div>
+
+                          <div class="col-md-3">
+                          <div class="sandbox-item">
+                          
+                              <div id="home-peopleplex-text-wrap">
+                              <h3 class="headings-font text-center">Timeline Visualization</h3>
+                              <p>Timeline’s an experimental visual tool to chronicle a series of events, charting out about 140 events relevant to the history of biology in TIFR/NCBS, from 1944 to today. </p>
+                          </div>
+                        </div>
+                        </div>
+
+                          <div class="col-md-3">
+                          <div class="sandbox-item">
+                          
+                              <div id="home-peopleplex-text-wrap">
+                              <h3 class="headings-font text-center">Oral History Metadata Synchronizer</h3>
+                              <p>Oral History Metadata Synchronizer is a widget to synchronize an interview transcript with the original oral history interview.</p>
+                          </div>
+                        </div>
+                        </div>
+
+                          <div class="col-md-3">
+                          <div class="sandbox-item">
+                          
+                              <div id="home-peopleplex-text-wrap">
+                              <h3 class="headings-font text-center">Space Tour</h3>
+                              <p>Tour of Obaid Siddiqi’s office and lab, with the memories of Deepti Trivedi, a former student.</p>
+                          </div>
+                        </div>
+                        </div>
+                  </div>
+              </div>
+          
+               <!-- sandbox item list section END -->
+
+     
+
+            <!-- Acknowledgements start --> 
+            <div class="ack-section" >
+               <div class="container" >
+
+                <!--Row-->            
+                <div class="row">
+                    
+                      
+                    <!--Column grid--> 
+                   <div class="col-xs-12">
+                    <h1 class="headings-font text-center">ACKNOWLEDGEMENTS</h1>
+                    <br/>
+                    <p>The design team gratefully acknowledges the invaluable support of the following institutes and people:</p>
+                    <br/>
+                    <p>Tata Institute of Fundamental Research (TIFR) Archives; and the offices of Architecture and Engineering, IT, Research Development Office, Establishment and Instrumentation, National Centre for Biological Sciences.</p>
+                    <br/>
+                    <p>A. Sreenath, Anil Ananthaswamy, George Antony, Aditya Asopa, Savita Ayyar, Champakali Ayyub, B.V. Sreekantan, Prasanta Baruah, Upinder Bhalla, Soumya Bhattacharjee, Aditi Bhattacharya, Chandrashekhar, Chinmayee Chandrashekhara, Sumantra Chattarji, Indira Chowdhury, D. R. Lad, G. Gajendra, Prem Chandra Gautam, Archit Guha, H. Bhagya, H. Krishnamurthy, H. Mohan, Gaiti Hasan, Shobha Jagtap, Mamtha Jaigopal, Jeevaraju, Sudhanshu Jha, Man Mohan Johri, K. S. Vishalakshi, K. Venkataramanathan, K. VijayRaghavan, Pavan Kumar Kaushik, Anubhab Khan, Sudhir Krishna, Anusha Krishnan, Ajith Kumar, Anand Kumar, L. S. Shashidhara, M. S. Swaminathan, Saurabh Mahajan, Priyanka Mathai, Debakshi Mullick, Mathew K Mathew, Satyajit Mayor, Issac F. Murzello, N. Shanthakumary, Rudra Naik, Vidyanand Nanjundiah, Maithreyi Narasimha, Samadhan Narwade, Shannon Olsson, P. Balaram, P. N. Bhavsar, P.P. Divakaran, P. Ranjith, Dasaradhi Palakodeti, Knight Paul Pandian, Mitradas Panicker, R. Chetana, R. Hema, R. Parvathi, R. Sowdhamini, R.D. John, Bhavya Ramakrishnan, Uma Ramakrishnan, Ashok Rao, B. J. Rao, C.N.R. Rao, Satyajit Rath, Krishanu Ray, Oindrila Raychaudhuri, Raj Rewal, S. Savitha, S. N. Basha, Taslimarif Saiyed, Vinaya Sahasrabuddhe, Sanjay Sane, Apurva Sarin, Kalyani Sharma, Shobhona Sharma, Archana Shetty, Dilawar Singh, Ram Naresh Singh, Virendra Singh, Sammitha Sreevathsa, Govind Swarup, T. Eswar, T. J. Felix, T. M. Sahadevan, Krishnapriya Tamma, Mukund Thattai, Parvathi Thangam, Thejaprakash, Deepti Trivedi, Sandip Trivedi, U.B. Poornima, Jayant Udgaonkar, Vidita Vaidya, Shaju Varghese, Veera, Noor Zainab, and the families of K.S. Krishnan and Obaid Siddiqi.</p>
+                    
+                    <p>Quotes from the following people were excerpted from oral history interviews conducted by Indira Chowdhury. (2002 - 2003). TIFR Archives. Oral History Project, TIFR Oral History Archives: P. Babu, P.K. Maitra, Obaid Siddiqi. Quotes from everyone else were excerpted from interviews that are part of an on-going NCBS Archives oral history project (July 2016 - April 2017). The voices you hear on this page are of a selection of people who generously gave their time to discuss the history of NCBS.</p>
+                    
+
+                    <p>Designed by D.Epicentre (Sudebi Thakurata, Bharat Joshi, Tanvi Talwar, Saakshita Prabhakar, Probal Banerjee) and Developed by <a href="http://servelots.com/new/3d.html" target="_blank">Janastu</a> (T B Dinesh, Bhanu Prakash, T Pradyumna, A Shalini, Arun Kumar, Khushpreet Kaur, Nikitha Bharadhwaj, Madhuvanthi, Amrapali)</p><br>
+                    <p>Feedback about the exhibit or need to get in touch with any of the record owners? 
+                    ncbs25@ncbs.res.in</p>
+
+
+                   </div>
+               </div>
+           </div>
+        </div>
+         <!-- Acknowledgements END -->
+
+
    </script>
+
    <script type="text/template" id="about-page-template">
    <div class="container" style="background-color:#f4f3e9; margin-top:15px;" id="ncbs-about-container">
    <div >
@@ -481,7 +842,7 @@ Your browser does not support the audio element.
   	<%var i = index+1;%>
   	<%var idGallery = arr.split(" ").join("-")%>
   	
-  <div role="tabpanel" class="tab-pane" id="<%=index%>-note">
+  <div role="tabpanel" class="tab-pane clearfix" id="<%=index%>-note">
   <%= content.element_texts[i].text %>
   <div id="<%=idGallery%>"></div>
   </div>
@@ -515,6 +876,7 @@ Your browser does not support the audio element.
 	<script type="text/javascript" src="libs/require.min.js"></script>	    		
 	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="libs/ImageViewer-master/imageviewer.min.js"></script>
+
 
 <!-- application code -->
 	<script type="text/javascript" src="js/views.js"></script>
