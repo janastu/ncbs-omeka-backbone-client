@@ -281,6 +281,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
     }
 }
 
+
 /* Ephemera Section */
 #ephemera {
     background-color: #7DE4E0;
@@ -349,7 +350,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
 
 
 /*CSS for footer*/
-
+#footer {
+    padding:15px;
+}
+.foot-align-content {
+    display:table;
+}
+.foot-item {
+    display:inline-table;
+}
+.sitemap-item {
+    text-align: center;
+    padding:0px;
+    border-color:transparent;
+    font-size: 12px;
+    font-weight: bolder;
+}
 /*.footer-content-text
 {
     cursor: pointer;     
