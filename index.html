@@ -815,7 +815,7 @@ Your browser does not support the audio element.
 
 
 <!-- Nav tabs -->
-  <ul class="nav nav-tabs <%=className%>" role="tablist" style="margin-top:125px; margin-bottom:10px; margin-left:10%;">
+  <ul class="nav nav-tabs responsive <%=className%>" role="tablist" style="margin-top:125px; margin-bottom:10px; margin-left:10%;">
   
   <% _.each(sitemap, function(arr,index) {%>
 
@@ -837,7 +837,7 @@ Your browser does not support the audio element.
   </ul>
 
   <!-- Tab panes -->
-  <div class="container tab-content">
+  <div class="container tab-content responsive">
   <% _.each(sitemap, function(arr,index) {%>
   	<%var i = index+1;%>
   	<%var idGallery = arr.split(" ").join("-")%>
@@ -876,6 +876,7 @@ Your browser does not support the audio element.
 	<script type="text/javascript" src="libs/require.min.js"></script>	    		
 	<script type="text/javascript" src="libs/bootstrap.min.js"></script>
 	<script type="text/javascript" src="libs/ImageViewer-master/imageviewer.min.js"></script>
+  <script type="text/javascript" src="libs/bootstrap-responsive-tabs-master/js/responsive-tabs.js"></script>
 
 
 <!-- application code -->

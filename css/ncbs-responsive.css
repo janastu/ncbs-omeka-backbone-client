@@ -92,7 +92,9 @@ color: #FFFFFC;
 {
 padding:5px;
 }
-
+.logo-responsive img {
+    width:100px;
+}
 
 .home-hero-bg
 {
@@ -105,6 +107,7 @@ background-repeat: no-repeat;
 .home-hero-lefttext-container
 {
 	margin-top: 10px;
+    margin-left:5px;
     background-color: rgba(102, 102, 102, 0.2);
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
@@ -231,6 +234,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
 .panel-background{
     background-color: transparent;
 }
+
+/*responsive styles for the home page insect image */
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { .theme-insect-image img
+    {
+        margin-top: 25%;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { .theme-insect-image img
+    {
+    margin-top: 15%;
+    }
+}
+
 /*CSS for About block*/
 #about {
     /*width:60%;*/
@@ -311,6 +331,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
 .items-row-wrap{
     padding:15px;
     color: #1a837f;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 /* Peopleplex section END */
 
@@ -353,22 +374,8 @@ footer
 }*/
 
 
- @media only screen and (max-width: 1200px) 
- {
-    .theme-insect-image
-    {
-        margin-top: 15%;
-    }
-    
-}
 
- @media only screen and (max-width: 992px) 
- {
-    .theme-insect-image
-    {
-        margin-top: 0%;
-    }
-    
-}
 
+
+ 
  
