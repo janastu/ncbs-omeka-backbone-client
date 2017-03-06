@@ -106,7 +106,7 @@ var ApplicationRouter = Backbone.Router.extend({
 		});
 
 	},
-	theme1: function(query) {
+	/*theme1: function(query) {
 		
 		//call view cleanup to unbind stale views and instantiate new view
 		// arguments is the view options
@@ -158,7 +158,7 @@ var ApplicationRouter = Backbone.Router.extend({
 			tag: "7-*",
 			query: query
 		});
-	},
+	},*/
 	notfound: function(){
 		this.unmountAndMountViews("notfound");
 		console.log("notfound");
