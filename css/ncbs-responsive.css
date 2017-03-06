@@ -286,7 +286,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
     background-color: #7DE4E0;
     padding:35px;
     font-size:18px;
-    color:#fff;
+    color:#1a837f;
 }
 #ephemera h3 {
     color: #1a837f;
@@ -331,7 +331,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aed7d3', end
 .items-row-wrap{
     padding:15px;
     color: #1a837f;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(125, 228, 224, 0.5);
 }
 /* Peopleplex section END */
 
