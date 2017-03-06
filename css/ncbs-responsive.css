@@ -29,6 +29,9 @@ a:hover {
     font-weight: bold;
     text-decoration: none;
 }
+a:focus {
+    text-decoration:none;
+}
 /* anchor links END*/
 /*CSS for header*/
 @media (max-width: 767px)
