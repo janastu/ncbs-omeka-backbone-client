@@ -184,9 +184,9 @@
 		.ncbs-home-text{
 			background-color:rgba(102, 102, 102, 0.2); 
 			
-			/*position:fixed; */
+			position:absolute; 
 			margin-top:90px; 
-			max-width: 375px; 
+			max-width: 390px; 
 			text-align:left;
 			line-height: 21px; 
 			/*font-family: roboto;*/
