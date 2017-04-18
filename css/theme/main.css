@@ -149,7 +149,7 @@
 		}
 		
 		#ncbs-nav-footer {
-			
+			font-size: 12px;
 			color:#333726;
 		}
 		#ncbs-nav-footer a:hover .ncbs-foot-nav-text{
@@ -178,14 +178,18 @@
 		.intro-landing {
 			background: url('../../img/2016-TIFR-bird-graffiti_crop6.jpg');
 			background-size: cover;
-			height: 94vh;
+			height: 607px;
 
 		}
 		.ncbs-home-text{
 			background-color:rgba(102, 102, 102, 0.2); 
 			
 			position:absolute; 
-			margin-top:80px; 
+
+			margin-top:75px; 
+
+		
+
 			max-width: 390px; 
 			text-align:left;
 			line-height: 21px; 
