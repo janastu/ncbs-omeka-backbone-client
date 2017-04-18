@@ -26,7 +26,7 @@
 				        header = document.querySelector("header");
 				    if (distanceY > shrinkOn) {
 				        classie.add(header,"smaller");
-				        $("#ncbs-home-text-collapsible").hide();
+				        //$("#ncbs-home-text-collapsible").hide();
 				    } else {
 				    	$("#ncbs-home-text-collapsible").show();
 				        if (classie.has(header,"smaller")) {

@@ -160,7 +160,7 @@ header {
     display: inline-block;
     float: right; 
     position: absolute;
-    right:173px;
+    right:165px;
     top:-1px;
   }
     header nav a {
@@ -216,7 +216,7 @@ header {
     float: none;
     margin: 0 auto;
     height: 100px;
-    line-height: 100px;
+    /*line-height: 100px;*/
     /*text-align: center;*/ }
   header nav {
     display: block;

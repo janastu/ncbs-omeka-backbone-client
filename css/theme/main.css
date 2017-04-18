@@ -175,16 +175,24 @@
 			    font-weight:bold;
 			    width:150px;
 		}
+		.intro-landing {
+			background: url('../../img/2016-TIFR-bird-graffiti_crop6.jpg');
+			background-size: cover;
+			height: 94vh;
 
+		}
 		.ncbs-home-text{
 			background-color:rgba(102, 102, 102, 0.2); 
-			position:fixed; 
-			top:13px; 
+			
+			/*position:fixed; */
+			margin-top:90px; 
 			max-width: 375px; 
-			font-size: 16px; 
-			line-height: 19px; 
-			font-family: roboto;
-			color: #f2f2f2;
+			text-align:left;
+			line-height: 21px; 
+			/*font-family: roboto;*/
+			font-size: 16px;
+			color:#fff;
+			/*color: #f2f2f2;*/
 			padding:15px; 
 			border-radius:0px; 
 			/*margin-left:45px;*/
